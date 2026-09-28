@@ -1,5 +1,5 @@
 /**
- * PORTAL BIRO ADMINISTRASI KEUANGAN & PENGADAAN (BAKP)
+ * PORTAL BIRO KEUANGAN DAN PENGADAAN
  * UNIVERSITAS SETIA BUDI SURAKARTA
  * Main Interactive Script (main.js)
  */
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('usb_bakp_theme', themeName);
 
     if (currentThemeLabel) {
-      currentThemeLabel.textContent = `Tema: ${themeNames[themeName]}`;
+      currentThemeLabel.textContent = themeNames[themeName];
     }
 
     themeButtons.forEach((btn) => {
@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSlides = [
     {
       title: 'Selamat Datang di <br />Website Biro Keuangan <br />& Pengadaan USB',
-      desc: 'Menyediakan pelayanan administrasi keuangan dan pengelolaan pengadaan Universitas Setia Budi yang transparan, akuntabel, dan profesional.',
-      image: 'hero-campus.jpg',
+      desc: 'Menyediakan pelayanan keuangan dan tata kelola pengadaan Universitas Setia Budi yang transparan, akuntabel, dan profesional.',
+      image: 'assets/images/hero-campus.jpg',
       primaryBtn: {
         text: 'Panduan Pembayaran',
         icon: 'book-open-check',
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: 'Layanan Pembayaran <br />SPP & Angsuran <br />Mahasiswa Terpadu',
       desc: 'Kemudahan verifikasi pembayaran kuliah secara otomatis via Virtual Account Bank Mitra 24 jam dan pengajuan dispensasi terstruktur.',
-      image: 'hero-payment.jpg',
+      image: 'assets/images/hero-payment.jpg',
       primaryBtn: {
         text: 'Petunjuk Virtual Account (VA)',
         icon: 'credit-card',
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       title: 'Tata Kelola Pengadaan <br />Barang & Jasa <br />Modern & Akuntabel',
       desc: 'Standardisasi proses pengusulan belanja unit, pedoman Standar Biaya Masukan (SBM), dan sistem e-procurement transparan di lingkungan USB.',
-      image: 'hero-procurement.jpg',
+      image: 'assets/images/hero-procurement.jpg',
       primaryBtn: {
         text: 'SOP & Alur Pengadaan',
         icon: 'shopping-bag',
@@ -741,13 +741,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  /* ==========================================================================
+     7.3 DYNAMIC SECTION ORDER & VISIBILITY (Controlled from CMS Admin)
+     ========================================================================== */
+  const sectionMap = {
+    hero: document.getElementById('heroSection'),
+    layananCepat: document.getElementById('layanan-cepat'),
+    alurLayanan: document.getElementById('serviceWorkflowSection'),
+    pengumuman: document.getElementById('newsAnnouncementSection'),
+    statistik: document.getElementById('statisticsSection'),
+    unduhan: document.getElementById('unduhan'),
+    faq: document.getElementById('faqSection'),
+    kontak: document.getElementById('kontak')
+  };
+
+  const navLinkMap = {
+    layananCepat: document.querySelectorAll('a[href="#layanan-cepat"]'),
+    alurLayanan: document.querySelectorAll('a[href="#serviceWorkflowSection"]'),
+    pengumuman: document.querySelectorAll('a[href="#pengumuman"]'),
+    unduhan: document.querySelectorAll('a[href="#unduhan"]'),
+    kontak: document.querySelectorAll('a[href="#kontak"]')
+  };
+
+  const applySectionVisibilityAndOrder = () => {
+    if (!window.portalDataManager) return;
+    const visibility = window.portalDataManager.getSectionVisibility();
+    const order = window.portalDataManager.getSectionOrder();
+    const container = document.getElementById('pageSectionsContainer');
+
+    // 1. Terapkan Urutan Posisi Section dalam DOM
+    if (container && Array.isArray(order)) {
+      order.forEach((key) => {
+        const el = sectionMap[key];
+        if (el && el.parentElement === container) {
+          container.appendChild(el);
+        }
+      });
+    }
+
+    // 2. Terapkan display show/hide ke tiap section
+    Object.keys(sectionMap).forEach((key) => {
+      const el = sectionMap[key];
+      if (el) {
+        const isVisible = visibility[key] !== false;
+        if (isVisible) {
+          el.style.display = '';
+          el.classList.remove('hidden');
+        } else {
+          el.style.display = 'none';
+          el.classList.add('hidden');
+        }
+      }
+    });
+
+    // 3. Sinkronisasi menu navigasi jika section disembunyikan
+    Object.keys(navLinkMap).forEach((key) => {
+      const links = navLinkMap[key];
+      const isVisible = visibility[key] !== false;
+      if (links) {
+        links.forEach((link) => {
+          if (link.closest('nav') || link.closest('aside')) {
+            link.style.display = isVisible ? '' : 'none';
+          }
+        });
+      }
+    });
+  };
+
   // Initial CMS Renderings
+  applySectionVisibilityAndOrder();
   renderDynamicSemester();
   renderDynamicAnnouncements();
   renderDynamicDownloads();
 
   // Listen for Cross-Window / Admin Updates
   window.addEventListener('usb_data_updated', () => {
+    applySectionVisibilityAndOrder();
     renderDynamicSemester();
     renderDynamicAnnouncements();
     renderDynamicDownloads();
@@ -756,6 +825,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('storage', (e) => {
     if (e.key === 'USB_BAKP_PORTAL_DATA_V1' && window.portalDataManager) {
       window.portalDataManager.data = window.portalDataManager.loadData();
+      applySectionVisibilityAndOrder();
       renderDynamicSemester();
       renderDynamicAnnouncements();
       renderDynamicDownloads();

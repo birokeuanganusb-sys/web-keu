@@ -1,12 +1,35 @@
 /**
  * DATA MANAGER & SEED DATA - PORTAL BAKP UNIVERSITAS SETIA BUDI
  * Menangani penyimpanan, pembaruan, dan pengambilan data dinamis
- * untuk Pengumuman, Berita, Dokumen Unduhan, dan Informasi Semester.
+ * untuk Pengumuman, Berita, Dokumen Unduhan, Informasi Semester,
+ * Visibilitas Section, dan Urutan Posisi Section.
  */
 
 const USB_STORAGE_KEY = 'USB_BAKP_PORTAL_DATA_V1';
 
+const DEFAULT_SECTION_ORDER = [
+  'hero',          // 1. Hero Banner & Slider Kampus
+  'layananCepat',  // 2. Layanan Utama & Akses Cepat
+  'alurLayanan',   // 3. Alur Layanan Baku (SOP Tabs)
+  'pengumuman',    // 4. Pengumuman Resmi & Berita Kegiatan
+  'statistik',     // 5. Statistik & Capaian Kinerja
+  'unduhan',       // 6. Pusat Unduhan Regulasi & SPJ
+  'faq',           // 7. FAQ (Tanya Jawab Layanan)
+  'kontak'         // 8. Footer, Jam Loket & Kontak Helpdesk
+];
+
 const DEFAULT_PORTAL_DATA = {
+  sectionOrder: [...DEFAULT_SECTION_ORDER],
+  sectionVisibility: {
+    hero: true,
+    layananCepat: true,
+    alurLayanan: true,
+    pengumuman: true,
+    statistik: true,
+    unduhan: true,
+    faq: true,
+    kontak: true
+  },
   infoSemester: {
     semester: 'Tahun Akademik 2025/2026',
     statusBadge: 'Aktif',
@@ -83,7 +106,7 @@ const DEFAULT_PORTAL_DATA = {
       docNumber: 'Humas BAKP USB',
       title: 'Sosialisasi Sistem E-Procurement dan Tata Kelola Anggaran Berbasis Kinerja Tahun 2026',
       summary: 'BAKP menggelar bimbingan teknis implementasi portal pengadaan barang digital bagi seluruh kepala tata usaha dan bendahara unit di Ruang Sidang Rektorat USB.',
-      content: '<p class="text-slate-700 text-sm leading-relaxed mb-3">Biro Administrasi Keuangan dan Pengadaan (BAKP) Universitas Setia Budi sukses menyelenggarakan Workshop Pengelolaan Anggaran Berbasis Kinerja dan Implementasi E-Procurement pada hari Rabu, 18 Maret 2026.</p><p class="text-slate-700 text-sm leading-relaxed">Acara ini dihadiri oleh 40 perwakilan bendahara fakultas dan unit kerja guna mempercepat digitalisasi proses belanja barang serta memperketat akuntabilitas pelaporan SPJ.</p>',
+      content: '<p class="text-slate-700 text-sm leading-relaxed mb-3">Biro Keuangan dan Pengadaan Universitas Setia Budi sukses menyelenggarakan Workshop Pengelolaan Anggaran Berbasis Kinerja dan Implementasi E-Procurement pada hari Rabu, 18 Maret 2026.</p><p class="text-slate-700 text-sm leading-relaxed">Acara ini dihadiri oleh 40 perwakilan bendahara fakultas dan unit kerja guna mempercepat digitalisasi proses belanja barang serta memperketat akuntabilitas pelaporan SPJ.</p>',
       actionUrl: '#',
       actionText: 'Lihat Dokumentasi Kegiatan'
     },
@@ -175,7 +198,21 @@ class PortalDataManager {
     try {
       const stored = localStorage.getItem(USB_STORAGE_KEY);
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        if (!parsed.sectionVisibility) {
+          parsed.sectionVisibility = { ...DEFAULT_PORTAL_DATA.sectionVisibility };
+        }
+        if (!parsed.sectionOrder || !Array.isArray(parsed.sectionOrder) || parsed.sectionOrder.length === 0) {
+          parsed.sectionOrder = [...DEFAULT_SECTION_ORDER];
+        } else {
+          // Pastikan semua key ada
+          DEFAULT_SECTION_ORDER.forEach(key => {
+            if (!parsed.sectionOrder.includes(key)) {
+              parsed.sectionOrder.push(key);
+            }
+          });
+        }
+        return parsed;
       }
     } catch (e) {
       console.warn('Gagal membaca data dari localStorage, menggunakan data default:', e);
@@ -194,6 +231,67 @@ class PortalDataManager {
       console.error('Gagal menyimpan data ke localStorage:', e);
       return false;
     }
+  }
+
+  // --- Section Order (Urutan Posisi) API ---
+  getSectionOrder() {
+    if (!this.data.sectionOrder || !Array.isArray(this.data.sectionOrder) || this.data.sectionOrder.length === 0) {
+      this.data.sectionOrder = [...DEFAULT_SECTION_ORDER];
+    }
+    return this.data.sectionOrder;
+  }
+
+  saveSectionOrder(newOrderArray) {
+    if (Array.isArray(newOrderArray) && newOrderArray.length > 0) {
+      this.data.sectionOrder = newOrderArray;
+      this.saveData();
+    }
+    return this.getSectionOrder();
+  }
+
+  moveSection(sectionKey, direction) {
+    const currentOrder = [...this.getSectionOrder()];
+    const index = currentOrder.indexOf(sectionKey);
+    if (index === -1) return currentOrder;
+
+    if (direction === 'up' && index > 0) {
+      const temp = currentOrder[index - 1];
+      currentOrder[index - 1] = currentOrder[index];
+      currentOrder[index] = temp;
+    } else if (direction === 'down' && index < currentOrder.length - 1) {
+      const temp = currentOrder[index + 1];
+      currentOrder[index + 1] = currentOrder[index];
+      currentOrder[index] = temp;
+    }
+
+    return this.saveSectionOrder(currentOrder);
+  }
+
+  // --- Section Visibility API ---
+  getSectionVisibility() {
+    return {
+      ...DEFAULT_PORTAL_DATA.sectionVisibility,
+      ...(this.data.sectionVisibility || {})
+    };
+  }
+
+  saveSectionVisibility(visibilityObj) {
+    this.data.sectionVisibility = {
+      ...this.getSectionVisibility(),
+      ...visibilityObj
+    };
+    this.saveData();
+    return this.data.sectionVisibility;
+  }
+
+  toggleSection(sectionKey, isVisible) {
+    if (!this.data.sectionVisibility) {
+      this.data.sectionVisibility = { ...DEFAULT_PORTAL_DATA.sectionVisibility };
+    }
+    const current = this.data.sectionVisibility[sectionKey] !== false;
+    this.data.sectionVisibility[sectionKey] = isVisible !== undefined ? isVisible : !current;
+    this.saveData();
+    return this.data.sectionVisibility[sectionKey];
   }
 
   // --- Announcements API ---
@@ -272,6 +370,12 @@ class PortalDataManager {
     try {
       const parsed = JSON.parse(jsonString);
       if (parsed.announcements && parsed.downloads && parsed.infoSemester) {
+        if (!parsed.sectionVisibility) {
+          parsed.sectionVisibility = { ...DEFAULT_PORTAL_DATA.sectionVisibility };
+        }
+        if (!parsed.sectionOrder || !Array.isArray(parsed.sectionOrder)) {
+          parsed.sectionOrder = [...DEFAULT_SECTION_ORDER];
+        }
         this.data = parsed;
         this.saveData();
         return true;

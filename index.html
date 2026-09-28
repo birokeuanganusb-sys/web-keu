@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Biro Administrasi Keuangan & Pengadaan (BAKP) - Universitas Setia Budi Surakarta</title>
-  <meta name="description" content="Portal Resmi Biro Administrasi Keuangan & Pengadaan Universitas Setia Budi (USB) Surakarta. Layanan verifikasi pembayaran kuliah, dispensasi, pengadaan barang/jasa, dan regulasi SPJ." />
-  <meta name="keywords" content="Universitas Setia Budi, BAKP USB, BKA USB, Keuangan USB, Pengadaan USB, SPP USB, SIAKAD Setia Budi" />
-  <meta name="author" content="Biro Administrasi Keuangan & Pengadaan USB" />
+  <title>Biro Keuangan dan Pengadaan - Universitas Setia Budi Surakarta</title>
+  <meta name="description" content="Portal Resmi Biro Keuangan dan Pengadaan Universitas Setia Budi (USB) Surakarta. Layanan verifikasi pembayaran kuliah, dispensasi, pengadaan barang/jasa, dan regulasi SPJ." />
+  <meta name="keywords" content="Universitas Setia Budi, Biro Keuangan USB, Pengadaan USB, SPP USB, SIAKAD Setia Budi" />
+  <meta name="author" content="Biro Keuangan dan Pengadaan USB" />
 
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +43,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- Favicon Brand Symbol -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563EB'><circle cx='12' cy='12' r='10'/></svg>" />
@@ -51,160 +51,58 @@
 <body class="bg-usb-surface text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
   <!-- =========================================================================
-       1. TOP BAR (Institutional Deep Slate Navy & Crisp White)
+       1. INSTITUTION HEADER & STICKY NAVBAR (Modern Crisp White Glass)
        ========================================================================= -->
-  <div class="bg-usb-navy-dark text-slate-300 text-xs border-b border-white/10 py-2 transition-colors duration-300 relative z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5">
-      <!-- Contact Info -->
-      <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6">
-        <div class="flex items-center gap-1.5 hover:text-white transition-colors">
-          <i data-lucide="phone-call" class="w-3.5 h-3.5 text-slate-400"></i>
-          <span>(0271) 852518 / Ext. 104</span>
-        </div>
-        <div class="flex items-center gap-1.5 hover:text-white transition-colors">
-          <i data-lucide="mail" class="w-3.5 h-3.5 text-blue-400"></i>
-          <span>keuangan@setiabudi.ac.id</span>
-        </div>
-        <div class="hidden sm:flex items-center gap-1.5 text-slate-400">
-          <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
-          <span>Senin - Jumat: 08.00 - 15.30 WIB</span>
-        </div>
-      </div>
-
-      <!-- Action Items: Theme Selector & Portal Buttons -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Dynamic Theme Selector Dropdown -->
-        <div class="relative group" id="themeDropdownGroup">
-          <button class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white border border-white/20 text-xs font-medium transition focus:outline-none">
-            <i data-lucide="palette" class="w-3.5 h-3.5 text-blue-400"></i>
-            <span id="currentThemeLabel">Tema: Institutional Navy</span>
-            <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform"></i>
-          </button>
-          
-          <div class="dropdown-menu absolute right-0 mt-1 w-60 bg-white rounded-xl shadow-2xl border border-slate-200/90 py-1.5 text-slate-800 z-50 text-xs">
-            <div class="px-3 py-1 font-bold text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-100">Pilihan Palet Warna:</div>
-            
-            <button class="theme-select-btn w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center justify-between transition" data-theme-val="navy-steel">
-              <span class="flex items-center gap-2">
-                <span class="theme-dot" style="background:#0F172A;"></span>
-                <span class="font-medium text-slate-700">Institutional Navy (Default)</span>
-              </span>
-              <i data-lucide="check" class="w-3.5 h-3.5 text-blue-600 theme-check hidden"></i>
-            </button>
-            
-            <button class="theme-select-btn w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center justify-between transition" data-theme-val="oxford-gold">
-              <span class="flex items-center gap-2">
-                <span class="theme-dot" style="background:linear-gradient(135deg, #0A192F, #D97706);"></span>
-                <span class="font-medium text-slate-700">Oxford Navy & Gold</span>
-              </span>
-              <i data-lucide="check" class="w-3.5 h-3.5 text-amber-600 theme-check hidden"></i>
-            </button>
-
-            <button class="theme-select-btn w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center justify-between transition" data-theme-val="slate-monochrome">
-              <span class="flex items-center gap-2">
-                <span class="theme-dot" style="background:#1F2937;"></span>
-                <span class="font-medium text-slate-700">Slate Monokrom</span>
-              </span>
-              <i data-lucide="check" class="w-3.5 h-3.5 text-slate-600 theme-check hidden"></i>
-            </button>
-
-            <button class="theme-select-btn w-full px-3 py-2 text-left hover:bg-slate-50 flex items-center justify-between transition" data-theme-val="pine-emerald">
-              <span class="flex items-center gap-2">
-                <span class="theme-dot" style="background:linear-gradient(135deg, #062420, #059669);"></span>
-                <span class="font-medium text-slate-700">Pine & Emerald</span>
-              </span>
-              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 theme-check hidden"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Portal Shortcuts -->
-        <a href="https://siakad.setiabudi.ac.id" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-slate-200 hover:bg-blue-600 hover:text-white border border-slate-700 transition">
-          <i data-lucide="layout-grid" class="w-3 h-3 text-blue-400"></i>
-          <span class="font-medium">SIMKEU</span>
-        </a>
-        <a href="#pengadaan" 
-           class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-slate-200 hover:bg-blue-600 hover:text-white border border-slate-700 transition">
-          <i data-lucide="shopping-bag" class="w-3 h-3 text-slate-300"></i>
-          <span class="font-medium">E-Procurement</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       2. INSTITUTION HEADER & STICKY NAVIGATION BAR (Pure White & Navy Accent)
-       ========================================================================= -->
-  <!-- Institution Identity Banner -->
-  <header class="bg-white border-b border-slate-200/90 py-3.5 shadow-sm relative z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <div class="flex items-center gap-3.5">
-        <!-- Official USB Emblem Badge with Clean Dark Slate Navy -->
-        <div class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-md border border-slate-700/80 flex-shrink-0">
-          <div class="text-center font-bold">
-            <span class="block text-sm leading-none text-white tracking-widest">USB</span>
-            <span class="block text-[9px] text-blue-400 font-extrabold tracking-tight mt-0.5">SURAKARTA</span>
-          </div>
-        </div>
-
-        <div>
-          <span class="text-xs font-bold tracking-wider text-blue-700 uppercase block">Universitas Setia Budi Surakarta</span>
-          <h1 class="text-base sm:text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight leading-snug">
-            Biro Administrasi Keuangan & Pengadaan (BAKP)
-          </h1>
-          <p class="text-[11px] text-slate-500 hidden sm:block">Akuntabel, Efisien, Transparan, dan Berorientasi Pelayanan Prima</p>
-        </div>
-      </div>
-
-      <!-- Quick Helpdesk Button -->
-      <div class="hidden lg:flex items-center gap-3">
-        <div class="text-right">
-          <span class="text-xs text-slate-500 block">Layanan Konsultasi Cepat:</span>
-          <a href="https://wa.me/6281234567890" target="_blank" class="text-sm font-bold text-slate-900 hover:text-blue-600 flex items-center gap-1.5 justify-end transition-colors duration-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <i data-lucide="message-square" class="w-4 h-4 text-slate-600"></i>
-            WhatsApp Loket Keuangan
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Sticky Navbar (Obsidian Dark Navy with Clean Slate Accents) -->
-  <nav id="mainNavbar" class="sticky top-0 z-40 glass-nav transition-all duration-300 border-b border-white/10 shadow-lg">
+  <header id="mainNavbar" class="glass-nav sticky top-0 z-40 transition-all duration-300 shadow-sm border-b border-slate-200/90">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-14">
+      <div class="flex items-center justify-between h-16 lg:h-18 gap-3 sm:gap-4">
         
-        <!-- Desktop Nav Items -->
-        <div class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium text-slate-200">
+        <!-- Brand Identity (Emblem Badge + Title) -->
+        <a href="#" class="flex items-center gap-3 group flex-shrink-0">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white flex items-center justify-center shadow-md border border-slate-700/60 flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
+            <div class="text-center font-bold">
+              <span class="block text-xs leading-none text-amber-400 tracking-wider font-extrabold">USB</span>
+              <span class="block text-[8px] text-blue-300 font-extrabold tracking-tighter mt-0.5">SURAKARTA</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-blue-700 uppercase leading-tight">Universitas Setia Budi</span>
+            <span class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight leading-snug group-hover:text-blue-700 transition-colors">
+              Biro Keuangan dan Pengadaan
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <nav class="hidden lg:flex items-center space-x-1 text-sm font-semibold text-slate-700">
           <!-- Beranda -->
-          <a href="#" class="px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5 text-white bg-white/10 font-semibold">
-            <i data-lucide="home" class="w-4 h-4 text-blue-400"></i>
+          <a href="#" class="px-3 py-2 rounded-lg text-blue-600 bg-blue-50/80 font-bold transition-colors flex items-center gap-1.5">
+            <i data-lucide="home" class="w-4 h-4 text-blue-600"></i>
             <span>Beranda</span>
           </a>
 
           <!-- Profil Dropdown -->
           <div class="relative group desktop-dropdown-group">
-            <button class="desktop-dropdown-btn px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1 focus:outline-none">
+            <button class="desktop-dropdown-btn px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors flex items-center gap-1 focus:outline-none">
               <span>Profil</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform group-hover:rotate-180"></i>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-64 bg-white rounded-xl shadow-2xl border border-slate-200/80 py-2 text-slate-800 z-50">
-              <div class="px-3.5 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Tentang Biro</div>
-              <a href="#profil" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 text-slate-800 z-50">
+              <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Tentang Biro</div>
+              <a href="#profil" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
                 <span>Visi, Misi & Tujuan</span>
               </a>
-              <a href="#profil" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#profil" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="users" class="w-4 h-4 text-blue-600"></i>
                 <span>Struktur Organisasi</span>
               </a>
-              <a href="#profil" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#profil" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="file-check" class="w-4 h-4 text-blue-600"></i>
-                <span>Tugas Pokok & Fungsi (Tupoksi)</span>
+                <span>Tugas Pokok & Fungsi</span>
               </a>
-              <a href="#profil" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#profil" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="award" class="w-4 h-4 text-blue-600"></i>
                 <span>Maklumat Pelayanan</span>
               </a>
@@ -213,52 +111,52 @@
 
           <!-- Layanan Keuangan Dropdown -->
           <div class="relative group desktop-dropdown-group">
-            <button class="desktop-dropdown-btn px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1 focus:outline-none">
+            <button class="desktop-dropdown-btn px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors flex items-center gap-1 focus:outline-none">
               <span>Layanan Keuangan</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform group-hover:rotate-180"></i>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-72 bg-white rounded-xl shadow-2xl border border-slate-200/80 py-2 text-slate-800 z-50">
-              <div class="px-3.5 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Kemahasiswaan & Unit</div>
-              <a href="#layanan-cepat" data-modal-trigger="payment-guide" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 text-slate-800 z-50">
+              <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Kemahasiswaan & Unit</div>
+              <a href="#layanan-cepat" data-modal-trigger="payment-guide" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="credit-card" class="w-4 h-4 text-blue-600"></i>
                 <span>Verifikasi Pembayaran SPP / UKT</span>
               </a>
-              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="calendar-clock" class="w-4 h-4 text-blue-600"></i>
                 <span>Pengajuan Dispensasi Kuliah</span>
               </a>
-              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="badge-percent" class="w-4 h-4 text-blue-600"></i>
                 <span>Layanan Beasiswa & Keringanan</span>
               </a>
-              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#layanan-cepat" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="wallet" class="w-4 h-4 text-blue-600"></i>
-                <span>Panduan Virtual Account Bank Mitra</span>
+                <span>Panduan Virtual Account</span>
               </a>
             </div>
           </div>
 
           <!-- Layanan Pengadaan Dropdown -->
           <div class="relative group desktop-dropdown-group">
-            <button class="desktop-dropdown-btn px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1 focus:outline-none">
+            <button class="desktop-dropdown-btn px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors flex items-center gap-1 focus:outline-none">
               <span>Layanan Pengadaan</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform group-hover:rotate-180"></i>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-72 bg-white rounded-xl shadow-2xl border border-slate-200/80 py-2 text-slate-800 z-50">
-              <div class="px-3.5 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Logistik & Belanja Unit</div>
-              <a href="#pengadaan" data-modal-trigger="procurement-guide" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+            <div class="dropdown-menu dropdown-menu-desktop absolute left-0 mt-1 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 text-slate-800 z-50">
+              <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">Logistik & Belanja Unit</div>
+              <a href="#pengadaan" data-modal-trigger="procurement-guide" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="git-branch" class="w-4 h-4 text-blue-600"></i>
                 <span>Alur Pengadaan Barang & Jasa</span>
               </a>
-              <a href="#unduhan" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#unduhan" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="calculator" class="w-4 h-4 text-blue-600"></i>
                 <span>Standar Biaya Masukan (SBM 2026)</span>
               </a>
-              <a href="#pengadaan" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#pengadaan" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="layers" class="w-4 h-4 text-blue-600"></i>
-                <span>E-Katalog & Daftar Rekanan USB</span>
+                <span>E-Katalog & Daftar Rekanan</span>
               </a>
-              <a href="#unduhan" class="flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-slate-50 hover:text-blue-600 transition">
+              <a href="#unduhan" class="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-blue-50/80 hover:text-blue-600 transition">
                 <i data-lucide="file-text" class="w-4 h-4 text-blue-600"></i>
                 <span>Form Rencana Kebutuhan (RAB/KAK)</span>
               </a>
@@ -266,46 +164,28 @@
           </div>
 
           <!-- Regulasi & Unduhan -->
-          <a href="#unduhan" class="px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5">
+          <a href="#unduhan" class="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors flex items-center gap-1.5">
             <i data-lucide="download-cloud" class="w-4 h-4 text-slate-400"></i>
-            <span>Regulasi & Unduhan</span>
+            <span>Unduhan</span>
           </a>
 
           <!-- Hubungi Kami -->
-          <a href="#kontak" class="px-3 py-2 rounded-md hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5">
+          <a href="#kontak" class="px-3 py-2 rounded-lg hover:text-blue-600 hover:bg-slate-50 transition-colors flex items-center gap-1.5">
             <i data-lucide="headphones" class="w-4 h-4 text-slate-400"></i>
-            <span>Hubungi Kami</span>
+            <span>Kontak</span>
           </a>
-        </div>
-
-        <!-- Mobile Brand Identity (Visible on Mobile) -->
-        <div class="flex md:hidden items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 text-white flex items-center justify-center font-bold text-xs shadow-sm">
-            USB
-          </div>
-          <div>
-            <span class="block text-xs font-extrabold text-white leading-tight">BAKP USB</span>
-            <span class="block text-[9px] text-blue-400 font-medium leading-none">Keuangan & Pengadaan</span>
-          </div>
-        </div>
-
-        <!-- Quick Action Button in Desktop Navbar -->
-        <div class="hidden md:flex items-center gap-3">
-          <a href="#unduhan" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
-            <i data-lucide="folder-down" class="w-3.5 h-3.5"></i>
-            <span>Unduh Format SPJ</span>
-          </a>
-        </div>
+        </nav>
 
         <!-- Mobile Hamburger Button -->
-        <div class="flex md:hidden items-center">
-          <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" class="p-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/10 focus:outline-none">
+        <div class="flex lg:hidden items-center">
+          <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" class="p-2 rounded-lg text-slate-700 hover:text-blue-600 hover:bg-slate-100 focus:outline-none transition">
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
+
       </div>
     </div>
-  </nav>
+  </header>
 
   <!-- =========================================================================
        MOBILE NAVIGATION DRAWER
@@ -318,7 +198,7 @@
         <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 text-white flex items-center justify-center font-bold text-xs shadow">
           USB
         </div>
-        <span class="font-bold text-sm tracking-wide text-slate-100">BAKP USB SURAKARTA</span>
+        <span class="font-bold text-sm tracking-wide text-slate-100">Biro Keuangan & Pengadaan USB</span>
       </div>
       <button id="closeMobileDrawerBtn" aria-label="Tutup Menu" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -433,11 +313,16 @@
   </aside>
 
   <!-- =========================================================================
-       3. HERO BANNER SECTION (MATCHING REFERENCE PORTAL LAYOUT)
+       DYNAMIC REORDERABLE SECTIONS CONTAINER
        ========================================================================= -->
-  <section class="hero-campus-container bg-[#0a1224] text-white">
+  <main id="pageSectionsContainer" class="flex-1 flex flex-col">
+
+    <!-- =========================================================================
+         3. HERO BANNER SECTION (MATCHING REFERENCE PORTAL LAYOUT)
+         ========================================================================= -->
+    <section id="heroSection" class="hero-campus-container bg-[#0a1224] text-white">
     <!-- Animated Dual Zoom Out Campus Background Layers for Silky Smooth Cross-Fade -->
-    <div id="heroBgLayer1" class="hero-bg-layer hero-bg-active is-zooming pointer-events-none" style="background-image: url('hero-campus.jpg');"></div>
+    <div id="heroBgLayer1" class="hero-bg-layer hero-bg-active is-zooming pointer-events-none" style="background-image: url('assets/images/hero-campus.jpg');"></div>
     <div id="heroBgLayer2" class="hero-bg-layer pointer-events-none"></div>
 
     <!-- Smooth Left Vignette Overlay (fading left-to-right to keep building 100% visible) -->
@@ -465,7 +350,7 @@
 
         <!-- Subtitle with Smooth Cross-Fade -->
         <p id="heroSubtitle" class="text-slate-100 text-sm sm:text-base md:text-lg font-normal leading-relaxed drop-shadow-md max-w-xl hero-fade-content">
-          Menyediakan pelayanan administrasi keuangan dan pengelolaan pengadaan Universitas Setia Budi yang transparan, akuntabel, dan profesional.
+          Menyediakan pelayanan keuangan dan tata kelola pengadaan Universitas Setia Budi yang transparan, akuntabel, dan profesional.
         </p>
 
         <!-- Main Action Buttons with Smooth Cross-Fade -->
@@ -1213,7 +1098,7 @@
   <!-- =========================================================================
        9. FAQ SECTION (PERTANYAAN UMUM LAYANAN)
        ========================================================================= -->
-  <section class="py-14 bg-white border-t border-slate-200">
+  <section id="faqSection" class="py-14 bg-white border-t border-slate-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center mb-10">
@@ -1269,131 +1154,118 @@
   <footer id="kontak" class="bg-usb-navy-dark text-slate-300 pt-16 pb-8 border-t border-white/10 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 pb-12 border-b border-white/10">
         
         <!-- Col 1: Institutional Info -->
         <div class="space-y-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 text-white font-extrabold flex items-center justify-center text-sm shadow-md">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-700 text-white font-extrabold flex items-center justify-center text-sm shadow-md flex-shrink-0">
               USB
             </div>
             <div>
-              <span class="text-[11px] font-bold text-blue-400 block tracking-wider uppercase">Universitas Setia Budi</span>
-              <h3 class="text-sm font-bold text-white leading-tight">BAKP SURAKARTA</h3>
+              <span class="text-xs font-bold text-blue-400 block tracking-wider uppercase">Universitas Setia Budi</span>
+              <h3 class="text-base font-extrabold text-white leading-tight">Biro Keuangan & Pengadaan</h3>
             </div>
           </div>
 
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Biro Administrasi Keuangan & Pengadaan bertugas mengelola perbendaharaan, akuntansi, anggaran, serta layanan logistik pengadaan yang terpercaya dan transparan di Universitas Setia Budi.
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Biro Keuangan dan Pengadaan bertugas mengelola perbendaharaan, akuntansi, anggaran, serta layanan logistik pengadaan yang terpercaya dan transparan di Universitas Setia Budi.
           </p>
 
-          <div class="pt-1 text-xs text-slate-400 space-y-1">
-            <div class="flex items-start gap-2">
-              <i data-lucide="map-pin" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5"></i>
+          <div class="pt-1 text-sm text-slate-300 space-y-1">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-blue-400 flex-shrink-0 mt-1"></i>
               <span>Jl. Letjen Sutoyo No. 43, Mojosongo, Kec. Jebres, Kota Surakarta, Jawa Tengah 57127</span>
             </div>
           </div>
         </div>
 
-        <!-- Col 2: Jam Pelayanan & Kontak Loket -->
+        <!-- Col 2: Tautan Sistem Kampus -->
         <div class="space-y-4">
-          <h4 class="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-2.5">
-            Jam Loket & Kontak
-          </h4>
-          <div class="text-xs text-slate-400 space-y-2.5">
-            <div>
-              <span class="text-slate-200 font-semibold block">Jam Pelayanan Loket Tatap Muka:</span>
-              <span>Senin – Jumat: 08.00 – 15.30 WIB</span>
-              <span class="block text-[11px] text-slate-400">(Istirahat: 12.00 – 13.00 WIB)</span>
-            </div>
-            <div>
-              <span class="text-slate-200 font-semibold block">Telepon Kantor:</span>
-              <span>(0271) 852518 / Fax. (0271) 853275</span>
-            </div>
-            <div>
-              <span class="text-slate-200 font-semibold block">Email Resmi:</span>
-              <span>keuangan@setiabudi.ac.id</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Col 3: Link Cepat Kampus -->
-        <div class="space-y-4">
-          <h4 class="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-2.5">
+          <h4 class="text-base font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-3">
             Tautan Sistem Kampus
           </h4>
-          <ul class="text-xs text-slate-400 space-y-2">
+          <ul class="text-sm text-slate-300 space-y-3">
             <li>
-              <a href="https://siakad.setiabudi.ac.id" target="_blank" class="hover:text-blue-400 flex items-center gap-1.5 transition">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              <a href="https://siakad.setiabudi.ac.id" target="_blank" class="hover:text-blue-400 flex items-center gap-2 transition">
+                <i data-lucide="external-link" class="w-4 h-4 text-blue-400/80"></i>
                 <span>SIAKAD USB Surakarta</span>
               </a>
             </li>
             <li>
-              <a href="https://setiabudi.ac.id" target="_blank" class="hover:text-blue-400 flex items-center gap-1.5 transition">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              <a href="https://setiabudi.ac.id" target="_blank" class="hover:text-blue-400 flex items-center gap-2 transition">
+                <i data-lucide="external-link" class="w-4 h-4 text-blue-400/80"></i>
                 <span>Website Utama Universitas</span>
               </a>
             </li>
             <li>
-              <a href="#" class="hover:text-blue-400 flex items-center gap-1.5 transition">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              <a href="#" class="hover:text-blue-400 flex items-center gap-2 transition">
+                <i data-lucide="external-link" class="w-4 h-4 text-blue-400/80"></i>
                 <span>Perpustakaan Digital USB</span>
               </a>
             </li>
             <li>
-              <a href="#" class="hover:text-blue-400 flex items-center gap-1.5 transition">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              <a href="#" class="hover:text-blue-400 flex items-center gap-2 transition">
+                <i data-lucide="external-link" class="w-4 h-4 text-blue-400/80"></i>
                 <span>Sistem Penjaminan Mutu Internal (SPMI)</span>
               </a>
             </li>
             <li>
-              <a href="#" class="hover:text-blue-400 flex items-center gap-1.5 transition">
-                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+              <a href="#" class="hover:text-blue-400 flex items-center gap-2 transition">
+                <i data-lucide="external-link" class="w-4 h-4 text-blue-400/80"></i>
                 <span>Lembaga Penelitian & Pengabdian (LPPM)</span>
               </a>
             </li>
           </ul>
         </div>
 
-        <!-- Col 4: Pengaduan & Integritas -->
+        <!-- Col 3: Jam Pelayanan & Kontak Loket -->
         <div class="space-y-4">
-          <h4 class="text-sm font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-2.5">
-            Saluran Integritas & Aduan
+          <h4 class="text-base font-bold text-white uppercase tracking-wider border-l-2 border-blue-500 pl-3">
+            Jam Loket & Kontak
           </h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Laporkan segala indikasi pungutan liar, ketidaksesuaian prosedur, atau keluhan layanan keuangan melalui saluran resmi:
-          </p>
-          <a href="mailto:pengaduan.keuangan@setiabudi.ac.id" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-slate-200 text-xs font-semibold border border-white/20 transition">
-            <i data-lucide="shield-alert" class="w-4 h-4 text-blue-400"></i>
-            <span>Whistleblowing Keuangan</span>
-          </a>
-          <div class="text-[11px] text-slate-500">
-            Identitas pelapor dijamin kerahasiaannya sesuai regulasi universitas.
+          <div class="text-sm text-slate-300 space-y-3">
+            <div>
+              <span class="text-white font-semibold block text-sm">Jam Pelayanan Loket Tatap Muka:</span>
+              <span class="text-slate-300">Senin – Jumat: 08.00 – 15.30 WIB</span>
+              <span class="block text-xs text-slate-400 mt-0.5">(Istirahat: 12.00 – 13.00 WIB)</span>
+            </div>
+            <div>
+              <span class="text-white font-semibold block text-sm">Telepon Kantor:</span>
+              <span class="text-slate-300">(0271) 852518 / Fax. (0271) 853275</span>
+            </div>
+            <div>
+              <span class="text-white font-semibold block text-sm">WhatsApp Loket Keuangan:</span>
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" 
+                 class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-medium transition text-xs sm:text-sm mt-1">
+                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                <span>+62 812-3456-7890 (Chat Loket)</span>
+              </a>
+            </div>
+            <div>
+              <span class="text-white font-semibold block text-sm">Email Resmi:</span>
+              <a href="mailto:keuangan@setiabudi.ac.id" class="text-blue-400 hover:text-blue-300 transition">keuangan@setiabudi.ac.id</a>
+            </div>
           </div>
         </div>
 
       </div>
 
       <!-- Bottom Bar -->
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-slate-400 gap-4">
         <div>
-          © 2026 <strong>Biro Administrasi Keuangan & Pengadaan</strong> - Universitas Setia Budi Surakarta. All Rights Reserved.
+          © 2026 <strong class="text-slate-200">Biro Keuangan dan Pengadaan</strong> - Universitas Setia Budi Surakarta. All Rights Reserved.
         </div>
-        <div class="flex items-center gap-4">
-          <a href="#" class="hover:text-slate-300 transition">Kebijakan Privasi</a>
+        <div class="flex items-center gap-4 text-xs sm:text-sm">
+          <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
           <span>•</span>
-          <a href="#" class="hover:text-slate-300 transition">Standar Pelayanan</a>
-          <span>•</span>
-          <a href="admin/" class="hover:text-blue-400 font-semibold flex items-center gap-1 text-slate-400 transition" title="Masuk ke Panel Pengelolaan Konten">
-            <i data-lucide="lock" class="w-3.5 h-3.5 text-blue-400"></i>
-            <span>Akses Admin CMS</span>
-          </a>
+          <a href="#" class="hover:text-white transition">Standar Pelayanan</a>
         </div>
       </div>
 
     </div>
   </footer>
+  </main>
 
   <!-- =========================================================================
        11. DYNAMIC GLOBAL MODAL DIALOG
@@ -1443,7 +1315,7 @@
   </button>
 
   <!-- Dynamic Data Manager & Main JavaScript Files -->
-  <script src="data.js"></script>
-  <script src="main.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

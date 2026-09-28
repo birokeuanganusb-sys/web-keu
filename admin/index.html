@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel CMS - BAKP Universitas Setia Budi Surakarta</title>
+  <title>Admin Panel CMS - Biro Keuangan dan Pengadaan Universitas Setia Budi</title>
   
+  <!-- Early Theme Hydration to prevent flicker -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('USB_ADMIN_THEME') || 'dark';
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,68 +57,115 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Light Mode Variables & Aesthetics */
+    html:not(.dark) body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+    }
+    html:not(.dark) .glass-panel {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) .glass-card {
+      background: #FFFFFF;
+      backdrop-filter: blur(8px);
+      border-color: #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Dark Mode Variables & Aesthetics */
+    html.dark body {
       background-color: #0B1120;
       color: #F1F5F9;
     }
-    .glass-panel {
+    html.dark .glass-panel {
       background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: none;
     }
-    .glass-card {
+    html.dark .glass-card {
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: none;
     }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    html.dark ::-webkit-scrollbar-track {
+      background: #0B1120;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    html:not(.dark) ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    html:not(.dark) ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
     /* Toast transition */
     #adminToast {
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
   </style>
 </head>
-<body class="min-h-screen bg-slate-950 flex flex-col">
+<body class="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col transition-colors">
 
   <!-- =========================================================================
        1. AUTHENTICATION / LOGIN OVERLAY (PIN / PASSWORD PROTECTED)
        ========================================================================= -->
-  <div id="authOverlay" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="glass-card max-w-md w-full p-8 rounded-3xl border border-slate-700 shadow-2xl text-center relative overflow-hidden">
+  <div id="authOverlay" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-2xl text-center relative overflow-hidden">
       <!-- Ambient Lighting -->
       <div class="absolute -top-16 -right-16 w-36 h-36 bg-blue-600/15 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-slate-700/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-slate-400/10 dark:bg-slate-700/20 rounded-full blur-2xl pointer-events-none"></div>
 
-      <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-700 mx-auto flex items-center justify-center text-blue-400 shadow-lg mb-5">
+      <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 mx-auto flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-lg mb-5">
         <i data-lucide="lock-keyhole" class="w-8 h-8"></i>
       </div>
 
-      <h2 class="text-xl font-extrabold text-white">Panel Administrator BAKP</h2>
-      <p class="text-xs text-slate-400 mt-1.5 mb-6">Universitas Setia Budi Surakarta • Sistem Pengelolaan Konten</p>
+      <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">Panel Administrator BAKP</h2>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 mb-6">Universitas Setia Budi Surakarta • Sistem Pengelolaan Konten</p>
 
       <form id="loginForm" class="space-y-4 text-left">
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Kata Sandi / PIN Akses:</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Kata Sandi / PIN Akses:</label>
           <div class="relative">
             <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin..." required
-                   class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                   class="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
             <i data-lucide="key" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
           </div>
-          <span class="text-[11px] text-blue-400 mt-1.5 block">💡 Password bawaan: <strong class="underline">admin123</strong></span>
+          <span class="text-[11px] text-blue-600 dark:text-blue-400 mt-1.5 block">💡 Password bawaan: <strong class="underline">admin123</strong></span>
         </div>
 
-        <p id="loginErrorMsg" class="text-xs text-rose-400 hidden flex items-center gap-1">
+        <p id="loginErrorMsg" class="text-xs text-rose-500 dark:text-rose-400 hidden flex items-center gap-1">
           <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
           <span>Password salah! Silakan coba lagi.</span>
         </p>
 
-        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-900/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/20 dark:shadow-blue-900/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
           <i data-lucide="log-in" class="w-4 h-4"></i>
           <span>Buka Panel Admin</span>
         </button>
       </form>
 
-      <div class="mt-6 pt-4 border-t border-slate-800 text-center">
-        <a href="../" class="text-xs text-slate-400 hover:text-white inline-flex items-center gap-1.5 transition">
+      <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 text-center">
+        <a href="../" class="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white inline-flex items-center gap-1.5 transition">
           <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
           <span>Kembali ke Halaman Depan Website</span>
         </a>
@@ -115,7 +176,7 @@
   <!-- =========================================================================
        2. TOP ADMIN NAVIGATION BAR
        ========================================================================= -->
-  <header class="glass-panel border-b border-slate-800 sticky top-0 z-30">
+  <header class="glass-panel border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
@@ -126,20 +187,29 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-extrabold text-sm sm:text-base text-white tracking-wide">CMS BAKP USB</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-500/15 text-blue-400 border border-blue-500/30">Admin Mode</span>
+              <span class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white tracking-wide">CMS BAKP USB</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">Admin Mode</span>
             </div>
-            <p class="text-[11px] text-slate-400">Pengelola Konten Pengumuman & Unduhan</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">Pengelola Konten Pengumuman & Unduhan</p>
           </div>
         </div>
 
-        <!-- Right Quick Actions -->
-        <div class="flex items-center gap-2.5">
-          <a href="../" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="external-link" class="w-3.5 h-3.5 text-blue-400"></i>
-            <span class="hidden sm:inline">Lihat Website Utama</span>
+        <!-- Right Quick Actions: Theme Switcher, Website Link, Logout -->
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <!-- Dark / Light Mode Toggle Button -->
+          <button id="adminThemeToggleBtn" type="button" 
+                  class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 border border-slate-300/80 dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm"
+                  title="Ganti Mode Tampilan (Gelap / Terang)">
+            <i id="themeToggleIcon" data-lucide="sun" class="w-4 h-4 text-amber-500 dark:text-amber-400"></i>
+            <span id="themeToggleLabel" class="hidden md:inline font-medium">Mode Terang</span>
+          </button>
+
+          <a href="../" target="_blank" class="px-3 py-2 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-300/80 dark:border-white/10 shadow-sm">
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+            <span class="hidden sm:inline">Lihat Website</span>
           </a>
-          <button id="logoutBtn" class="px-3.5 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-semibold transition flex items-center gap-1.5 border border-rose-500/30">
+
+          <button id="logoutBtn" class="px-3 py-2 sm:px-3.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 dark:text-rose-300 text-xs font-semibold transition flex items-center gap-1.5 border border-rose-200 dark:border-rose-500/30 shadow-sm">
             <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
             <span class="hidden sm:inline">Keluar</span>
           </button>
@@ -156,44 +226,44 @@
     
     <!-- Top Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
           <i data-lucide="bell" class="w-6 h-6"></i>
         </div>
         <div>
-          <span class="text-xs text-slate-400 font-medium block">Pengumuman & Berita</span>
-          <span id="statAnnouncementCount" class="text-2xl font-black text-white">0</span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block">Pengumuman & Berita</span>
+          <span id="statAnnouncementCount" class="text-2xl font-black text-slate-900 dark:text-white">0</span>
         </div>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center">
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
           <i data-lucide="file-text" class="w-6 h-6"></i>
         </div>
         <div>
-          <span class="text-xs text-slate-400 font-medium block">Dokumen Unduhan</span>
-          <span id="statDownloadCount" class="text-2xl font-black text-white">0</span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block">Dokumen Unduhan</span>
+          <span id="statDownloadCount" class="text-2xl font-black text-slate-900 dark:text-white">0</span>
         </div>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
           <i data-lucide="calendar" class="w-6 h-6"></i>
         </div>
         <div>
-          <span class="text-xs text-slate-400 font-medium block">Semester Aktif</span>
-          <span id="statSemester" class="text-sm font-bold text-white truncate block max-w-[150px]">2025/2026</span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block">Semester Aktif</span>
+          <span id="statSemester" class="text-sm font-bold text-slate-900 dark:text-white truncate block max-w-[150px]">2025/2026</span>
         </div>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center">
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
           <i data-lucide="database" class="w-6 h-6"></i>
         </div>
         <div>
-          <span class="text-xs text-slate-400 font-medium block">Status Sinkronisasi</span>
-          <span class="text-xs font-bold text-blue-400 flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block">Status Sinkronisasi</span>
+          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
             Tersinkronisasi
           </span>
         </div>
@@ -201,23 +271,28 @@
     </div>
 
     <!-- Navigation Tabs -->
-    <div class="border-b border-slate-800 flex flex-wrap gap-2 sm:gap-4">
-      <button class="admin-tab-btn active px-4 py-3 text-sm font-bold border-b-2 border-blue-500 text-blue-400 flex items-center gap-2" data-tab="tab-announcements">
+    <div class="border-b border-slate-200 dark:border-slate-800 flex flex-wrap gap-2 sm:gap-4 transition-colors">
+      <button class="admin-tab-btn active px-4 py-3 text-sm font-bold border-b-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 flex items-center gap-2" data-tab="tab-announcements">
         <i data-lucide="newspaper" class="w-4 h-4"></i>
         <span>Pengumuman & Berita</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-400 hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-downloads">
+      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-downloads">
         <i data-lucide="folder-down" class="w-4 h-4"></i>
         <span>Pusat Unduhan (File & Form)</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-400 hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-info-semester">
+      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-info-semester">
         <i data-lucide="info" class="w-4 h-4"></i>
         <span>Info Semester & Highlight</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-400 hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-backup">
+      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-sections">
+        <i data-lucide="layout-grid" class="w-4 h-4"></i>
+        <span>Pengaturan Section</span>
+      </button>
+
+      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-backup">
         <i data-lucide="hard-drive" class="w-4 h-4"></i>
         <span>Cadangan & Pemulihan (Backup)</span>
       </button>
@@ -235,25 +310,25 @@
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Tambah Pengumuman / Berita</span>
           </button>
-          <select id="filterAnnouncementType" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none">
-            <option value="all" class="bg-slate-900">Semua Tipe</option>
-            <option value="pengumuman-resmi" class="bg-slate-900">Pengumuman Resmi</option>
-            <option value="berita-kegiatan" class="bg-slate-900">Berita & Kegiatan</option>
+          <select id="filterAnnouncementType" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <option value="all">Semua Tipe</option>
+            <option value="pengumuman-resmi">Pengumuman Resmi</option>
+            <option value="berita-kegiatan">Berita & Kegiatan</option>
           </select>
         </div>
 
         <div class="relative w-full sm:w-64">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
           <input type="text" id="searchAnnouncementInput" placeholder="Cari judul pengumuman..." 
-                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
       </div>
 
       <!-- Table / Cards List -->
-      <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs text-slate-300">
-            <thead class="bg-white/5 uppercase text-[11px] font-bold text-slate-400 border-b border-white/10">
+          <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
               <tr>
                 <th class="py-3.5 px-4">Tipe & Kategori</th>
                 <th class="py-3.5 px-4">Judul & Ringkasan</th>
@@ -261,7 +336,7 @@
                 <th class="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody id="announcementsTableBody" class="divide-y divide-white/5">
+            <tbody id="announcementsTableBody" class="divide-y divide-slate-200 dark:divide-white/5">
               <!-- Rendered Dynamically via JS -->
             </tbody>
           </table>
@@ -281,26 +356,26 @@
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Tambah Dokumen Unduhan</span>
           </button>
-          <select id="filterDownloadCategory" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none">
-            <option value="all" class="bg-slate-900">Semua Kategori</option>
-            <option value="spj" class="bg-slate-900">Format SPJ & Kuitansi</option>
-            <option value="sop" class="bg-slate-900">Standar SOP</option>
-            <option value="sk" class="bg-slate-900">SK & Edaran Tarif</option>
+          <select id="filterDownloadCategory" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <option value="all">Semua Kategori</option>
+            <option value="spj">Format SPJ & Kuitansi</option>
+            <option value="sop">Standar SOP</option>
+            <option value="sk">SK & Edaran Tarif</option>
           </select>
         </div>
 
         <div class="relative w-full sm:w-64">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
           <input type="text" id="searchDownloadInput" placeholder="Cari nama dokumen..." 
-                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
       </div>
 
       <!-- Table List -->
-      <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs text-slate-300">
-            <thead class="bg-white/5 uppercase text-[11px] font-bold text-slate-400 border-b border-white/10">
+          <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
               <tr>
                 <th class="py-3.5 px-4">Format</th>
                 <th class="py-3.5 px-4">Judul Dokumen</th>
@@ -309,7 +384,7 @@
                 <th class="py-3.5 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody id="downloadsTableBody" class="divide-y divide-white/5">
+            <tbody id="downloadsTableBody" class="divide-y divide-slate-200 dark:divide-white/5">
               <!-- Rendered Dynamically via JS -->
             </tbody>
           </table>
@@ -321,26 +396,26 @@
          TAB 3: INFO SEMESTER & HIGHLIGHT
          ========================================================================= -->
     <div id="tab-info-semester" class="admin-tab-pane hidden space-y-6">
-      <div class="glass-card p-6 sm:p-8 rounded-2xl border border-white/10 max-w-3xl">
-        <h3 class="text-base font-bold text-white mb-1">Pengaturan Informasi Semester Hero Banner</h3>
-        <p class="text-xs text-slate-400 mb-6">Ubah tulisan semester aktif dan kartu sorotan pengumuman pada banner utama.</p>
+      <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 max-w-3xl">
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Pengaturan Informasi Semester Hero Banner</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Ubah tulisan semester aktif dan kartu sorotan pengumuman pada banner utama.</p>
 
         <form id="infoSemesterForm" class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Teks Semester / Tahun Akademik:</label>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Semester / Tahun Akademik:</label>
               <input type="text" id="infoSemesterInput" required
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500" />
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Status Badge:</label>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Status Badge:</label>
               <input type="text" id="infoStatusBadgeInput" required
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500" />
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
             </div>
           </div>
 
-          <div class="border-t border-white/10 pt-4 space-y-4">
-            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block">3 Poin Sorotan Informasi:</span>
+          <div class="border-t border-slate-200 dark:border-white/10 pt-4 space-y-4">
+            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">3 Poin Sorotan Informasi:</span>
             
             <div id="semesterItemsContainer" class="space-y-4">
               <!-- Dynamically rendered 3 item forms -->
@@ -362,50 +437,50 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Export Card -->
-        <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center">
               <i data-lucide="download-cloud" class="w-5 h-5"></i>
             </div>
             <div>
-              <h4 class="text-sm font-bold text-white">Ekspor Data Cadangan (Backup JSON)</h4>
-              <p class="text-xs text-slate-400">Unduh seluruh data pengumuman & link dokumen sebagai file cadangan.</p>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Ekspor Data Cadangan (Backup JSON)</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Unduh seluruh data pengumuman & link dokumen sebagai file cadangan.</p>
             </div>
           </div>
-          <button id="exportDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-white/15">
-            <i data-lucide="download" class="w-4 h-4 text-blue-400"></i>
+          <button id="exportDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
+            <i data-lucide="download" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
             <span>Unduh Cadangan (backup-portal-bakp.json)</span>
           </button>
         </div>
 
         <!-- Import Card -->
-        <div class="glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center">
               <i data-lucide="upload-cloud" class="w-5 h-5"></i>
             </div>
             <div>
-              <h4 class="text-sm font-bold text-white">Impor Data dari JSON</h4>
-              <p class="text-xs text-slate-400">Pulihkan atau masukkan data baru dari file JSON.</p>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">Impor Data dari JSON</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Pulihkan atau masukkan data baru dari file JSON.</p>
             </div>
           </div>
           <input type="file" id="importJsonFileInput" accept=".json" class="hidden" />
-          <button id="importDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-white/15">
-            <i data-lucide="upload" class="w-4 h-4 text-blue-400"></i>
+          <button id="importDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
+            <i data-lucide="upload" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
             <span>Pilih File JSON untuk Dipulihkan</span>
           </button>
         </div>
 
         <!-- Reset Default Card -->
-        <div class="glass-card p-6 rounded-2xl border border-rose-500/30 md:col-span-2 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-rose-200 dark:border-rose-500/30 md:col-span-2 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/20 dark:text-rose-400 flex items-center justify-center">
                 <i data-lucide="refresh-cw" class="w-5 h-5"></i>
               </div>
               <div>
-                <h4 class="text-sm font-bold text-rose-300">Kembalikan ke Data Awal (Reset Default)</h4>
-                <p class="text-xs text-slate-400">Menghapus semua perubahan dan mengembalikan ke data pengumuman & unduhan bawaan pabrik.</p>
+                <h4 class="text-sm font-bold text-rose-700 dark:text-rose-300">Kembalikan ke Data Awal (Reset Default)</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Menghapus semua perubahan dan mengembalikan ke data pengumuman & unduhan bawaan pabrik.</p>
               </div>
             </div>
             <button id="resetDefaultBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow transition flex items-center gap-1.5">
@@ -418,19 +493,64 @@
       </div>
     </div>
 
+    <!-- =========================================================================
+         TAB 5: PENGATURAN SECTION (VISIBILITY & ORDER MANAGER)
+         ========================================================================= -->
+    <div id="tab-sections" class="admin-tab-pane hidden space-y-6">
+      
+      <!-- Overview & Action Bar -->
+      <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30 flex items-center gap-1.5">
+              <i data-lucide="arrow-up-down" class="w-3.5 h-3.5"></i>
+              <span>Layout & Section Reorder</span>
+            </span>
+            <span id="sectionActiveCountBadge" class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-400 dark:bg-emerald-500/15 dark:border-emerald-500/30 px-2 py-0.5 rounded-full">
+              8/8 Section Aktif
+            </span>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Susun Urutan & Visibilitas Section Website</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Gunakan tombol <strong class="text-blue-600 dark:text-blue-300">Naik (▲) / Turun (▼)</strong> atau <strong class="text-blue-600 dark:text-blue-300">Tarik (Drag)</strong> kartu untuk mengatur urutan posisi section di halaman depan website.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <button id="showAllSectionsBtn" class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border border-blue-200 hover:border-blue-600 dark:bg-blue-600/30 dark:hover:bg-blue-600 dark:text-blue-200 dark:hover:text-white dark:border-blue-500/40 text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            <span>Tampilkan Semua</span>
+          </button>
+          <button id="hideAllSectionsBtn" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-300 hover:border-rose-300 dark:bg-slate-800 dark:hover:bg-rose-900/60 dark:text-slate-300 dark:hover:text-rose-200 dark:border-slate-700 dark:hover:border-rose-500/40 text-xs font-bold transition flex items-center gap-1.5">
+            <i data-lucide="eye-off" class="w-3.5 h-3.5"></i>
+            <span>Sembunyikan Semua</span>
+          </button>
+          <button id="resetSectionsOrderBtn" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-300 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-300 dark:hover:text-white dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5" title="Kembalikan urutan bawaan">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+            <span>Reset Urutan Default</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sections List (Vertical Stack with Drag-and-drop & Up/Down Controls) -->
+      <div class="space-y-3" id="sectionsVisibilityGrid">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+
   </main>
 
   <!-- =========================================================================
        MODAL: TAMBAH / EDIT PENGUMUMAN
        ========================================================================= -->
-  <div id="announcementModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
-        <h3 id="announcementModalTitle" class="text-base font-extrabold text-white flex items-center gap-2">
-          <i data-lucide="plus-circle" class="w-5 h-5 text-blue-400"></i>
+  <div id="announcementModal" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
+        <h3 id="announcementModalTitle" class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
           <span>Tambah Pengumuman Baru</span>
         </h3>
-        <button id="closeAnnouncementModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10">
+        <button id="closeAnnouncementModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -440,65 +560,65 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Tipe Konten:</label>
-            <select id="announcementTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500">
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tipe Konten:</label>
+            <select id="announcementTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="pengumuman-resmi">Pengumuman Resmi</option>
               <option value="berita-kegiatan">Berita & Kegiatan</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Label Badge / Kategori Singkat:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Label Badge / Kategori Singkat:</label>
             <input type="text" id="announcementBadgeInput" placeholder="Contoh: PENGUMUMAN PENTING / SPJ" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Terbit:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tanggal Terbit:</label>
             <input type="text" id="announcementDateInput" placeholder="Contoh: 25 Maret 2026" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Surat / Referensi:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nomor Surat / Referensi:</label>
             <input type="text" id="announcementDocNumInput" placeholder="Contoh: No. Surat: 142/BAKP-USB/III/2026"
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Judul Lengkap:</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Lengkap:</label>
           <input type="text" id="announcementTitleInput" placeholder="Masukkan judul pengumuman..." required
-                 class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Ringkasan Singkat (Muncul di kartu):</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Ringkasan Singkat (Muncul di kartu):</label>
           <textarea id="announcementSummaryInput" rows="2" placeholder="Tuliskan ringkasan 1-2 kalimat..." required
-                    class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
+                    class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Isi Lengkap (Muncul saat tombol "Baca Detail" diklik):</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Isi Lengkap (Muncul saat tombol "Baca Detail" diklik):</label>
           <textarea id="announcementContentInput" rows="4" placeholder="Tuliskan isi pengumuman lengkap (Bisa format HTML paragraf atau teks biasa)..." required
-                    class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
+                    class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">URL File Unduhan Lampiran (Opsional):</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">URL File Unduhan Lampiran (Opsional):</label>
             <input type="text" id="announcementActionUrlInput" placeholder="https://link-file-drive.pdf"
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Teks Tombol Lampiran:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Tombol Lampiran:</label>
             <input type="text" id="announcementActionTextInput" placeholder="Contoh: Unduh Surat Edaran (PDF)"
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
-        <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
-          <button type="button" id="cancelAnnouncementModalBtn" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-slate-300 font-semibold">
+        <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-end gap-3">
+          <button type="button" id="cancelAnnouncementModalBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
             Batal
           </button>
           <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
@@ -513,14 +633,14 @@
   <!-- =========================================================================
        MODAL: TAMBAH / EDIT DOKUMEN UNDUHAN
        ========================================================================= -->
-  <div id="downloadModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
-        <h3 id="downloadModalTitle" class="text-base font-extrabold text-white flex items-center gap-2">
-          <i data-lucide="plus-circle" class="w-5 h-5 text-blue-400"></i>
+  <div id="downloadModal" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
+        <h3 id="downloadModalTitle" class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
           <span>Tambah Dokumen Unduhan</span>
         </h3>
-        <button id="closeDownloadModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10">
+        <button id="closeDownloadModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -529,23 +649,23 @@
         <input type="hidden" id="downloadIdInput" />
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Judul Dokumen / Nama Formulir:</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Dokumen / Nama Formulir:</label>
           <input type="text" id="downloadTitleInput" placeholder="Contoh: Format SPJ Kegiatan dan Kuitansi 2026" required
-                 class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Kategori Dokumen:</label>
-            <select id="downloadCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500">
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Kategori Dokumen:</label>
+            <select id="downloadCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="spj">Format SPJ & Kuitansi</option>
               <option value="sop">Standar SOP</option>
               <option value="sk">SK & Edaran Tarif</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Tipe Format File:</label>
-            <select id="downloadFileTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500">
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tipe Format File:</label>
+            <select id="downloadFileTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="PDF">PDF</option>
               <option value="DOCX">DOCX (Word)</option>
               <option value="XLSX">XLSX (Excel)</option>
@@ -556,26 +676,26 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Ukuran File:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Ukuran File:</label>
             <input type="text" id="downloadFileSizeInput" placeholder="Contoh: 184 KB / 1.5 MB" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Bulan/Tahun Update:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Bulan/Tahun Update:</label>
             <input type="text" id="downloadUpdatedDateInput" placeholder="Contoh: Maret 2026" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Link / URL File (Google Drive / Server Kampus):</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Link / URL File (Google Drive / Server Kampus):</label>
           <input type="text" id="downloadUrlInput" placeholder="https://drive.google.com/file/d/... atau assets/file.pdf" required
-                 class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
-          <span class="text-[11px] text-slate-400 mt-1 block">💡 Bisa masukkan link share Google Drive atau URL langsung. Jika diisi tanda pagar (#) tombol tetap bisa diklik.</span>
+                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+          <span class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">💡 Bisa masukkan link share Google Drive atau URL langsung. Jika diisi tanda pagar (#) tombol tetap bisa diklik.</span>
         </div>
 
-        <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
-          <button type="button" id="cancelDownloadModalBtn" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-slate-300 font-semibold">
+        <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-end gap-3">
+          <button type="button" id="cancelDownloadModalBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
             Batal
           </button>
           <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
@@ -594,28 +714,86 @@
   </div>
 
   <!-- Scripts -->
-  <script src="../data.js"></script>
+  <script src="../assets/js/data.js"></script>
   <script>
     // Security PIN / Password
     const ADMIN_PASSWORD = 'admin123';
     const AUTH_SESSION_KEY = 'USB_ADMIN_AUTH_ACTIVE';
+    const THEME_STORAGE_KEY = 'USB_ADMIN_THEME';
 
+    // ==========================================
+    // THEME (DARK / LIGHT MODE) MANAGER
+    // ==========================================
+    function initTheme() {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'dark';
+      applyTheme(savedTheme, false);
+    }
+
+    function applyTheme(theme, shouldNotify = false) {
+      const isDark = theme === 'dark';
+      const toggleIcon = document.getElementById('themeToggleIcon');
+      const toggleLabel = document.getElementById('themeToggleLabel');
+
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'sun');
+        if (toggleLabel) toggleLabel.textContent = 'Mode Terang';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        if (toggleIcon) toggleIcon.setAttribute('data-lucide', 'moon');
+        if (toggleLabel) toggleLabel.textContent = 'Mode Gelap';
+      }
+
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+      lucide.createIcons();
+
+      if (shouldNotify) {
+        showToast(`Tampilan CMS diubah ke ${isDark ? 'Mode Gelap 🌙' : 'Mode Terang ☀️'}`);
+      }
+    }
+
+    document.getElementById('adminThemeToggleBtn')?.addEventListener('click', () => {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      const nextTheme = isCurrentlyDark ? 'light' : 'dark';
+      applyTheme(nextTheme, true);
+    });
+
+    let toastTimer = null;
     function showToast(message, isError = false) {
       const toast = document.getElementById('adminToast');
       const msg = document.getElementById('adminToastMsg');
       const icon = document.getElementById('adminToastIcon');
+      if (!toast || !msg || !icon) return;
+
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
 
       msg.textContent = message;
+
+      const baseClasses = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border text-xs font-bold transition-all duration-300';
+
       if (isError) {
-        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border text-xs font-bold bg-rose-900/90 text-rose-200 border-rose-500/50 transform translate-y-0 opacity-100';
+        toast.className = `${baseClasses} bg-rose-900/95 dark:bg-rose-950/95 text-rose-100 border-rose-500/50 shadow-rose-950/30`;
         icon.setAttribute('data-lucide', 'alert-circle');
+        icon.className = 'w-5 h-5 text-rose-300 shrink-0';
       } else {
-        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border text-xs font-bold bg-slate-900/95 text-blue-200 border-blue-500/50 transform translate-y-0 opacity-100';
+        toast.className = `${baseClasses} bg-slate-900/95 dark:bg-slate-800/95 text-slate-100 border-blue-500/40 shadow-blue-950/20`;
         icon.setAttribute('data-lucide', 'check-circle-2');
+        icon.className = 'w-5 h-5 text-blue-400 dark:text-blue-300 shrink-0';
       }
       lucide.createIcons();
 
-      setTimeout(() => {
+      // Show toast
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+      // Auto dismiss after 3 seconds
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
         toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
       }, 3000);
     }
@@ -659,11 +837,11 @@
       btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-tab');
         tabButtons.forEach(b => {
-          b.classList.remove('active', 'border-blue-500', 'text-blue-400');
-          b.classList.add('text-slate-400', 'border-transparent');
+          b.classList.remove('active', 'border-blue-600', 'dark:border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+          b.classList.add('text-slate-500', 'dark:text-slate-400', 'border-transparent');
         });
-        btn.classList.add('active', 'border-blue-500', 'text-blue-400');
-        btn.classList.remove('text-slate-400', 'border-transparent');
+        btn.classList.add('active', 'border-blue-600', 'dark:border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+        btn.classList.remove('text-slate-500', 'dark:text-slate-400', 'border-transparent');
 
         tabPanes.forEach(pane => {
           if (pane.id === target) {
@@ -706,7 +884,7 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="4" class="py-8 text-center text-slate-400">
-              <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-500"></i>
+              <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-400 dark:text-slate-500"></i>
               <span>Belum ada pengumuman yang sesuai.</span>
             </td>
           </tr>
@@ -716,27 +894,27 @@
       }
 
       tbody.innerHTML = filtered.map(item => `
-        <tr class="hover:bg-white/5 transition">
+        <tr class="hover:bg-slate-100/70 dark:hover:bg-white/5 transition">
           <td class="py-3.5 px-4 align-top">
             <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-600 text-white">
               ${item.badge || 'INFO'}
             </span>
-            <div class="text-[11px] text-slate-400 mt-1 capitalize">${item.type.replace('-', ' ')}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 capitalize">${item.type.replace('-', ' ')}</div>
           </td>
           <td class="py-3.5 px-4 align-top max-w-md">
-            <div class="font-bold text-white text-sm mb-1">${item.title}</div>
-            <div class="text-slate-400 text-xs line-clamp-2">${item.summary || ''}</div>
+            <div class="font-bold text-slate-900 dark:text-white text-sm mb-1">${item.title}</div>
+            <div class="text-slate-600 dark:text-slate-400 text-xs line-clamp-2">${item.summary || ''}</div>
           </td>
           <td class="py-3.5 px-4 align-top whitespace-nowrap">
-            <div class="text-white font-medium">${item.date || '-'}</div>
-            <div class="text-[11px] text-slate-400">${item.docNumber || '-'}</div>
+            <div class="text-slate-900 dark:text-white font-medium">${item.date || '-'}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400">${item.docNumber || '-'}</div>
           </td>
           <td class="py-3.5 px-4 align-top text-right whitespace-nowrap">
             <div class="flex items-center justify-end gap-1.5">
-              <button onclick="editAnnouncement('${item.id}')" class="p-1.5 rounded-lg bg-white/10 hover:bg-blue-600 hover:text-white text-slate-300 transition" title="Edit">
+              <button onclick="editAnnouncement('${item.id}')" class="p-1.5 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-600 dark:bg-white/10 dark:hover:bg-blue-600 dark:hover:text-white dark:text-slate-300 transition" title="Edit">
                 <i data-lucide="edit-3" class="w-4 h-4"></i>
               </button>
-              <button onclick="deleteAnnouncementItem('${item.id}')" class="p-1.5 rounded-lg bg-white/10 hover:bg-rose-600 hover:text-white text-slate-300 transition" title="Hapus">
+              <button onclick="deleteAnnouncementItem('${item.id}')" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-600 dark:bg-white/10 dark:hover:bg-rose-600 dark:hover:text-white dark:text-slate-300 transition" title="Hapus">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
               </button>
             </div>
@@ -752,7 +930,7 @@
     document.getElementById('openAddAnnouncementBtn').addEventListener('click', () => {
       document.getElementById('announcementForm').reset();
       document.getElementById('announcementIdInput').value = '';
-      document.getElementById('announcementModalTitle').innerHTML = '<i data-lucide="plus-circle" class="w-5 h-5 text-blue-400"></i><span>Tambah Pengumuman / Berita Baru</span>';
+      document.getElementById('announcementModalTitle').innerHTML = '<i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i><span>Tambah Pengumuman / Berita Baru</span>';
       annModal.classList.remove('hidden');
       annModal.classList.add('flex');
       lucide.createIcons();
@@ -783,7 +961,7 @@
       document.getElementById('announcementActionUrlInput').value = item.actionUrl || '';
       document.getElementById('announcementActionTextInput').value = item.actionText || '';
 
-      document.getElementById('announcementModalTitle').innerHTML = '<i data-lucide="edit-3" class="w-5 h-5 text-blue-400"></i><span>Edit Pengumuman</span>';
+      document.getElementById('announcementModalTitle').innerHTML = '<i data-lucide="edit-3" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i><span>Edit Pengumuman</span>';
       annModal.classList.remove('hidden');
       annModal.classList.add('flex');
       lucide.createIcons();
@@ -858,7 +1036,7 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="5" class="py-8 text-center text-slate-400">
-              <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-500"></i>
+              <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-400 dark:text-slate-500"></i>
               <span>Belum ada dokumen yang sesuai.</span>
             </td>
           </tr>
@@ -868,36 +1046,36 @@
       }
 
       tbody.innerHTML = filtered.map(item => `
-        <tr class="hover:bg-white/5 transition">
+        <tr class="hover:bg-slate-100/70 dark:hover:bg-white/5 transition">
           <td class="py-3.5 px-4 align-top">
             <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-bold ${
-              item.fileType === 'PDF' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
-              item.fileType === 'XLSX' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
-              'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+              item.fileType === 'PDF' ? 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30' :
+              item.fileType === 'XLSX' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30' :
+              'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30'
             }">
               ${item.fileType || 'FILE'}
             </span>
           </td>
           <td class="py-3.5 px-4 align-top max-w-md">
-            <div class="font-bold text-white text-sm mb-0.5">${item.title}</div>
-            <div class="text-[11px] text-slate-400">Diperbarui: ${item.updatedDate || '-'}</div>
+            <div class="font-bold text-slate-900 dark:text-white text-sm mb-0.5">${item.title}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400">Diperbarui: ${item.updatedDate || '-'}</div>
           </td>
           <td class="py-3.5 px-4 align-top whitespace-nowrap">
-            <div class="text-white font-medium capitalize">${item.categoryLabel || item.category}</div>
-            <div class="text-[11px] text-slate-400">${item.fileSize || '-'}</div>
+            <div class="text-slate-800 dark:text-white font-medium capitalize">${item.categoryLabel || item.category}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400">${item.fileSize || '-'}</div>
           </td>
           <td class="py-3.5 px-4 align-top max-w-xs truncate">
-            <a href="${item.downloadUrl || '#'}" target="_blank" class="text-blue-400 hover:underline inline-flex items-center gap-1 font-mono text-[11px]">
+            <a href="${item.downloadUrl || '#'}" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1 font-mono text-[11px]">
               <i data-lucide="link" class="w-3 h-3"></i>
               <span class="truncate max-w-[150px]">${item.downloadUrl || '#'}</span>
             </a>
           </td>
           <td class="py-3.5 px-4 align-top text-right whitespace-nowrap">
             <div class="flex items-center justify-end gap-1.5">
-              <button onclick="editDownload('${item.id}')" class="p-1.5 rounded-lg bg-white/10 hover:bg-blue-600 hover:text-white text-slate-300 transition" title="Edit">
+              <button onclick="editDownload('${item.id}')" class="p-1.5 rounded-lg bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-600 dark:bg-white/10 dark:hover:bg-blue-600 dark:hover:text-white dark:text-slate-300 transition" title="Edit">
                 <i data-lucide="edit-3" class="w-4 h-4"></i>
               </button>
-              <button onclick="deleteDownloadItem('${item.id}')" class="p-1.5 rounded-lg bg-white/10 hover:bg-rose-600 hover:text-white text-slate-300 transition" title="Hapus">
+              <button onclick="deleteDownloadItem('${item.id}')" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-600 dark:bg-white/10 dark:hover:bg-rose-600 dark:hover:text-white dark:text-slate-300 transition" title="Hapus">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
               </button>
             </div>
@@ -913,7 +1091,7 @@
     document.getElementById('openAddDownloadBtn').addEventListener('click', () => {
       document.getElementById('downloadForm').reset();
       document.getElementById('downloadIdInput').value = '';
-      document.getElementById('downloadModalTitle').innerHTML = '<i data-lucide="plus-circle" class="w-5 h-5 text-blue-400"></i><span>Tambah Dokumen Unduhan Baru</span>';
+      document.getElementById('downloadModalTitle').innerHTML = '<i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i><span>Tambah Dokumen Unduhan Baru</span>';
       dlModal.classList.remove('hidden');
       dlModal.classList.add('flex');
       lucide.createIcons();
@@ -941,7 +1119,7 @@
       document.getElementById('downloadUpdatedDateInput').value = item.updatedDate || '';
       document.getElementById('downloadUrlInput').value = item.downloadUrl || '';
 
-      document.getElementById('downloadModalTitle').innerHTML = '<i data-lucide="edit-3" class="w-5 h-5 text-blue-400"></i><span>Edit Dokumen Unduhan</span>';
+      document.getElementById('downloadModalTitle').innerHTML = '<i data-lucide="edit-3" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i><span>Edit Dokumen Unduhan</span>';
       dlModal.classList.remove('hidden');
       dlModal.classList.add('flex');
       lucide.createIcons();
@@ -1011,21 +1189,21 @@
 
       const container = document.getElementById('semesterItemsContainer');
       container.innerHTML = (info.items || []).map((item, idx) => `
-        <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
-          <div class="text-xs font-bold text-slate-300">Poin Sorotan #${idx + 1}</div>
+        <div class="p-4 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-3">
+          <div class="text-xs font-bold text-slate-800 dark:text-slate-300">Poin Sorotan #${idx + 1}</div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="text-[11px] text-slate-400 block mb-1">Judul Poin:</label>
-              <input type="text" class="sem-item-title w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs text-white" value="${item.title || ''}" required />
+              <label class="text-[11px] text-slate-600 dark:text-slate-400 block mb-1">Judul Poin:</label>
+              <input type="text" class="sem-item-title w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white" value="${item.title || ''}" required />
             </div>
             <div>
-              <label class="text-[11px] text-slate-400 block mb-1">Batas Waktu / Tanggal:</label>
-              <input type="text" class="sem-item-date w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs text-white" value="${item.date || ''}" required />
+              <label class="text-[11px] text-slate-600 dark:text-slate-400 block mb-1">Batas Waktu / Tanggal:</label>
+              <input type="text" class="sem-item-date w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white" value="${item.date || ''}" required />
             </div>
           </div>
           <div>
-            <label class="text-[11px] text-slate-400 block mb-1">Keterangan Singkat:</label>
-            <input type="text" class="sem-item-desc w-full px-3 py-2 rounded-lg bg-white/10 border border-white/10 text-xs text-white" value="${item.desc || ''}" required />
+            <label class="text-[11px] text-slate-600 dark:text-slate-400 block mb-1">Keterangan Singkat:</label>
+            <input type="text" class="sem-item-desc w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white" value="${item.desc || ''}" required />
           </div>
         </div>
       `).join('');
@@ -1091,6 +1269,7 @@
           renderAnnouncementsTable();
           renderDownloadsTable();
           renderInfoSemesterForm();
+          renderSectionVisibility();
           updateStats();
           showToast('Data berhasil dipulihkan dari file JSON!');
         } else {
@@ -1101,23 +1280,290 @@
     });
 
     document.getElementById('resetDefaultBtn').addEventListener('click', () => {
-      if (confirm('PERINGATAN: Semua pengumuman dan dokumen akan di-reset ke pengaturan awal pabrik. Lanjutkan?')) {
+      if (confirm('PERINGATAN: Semua pengumuman, dokumen, dan pengaturan section akan di-reset ke pengaturan awal pabrik. Lanjutkan?')) {
         window.portalDataManager.resetToDefault();
         renderAnnouncementsTable();
         renderDownloadsTable();
         renderInfoSemesterForm();
+        renderSectionVisibility();
         updateStats();
         showToast('Data berhasil di-reset ke bawaan default!');
       }
     });
 
+    // ==========================================
+    // 5. SECTION VISIBILITY & ORDER MANAGER
+    // ==========================================
+    const SECTION_DEFINITIONS = [
+      {
+        key: 'hero',
+        title: 'Hero Banner & Slider Kampus',
+        desc: 'Headline sambutan, latar belakang zoom out kampus, dan tombol aksi cepat panduan pembayaran.',
+        icon: 'image'
+      },
+      {
+        key: 'layananCepat',
+        title: 'Layanan Utama & Akses Cepat',
+        desc: '4 kartu layanan mandiri: Verifikasi Pembayaran SPP/VA, Pengadaan, Format SPJ, dan Kalender Akademik.',
+        icon: 'zap'
+      },
+      {
+        key: 'alurLayanan',
+        title: 'Alur Layanan Baku (SOP Tabs)',
+        desc: 'Tab interaktif tahapan prosedur 01-04 untuk Alur Mahasiswa dan Alur Pengadaan Unit Kerja.',
+        icon: 'git-branch'
+      },
+      {
+        key: 'pengumuman',
+        title: 'Pengumuman Resmi & Berita Kegiatan',
+        desc: 'Pusat informasi surat edaran dispensasi, batas penyerahan SPJ, SK SBM, dan liputan workshop.',
+        icon: 'newspaper'
+      },
+      {
+        key: 'statistik',
+        title: 'Statistik & Capaian Kinerja',
+        desc: '4 indikator metrik akuntabilitas: Ketepatan Verifikasi, SLA <24 Jam, Unit Terlayani, dan Opini WTP.',
+        icon: 'bar-chart-3'
+      },
+      {
+        key: 'unduhan',
+        title: 'Pusat Unduhan Regulasi & SPJ',
+        desc: 'Katalog download file format Excel LPJ, kuitansi SPTJM, standar SOP, SK Rektor, dan formulir dispensasi.',
+        icon: 'folder-down'
+      },
+      {
+        key: 'faq',
+        title: 'FAQ (Pertanyaan yang Sering Diajukan)',
+        desc: 'Accordion bantuan tanya-jawab terkait verifikasi VA, syarat dispensasi, dan pengadaan di luar pagu.',
+        icon: 'help-circle'
+      },
+      {
+        key: 'kontak',
+        title: 'Footer, Kontak & Tautan Sistem',
+        desc: 'Informasi alamat institusi USB, jam operasional loket tatap muka, dan tautan sistem kampus.',
+        icon: 'phone-call'
+      }
+    ];
+
+    let draggedItemKey = null;
+
+    function renderSectionVisibility() {
+      const dm = window.portalDataManager;
+      const visibility = dm.getSectionVisibility();
+      const order = dm.getSectionOrder();
+      const container = document.getElementById('sectionsVisibilityGrid');
+      const badge = document.getElementById('sectionActiveCountBadge');
+
+      if (!container) return;
+
+      // Sort definitions based on custom order
+      const defMap = {};
+      SECTION_DEFINITIONS.forEach(def => { defMap[def.key] = def; });
+
+      const orderedList = [];
+      order.forEach(key => {
+        if (defMap[key]) orderedList.push(defMap[key]);
+      });
+      SECTION_DEFINITIONS.forEach(def => {
+        if (!orderedList.find(item => item.key === def.key)) {
+          orderedList.push(def);
+        }
+      });
+
+      let activeCount = 0;
+      const totalCount = orderedList.length;
+
+      container.innerHTML = orderedList.map((sec, index) => {
+        const isVisible = visibility[sec.key] !== false;
+        if (isVisible) activeCount++;
+        const isFirst = index === 0;
+        const isLast = index === totalCount - 1;
+
+        return `
+          <div class="section-sort-card glass-card p-4 sm:p-5 rounded-2xl border ${
+            isVisible 
+              ? 'border-slate-200 hover:border-blue-500/50 bg-white dark:border-white/10 dark:hover:border-blue-500/40 dark:bg-slate-900/60' 
+              : 'border-rose-300 bg-rose-50/50 opacity-80 dark:border-rose-500/30 dark:bg-slate-950/70 dark:opacity-75'
+          } transition duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
+               draggable="true"
+               data-key="${sec.key}"
+               data-index="${index}">
+            
+            <!-- Left Info: Drag Handle, Number Badge, Icon, Title & Description -->
+            <div class="flex items-start sm:items-center gap-3.5 flex-1 min-w-0">
+              <!-- Drag Handle Icon -->
+              <div class="drag-handle cursor-grab active:cursor-grabbing text-slate-400 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition flex items-center justify-center flex-shrink-0" title="Tarik & Geser untuk memindahkan urutan">
+                <i data-lucide="grip-vertical" class="w-5 h-5"></i>
+              </div>
+
+              <!-- Order Number Badge -->
+              <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-600/20 dark:border-blue-500/30 dark:text-blue-300 font-extrabold text-xs flex items-center justify-center flex-shrink-0 shadow-inner">
+                #${index + 1}
+              </div>
+
+              <!-- Section Icon -->
+              <div class="w-10 h-10 rounded-xl ${isVisible ? 'bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400' : 'bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500'} flex items-center justify-center flex-shrink-0">
+                <i data-lucide="${sec.icon}" class="w-5 h-5"></i>
+              </div>
+
+              <!-- Text Details -->
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="text-sm font-bold ${isVisible ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'} truncate">${sec.title}</h4>
+                  <span class="text-[10px] px-2 py-0.5 rounded font-mono font-medium ${isVisible ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/30' : 'bg-slate-100 text-slate-500 border border-slate-200 dark:bg-slate-800 dark:text-slate-500 dark:border-slate-700'}">
+                    ${isVisible ? 'Aktif' : 'Nonaktif'}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed line-clamp-1 sm:line-clamp-2">${sec.desc}</p>
+              </div>
+            </div>
+
+            <!-- Right Controls: Move Up/Down Buttons & Visibility Toggle -->
+            <div class="flex items-center justify-between sm:justify-end gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-slate-200 dark:border-white/10 flex-shrink-0">
+              
+              <!-- Move Up & Down Reorder Buttons -->
+              <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-white/10">
+                <button type="button" 
+                        class="btn-move-section p-2 rounded-lg ${isFirst ? 'opacity-25 cursor-not-allowed text-slate-400' : 'hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-300 active:scale-95'} transition"
+                        data-key="${sec.key}"
+                        data-dir="up"
+                        ${isFirst ? 'disabled' : ''}
+                        title="${isFirst ? 'Sudah berada di posisi paling atas' : 'Geser Naik (Pindah ke atas)'}">
+                  <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                </button>
+                <button type="button" 
+                        class="btn-move-section p-2 rounded-lg ${isLast ? 'opacity-25 cursor-not-allowed text-slate-400' : 'hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-300 active:scale-95'} transition"
+                        data-key="${sec.key}"
+                        data-dir="down"
+                        ${isLast ? 'disabled' : ''}
+                        title="${isLast ? 'Sudah berada di posisi paling bawah' : 'Geser Turun (Pindah ke bawah)'}">
+                  <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- iOS Style Toggle Switch -->
+              <div class="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-white/10">
+                <label class="relative inline-flex items-center cursor-pointer" title="Tampilkan / Sembunyikan Section">
+                  <input type="checkbox" class="sr-only peer section-toggle-input" data-key="${sec.key}" ${isVisible ? 'checked' : ''}>
+                  <div class="w-11 h-6 bg-slate-300 dark:bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (badge) {
+        badge.textContent = `${activeCount}/${totalCount} Section Aktif`;
+        badge.className = `text-xs font-bold px-2 py-0.5 rounded-full border ${activeCount === totalCount ? 'text-emerald-700 bg-emerald-50 border-emerald-200 dark:text-emerald-400 dark:bg-emerald-500/15 dark:border-emerald-500/30' : 'text-amber-700 bg-amber-50 border-amber-200 dark:text-amber-400 dark:bg-amber-500/15 dark:border-amber-500/30'}`;
+      }
+
+      // Attach Move Button Click Handlers (Naik & Turun)
+      container.querySelectorAll('.btn-move-section').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const key = btn.getAttribute('data-key');
+          const dir = btn.getAttribute('data-dir');
+          if (btn.hasAttribute('disabled')) return;
+
+          dm.moveSection(key, dir);
+          renderSectionVisibility();
+          showToast(`Posisi section berhasil digeser ${dir === 'up' ? 'NAIK (▲)' : 'TURUN (▼)'}!`);
+        });
+      });
+
+      // Attach Toggle Events
+      container.querySelectorAll('.section-toggle-input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const key = e.target.getAttribute('data-key');
+          const isChecked = e.target.checked;
+          dm.toggleSection(key, isChecked);
+          renderSectionVisibility();
+          showToast(`Section "${key}" berhasil di-${isChecked ? 'tampilkan' : 'sembunyikan'}!`);
+        });
+      });
+
+      // Drag and Drop Implementation
+      const cards = container.querySelectorAll('.section-sort-card');
+      cards.forEach(card => {
+        card.addEventListener('dragstart', (e) => {
+          draggedItemKey = card.getAttribute('data-key');
+          card.classList.add('opacity-40', 'scale-[0.99]', 'border-blue-500');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', draggedItemKey);
+        });
+
+        card.addEventListener('dragend', () => {
+          card.classList.remove('opacity-40', 'scale-[0.99]', 'border-blue-500');
+          cards.forEach(c => c.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50', 'dark:bg-blue-950/40'));
+        });
+
+        card.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          card.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50', 'dark:bg-blue-950/40');
+        });
+
+        card.addEventListener('dragleave', () => {
+          card.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50', 'dark:bg-blue-950/40');
+        });
+
+        card.addEventListener('drop', (e) => {
+          e.preventDefault();
+          card.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50', 'dark:bg-blue-950/40');
+          const targetKey = card.getAttribute('data-key');
+          if (!draggedItemKey || draggedItemKey === targetKey) return;
+
+          const currentOrder = [...dm.getSectionOrder()];
+          const fromIdx = currentOrder.indexOf(draggedItemKey);
+          const toIdx = currentOrder.indexOf(targetKey);
+
+          if (fromIdx !== -1 && toIdx !== -1) {
+            currentOrder.splice(fromIdx, 1);
+            currentOrder.splice(toIdx, 0, draggedItemKey);
+            dm.saveSectionOrder(currentOrder);
+            renderSectionVisibility();
+            showToast('Urutan posisi section berhasil diperbarui!');
+          }
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    // Handlers for Batch Toggle
+    document.getElementById('showAllSectionsBtn')?.addEventListener('click', () => {
+      const allTrue = {};
+      SECTION_DEFINITIONS.forEach(s => allTrue[s.key] = true);
+      window.portalDataManager.saveSectionVisibility(allTrue);
+      renderSectionVisibility();
+      showToast('Semua section berhasil diatur AKTIF / ditampilkan!');
+    });
+
+    document.getElementById('hideAllSectionsBtn')?.addEventListener('click', () => {
+      const allFalse = {};
+      SECTION_DEFINITIONS.forEach(s => allFalse[s.key] = false);
+      window.portalDataManager.saveSectionVisibility(allFalse);
+      renderSectionVisibility();
+      showToast('Semua section disembunyikan!', true);
+    });
+
+    document.getElementById('resetSectionsOrderBtn')?.addEventListener('click', () => {
+      window.portalDataManager.saveSectionOrder([...DEFAULT_SECTION_ORDER]);
+      renderSectionVisibility();
+      showToast('Urutan posisi section dikembalikan ke susunan default!');
+    });
+
     // Initial Execution
     document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
       checkAuth();
       updateStats();
       renderAnnouncementsTable();
       renderDownloadsTable();
       renderInfoSemesterForm();
+      renderSectionVisibility();
       lucide.createIcons();
     });
   </script>
