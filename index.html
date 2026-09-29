@@ -1,399 +1,696 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Sedang Dalam Pengembangan | Biro Keuangan</title>
-  
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Website is Under Construction | Biro Keuangan</title>
+
+  <!-- Font display swap untuk render cepat tanpa blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
-    /* ==================== RESET & VARIABLES ==================== */
+    /* ==========================================================================
+       OPTIMIZED FOR LOW-SPEC / LEGACY PC
+       - Zero continuous CPU/GPU loops
+       - Zero heavy backdrop-filter blur
+       - Pure inline SVG icons (No heavy external font libraries)
+       - Lightweight, fast DOM rendering
+       ========================================================================== */
+
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent: #38bdf8;
-      --bg: #0b1120;
-      --bg-card: rgba(17, 24, 39, 0.88);
-      --border: rgba(255, 255, 255, 0.1);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-dark: #120127;
+      --bg-gradient: radial-gradient(circle at 75% 45%, #2a074c 0%, #15012e 50%, #0c001a 100%);
+      --accent-pink: #ec4899;
+      --accent-orange: #f97316;
+      --btn-gradient: linear-gradient(90deg, #d91b8d 0%, #ec4899 50%, #f97316 100%);
+      --text-white: #ffffff;
+      --text-muted: #a395be;
+      --modal-bg: #1c0538;
+      --border-light: rgba(255, 255, 255, 0.12);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      box-sizing: border-box;
     }
 
-    html, body {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden; /* Mencegah scrollbar vertikal maupun horizontal */
-      background-color: var(--bg);
-      color: var(--text);
-    }
-
+    html,
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      position: relative;
-    }
-
-    /* Ambient Background Glow */
-    .bg-glow {
-      position: absolute;
-      width: 450px;
-      height: 450px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .bg-glow-secondary {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
-      top: 15%;
-      left: 20%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ==================== MAIN CARD ==================== */
-    .container {
-      position: relative;
-      z-index: 1;
       width: 100%;
-      max-width: 540px;
-      max-height: calc(100vh - 2rem);
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.75rem 1.75rem 1.25rem;
-      text-align: center;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(37, 99, 235, 0.12);
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image: var(--bg-gradient);
+      color: var(--text-white);
+      /* Fallback font stack yang sudah terpasang di sistem operasi Windows lama (Segoe UI/Arial) */
+      font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container Utama */
+    .page-wrapper {
+      width: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-between;
-      animation: fadeIn 0.6s ease-out;
+      padding: 2rem 5% 1.5rem;
+      max-width: 1360px;
+      margin: 0 auto;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    /* Brand Header */
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .brand-icon {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 10px;
+    /* ==================== HEADER NAV ==================== */
+    .header-nav {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-size: 1.1rem;
-      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+      width: 100%;
+      padding-bottom: 1rem;
     }
 
-    .brand-text {
-      text-align: left;
-    }
-
-    .brand-title {
-      font-size: 0.98rem;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      color: #ffffff;
-      display: block;
-      line-height: 1.2;
-    }
-
-    .brand-subtitle {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      display: block;
-    }
-
-    /* Status Badge */
-    .status-badge {
+    .brand-logo {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      padding: 0.3rem 0.85rem;
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 9999px;
-      color: #fbbf24;
-      font-size: 0.75rem;
+      text-decoration: none;
+      cursor: default;
+    }
+
+    .brand-logo-img {
+      height: clamp(52px, 5.5vw, 65px);
+      width: auto;
+      max-width: 320px;
+      object-fit: contain;
+      background: transparent;
+      display: block;
+    }
+
+    .hamburger-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 32px;
+      height: 20px;
+      padding: 0;
+      z-index: 100;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #ff52b7;
+      border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    /* ==================== HERO SECTION (2 COLUMNS) ==================== */
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      flex: 1;
+      padding: 1rem 0;
+    }
+
+    .hero-content {
+      max-width: 560px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Outfit', 'Segoe UI', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
       font-weight: 600;
-      margin-bottom: 0.85rem;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      background-color: #f59e0b;
-      border-radius: 50%;
-      box-shadow: 0 0 6px #f59e0b;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.7; }
-    }
-
-    /* Animated Illustration */
-    .illustration-wrapper {
-      margin: 0.25rem auto 0.85rem;
-      width: 76px;
-      height: 76px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gear-main {
-      font-size: 3.2rem;
-      color: rgba(56, 189, 248, 0.25);
-      animation: rotateRight 12s linear infinite;
-    }
-
-    .gear-sub {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      font-size: 1.8rem;
-      color: rgba(37, 99, 235, 0.45);
-      animation: rotateLeft 8s linear infinite;
-    }
-
-    .center-icon {
-      position: absolute;
-      font-size: 1.25rem;
-      color: var(--accent);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    @keyframes rotateRight {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes rotateLeft {
-      from { transform: rotate(360deg); }
-      to { transform: rotate(0deg); }
-    }
-
-    /* Title & Description */
-    h1 {
-      font-size: clamp(1.25rem, 2.8vw, 1.55rem);
-      font-weight: 800;
+      line-height: 1.15;
       color: #ffffff;
-      margin-bottom: 0.5rem;
-      line-height: 1.25;
+      margin-bottom: 0.2rem;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero-title {
+      font-family: 'Outfit', 'Segoe UI', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
     }
 
-    p.description {
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 2.2rem;
+      max-width: 480px;
+    }
+
+    /* Tombol Contact Us */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: var(--btn-gradient);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(217, 27, 141, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(217, 27, 141, 0.6);
+    }
+
+    .cta-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Visual 3D Illustration Area */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .illustration-card {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .illustration-img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 20px;
+      display: block;
+    }
+
+    /* ==================== MODAL & DRAWER (RINGAN) ==================== */
+    /* Side Drawer */
+    .menu-drawer {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100vh;
+      background: #17032e;
+      border-left: 1px solid var(--border-light);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+      z-index: 90;
+      transition: right 0.25s ease;
+      padding: 5rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-drawer.open {
+      right: 0;
+    }
+
+    .drawer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .drawer-nav-item a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .drawer-nav-item a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(236, 72, 153, 0.4);
+      color: #ff75c3;
+    }
+
+    .drawer-nav-item a svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent-pink);
+      flex-shrink: 0;
+    }
+
+    .drawer-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal Popup Kontak */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--modal-bg);
+      border: 1px solid rgba(236, 72, 153, 0.35);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem 1.75rem;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--accent-pink);
+    }
+
+    .modal-close-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: #ffffff;
+    }
+
+    .modal-title {
+      font-family: 'Outfit', 'Segoe UI', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+    }
+
+    .modal-subtitle {
       font-size: 0.85rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 1.1rem;
-      max-width: 440px;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
     }
 
-    /* ==================== ACTION & CONTACT ==================== */
-    .contact-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .actions {
+    .contact-channels {
       display: flex;
-      gap: 0.6rem;
-      justify-content: center;
-      width: 100%;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
-    .btn {
-      display: inline-flex;
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .channel-item:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(236, 72, 153, 0.5);
+    }
+
+    .channel-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
-      padding: 0.55rem 1rem;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
+      flex-shrink: 0;
     }
 
-    .btn-wa {
+    .channel-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .icon-wa {
       background: #22c55e;
+    }
+
+    .icon-email {
+      background: #0284c7;
+    }
+
+    .icon-phone {
+      background: #e11d48;
+    }
+
+    .channel-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
       color: #ffffff;
-      box-shadow: 0 3px 10px rgba(34, 197, 94, 0.3);
+      margin-bottom: 0.15rem;
     }
 
-    .btn-wa:hover {
-      background: #16a34a;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    /* ==================== FOOTER ==================== */
-    footer {
-      margin-top: 1rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.72rem;
+    .channel-info p {
+      font-size: 0.75rem;
       color: var(--text-muted);
-      width: 100%;
     }
 
-    /* Responsive untuk layar sangat kecil */
-    @media (max-height: 600px) {
-      .container {
-        padding: 1rem 1.25rem 0.85rem;
+    /* Footer Ringan */
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .page-footer a {
+      color: #c4b5fd;
+      text-decoration: none;
+    }
+
+    .page-footer a:hover {
+      color: #ff75c3;
+      text-decoration: underline;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
       }
-      .illustration-wrapper {
-        display: none; /* Sembunyikan ilustrasi di layar sangat pendek */
+
+      .hero-content {
+        margin: 0 auto;
       }
-      h1 {
-        font-size: 1.2rem;
-        margin-bottom: 0.35rem;
+
+      .hero-desc {
+        margin: 0 auto 1.75rem;
       }
-      p.description {
-        font-size: 0.78rem;
-        margin-bottom: 0.75rem;
+
+      .illustration-card {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-wrapper {
+        padding: 1.5rem 1rem 1.25rem;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.6rem;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .page-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Background Ambient Glow -->
-  <div class="bg-glow"></div>
-  <div class="bg-glow-secondary"></div>
+  <div class="page-wrapper">
 
-  <!-- Main Card Container (Full Screen Centered) -->
-  <div class="container">
-    
-    <!-- Header / Brand -->
-    <div class="brand">
-      <div class="brand-icon">
-        <i class="fa-solid fa-building-columns"></i>
-      </div>
-      <div class="brand-text">
-        <span class="brand-title">BIRO KEUANGAN</span>
-        <span class="brand-subtitle">Universitas Setia Budi Surakarta</span>
-      </div>
-    </div>
+    <!-- Top Header -->
+    <header class="header-nav">
+      <a href="#" class="brand-logo" aria-label="Universitas Setia Budi">
+        <img src="assets/LogoHD resizee.png" alt="Logo Universitas Setia Budi" class="brand-logo-img" height="62">
+      </a>
 
-    <!-- Status Badge -->
-    <div class="status-badge">
-      <span class="pulse-dot"></span>
-      <span>Pemeliharaan & Peningkatan Sistem</span>
-    </div>
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
 
-    <!-- Animated Gears Illustration -->
-    <div class="illustration-wrapper">
-      <i class="fa-solid fa-gear gear-main"></i>
-      <i class="fa-solid fa-gear gear-sub"></i>
-      <div class="center-icon">
-        <i class="fa-solid fa-code"></i>
-      </div>
-    </div>
+    <!-- Main Hero -->
+    <main class="hero-container">
 
-    <!-- Title & Description -->
-    <div>
-      <h1>Website Sedang Dalam <br><span class="gradient-text">Tahap Pengembangan</span></h1>
-      <p class="description">
-        Mohon maaf atas ketidaknyamanannya. Kami sedang memperbarui sistem portal keuangan untuk menghadirkan pelayanan administrasi yang lebih cepat, aman, dan terintegrasi.
-      </p>
-    </div>
+      <!-- Left Column: Teks & Tombol -->
+      <section class="hero-content">
+        <h2 class="hero-subtitle">Website is</h2>
+        <h1 class="hero-title">UNDER CONSTRUCTION</h1>
+        <p class="hero-desc">
+          Mohon maaf atas ketidaknyamanannya. Website Biro Keuangan Universitas Setia Budi saat ini sedang dalam proses
+          pemeliharaan dan peningkatan sistem guna menghadirkan layanan administrasi yang lebih optimal, aman, dan
+          terintegrasi.
+        </p>
+        <button class="cta-btn" id="contactBtn">
+          <span>Contact Us</span>
+          <!-- Inline Fast SVG Arrow -->
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" fill="none" />
+          </svg>
+        </button>
+      </section>
 
-    <!-- Contact Info / Emergency Action -->
-    <div style="width: 100%;">
-      <div class="contact-title">Butuh Bantuan Mendesak?</div>
-      <div class="actions">
-        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Biro%20Keuangan,%20saya%20membutuhkan%20informasi%20layanan%20pembayaran" target="_blank" class="btn btn-wa" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Keuangan
-        </a>
-        <a href="mailto:keuangan@setiabudi.ac.id" class="btn btn-outline">
-          <i class="fa-regular fa-envelope"></i> Kirim Email
-        </a>
-      </div>
-    </div>
+      <!-- Right Column: 3D Illustration -->
+      <section class="hero-visual">
+        <div class="illustration-card">
+          <img src="assets/illustration.jpg" alt="Under Construction" class="illustration-img" loading="eager"
+            decoding="async" width="480" height="480">
+        </div>
+      </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer>
-      © 2026 Biro Keuangan - Universitas Setia Budi.
+    <footer class="page-footer">
+      <div>© 2026 Biro Keuangan - Universitas Setia Budi.</div>
+      <div>
+        <a href="javascript:void(0)" onclick="openContactModal()">Pusat Bantuan & Kontak</a>
+      </div>
     </footer>
 
   </div>
 
+  <!-- Side Navigation Drawer -->
+  <aside class="menu-drawer" id="menuDrawer">
+    <div>
+      <ul class="drawer-nav-list">
+        <li class="drawer-nav-item">
+          <a href="#" onclick="closeMenuDrawer()">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1V9.5z" />
+            </svg>
+            Beranda
+          </a>
+        </li>
+        <li class="drawer-nav-item">
+          <a href="javascript:void(0)" onclick="closeMenuDrawer(); openContactModal();">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2a9 9 0 00-9 9v4a3 3 0 003 3h1v-6H5v-1a7 7 0 1114 0v1h-2v6h1a3 3 0 003-3v-4a9 9 0 00-9-9z" />
+            </svg>
+            Layanan Bantuan
+          </a>
+        </li>
+        <li class="drawer-nav-item">
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+            </svg>
+            WhatsApp Admin
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="drawer-footer">
+      <p>Sistem dalam proses upgrade & pemeliharaan.</p>
+    </div>
+  </aside>
+
+  <!-- Contact Modal -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeContactModal()" title="Tutup">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </button>
+
+      <h3 class="modal-title">Hubungi Kami</h3>
+      <p class="modal-subtitle">Tim Biro Keuangan siap membantu pertanyaan dan kebutuhan transaksi Anda selama masa
+        perbaikan sistem.</p>
+
+      <div class="contact-channels">
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Biro%20Keuangan,%20saya%20membutuhkan%20informasi%20layanan%20pembayaran"
+          target="_blank" class="channel-item" rel="noopener">
+          <div class="channel-icon icon-wa">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+            </svg>
+          </div>
+          <div class="channel-info">
+            <h4>WhatsApp Official</h4>
+            <p>08.00 - 16.00 WIB</p>
+          </div>
+        </a>
+
+        <a href="mailto:keuangan@setiabudi.ac.id" class="channel-item">
+          <div class="channel-icon icon-email">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
+          </div>
+          <div class="channel-info">
+            <h4>Email Administrasi</h4>
+            <p>keuangan@setiabudi.ac.id</p>
+          </div>
+        </a>
+
+        <a href="tel:+62271852518" class="channel-item">
+          <div class="channel-icon icon-phone">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+          </div>
+          <div class="channel-info">
+            <h4>Telepon Kantor</h4>
+            <p>(0271) 852518 - Keuangan</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ultra-lightweight Vanilla JS (Hanya ~20 baris) -->
+  <script>
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var menuDrawer = document.getElementById('menuDrawer');
+    var contactBtn = document.getElementById('contactBtn');
+    var contactModal = document.getElementById('contactModal');
+
+    // Toggle Drawer
+    hamburgerBtn.addEventListener('click', function () {
+      hamburgerBtn.classList.toggle('active');
+      menuDrawer.classList.toggle('open');
+    });
+
+    function closeMenuDrawer() {
+      hamburgerBtn.classList.remove('active');
+      menuDrawer.classList.remove('open');
+    }
+
+    // Modal
+    function openContactModal() {
+      contactModal.classList.add('active');
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove('active');
+    }
+
+    contactBtn.addEventListener('click', openContactModal);
+
+    contactModal.addEventListener('click', function (e) {
+      if (e.target === contactModal) {
+        closeContactModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeContactModal();
+        closeMenuDrawer();
+      }
+    });
+  </script>
 </body>
+
 </html>
