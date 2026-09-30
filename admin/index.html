@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel CMS - Biro Keuangan dan Pengadaan Universitas Setia Budi</title>
-  
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="../assets/images/favicon.png" />
+
   <!-- Early Theme Hydration to prevent flicker -->
   <script>
     (function () {
@@ -22,37 +27,15 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Tailwind Play CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            usb: {
-              black: '#0B1120',
-              primary: '#0F172A',
-              primaryDark: '#0A0F1D',
-              primaryLight: '#1E293B',
-              blue: '#2563EB',
-              blueDark: '#1D4ED8',
-              blueLight: '#60A5FA',
-              accent: '#2563EB'
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Ultra-Fast Precompiled Static CSS (Replaces heavy Play CDN) -->
+  <link rel="stylesheet" href="../assets/css/app.min.css" />
+
+  <!-- Local Lucide Icons Script -->
+  <script src="../assets/js/lucide.min.js"></script>
 
   <style>
     body {
@@ -65,6 +48,7 @@
       background-color: #F8FAFC;
       color: #0F172A;
     }
+
     html:not(.dark) .glass-panel {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
@@ -72,6 +56,7 @@
       border-color: #E2E8F0;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
+
     html:not(.dark) .glass-card {
       background: #FFFFFF;
       backdrop-filter: blur(8px);
@@ -84,6 +69,7 @@
       background-color: #0B1120;
       color: #F1F5F9;
     }
+
     html.dark .glass-panel {
       background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(12px);
@@ -91,6 +77,7 @@
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: none;
     }
+
     html.dark .glass-card {
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(8px);
@@ -103,16 +90,20 @@
       width: 6px;
       height: 6px;
     }
+
     html.dark ::-webkit-scrollbar-track {
       background: #0B1120;
     }
+
     html.dark ::-webkit-scrollbar-thumb {
       background: #334155;
       border-radius: 4px;
     }
+
     html:not(.dark) ::-webkit-scrollbar-track {
       background: #F1F5F9;
     }
+
     html:not(.dark) ::-webkit-scrollbar-thumb {
       background: #CBD5E1;
       border-radius: 4px;
@@ -124,33 +115,42 @@
     }
   </style>
 </head>
+
 <body class="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col transition-colors">
 
   <!-- =========================================================================
        1. AUTHENTICATION / LOGIN OVERLAY (PIN / PASSWORD PROTECTED)
        ========================================================================= -->
-  <div id="authOverlay" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="glass-card max-w-md w-full p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-2xl text-center relative overflow-hidden">
+  <div id="authOverlay"
+    class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div
+      class="glass-card max-w-md w-full p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-2xl text-center relative overflow-hidden">
       <!-- Ambient Lighting -->
       <div class="absolute -top-16 -right-16 w-36 h-36 bg-blue-600/15 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-slate-400/10 dark:bg-slate-700/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div
+        class="absolute -bottom-16 -left-16 w-36 h-36 bg-slate-400/10 dark:bg-slate-700/20 rounded-full blur-2xl pointer-events-none">
+      </div>
 
-      <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 mx-auto flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-lg mb-5">
+      <div
+        class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 mx-auto flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-lg mb-5">
         <i data-lucide="lock-keyhole" class="w-8 h-8"></i>
       </div>
 
       <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">Panel Administrator BAKP</h2>
-      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 mb-6">Universitas Setia Budi Surakarta • Sistem Pengelolaan Konten</p>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 mb-6">Universitas Setia Budi Surakarta • Sistem
+        Pengelolaan Konten</p>
 
       <form id="loginForm" class="space-y-4 text-left">
         <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Kata Sandi / PIN Akses:</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Kata Sandi / PIN
+            Akses:</label>
           <div class="relative">
             <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin..." required
-                   class="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+              class="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
             <i data-lucide="key" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
           </div>
-          <span class="text-[11px] text-blue-600 dark:text-blue-400 mt-1.5 block">💡 Password bawaan: <strong class="underline">admin123</strong></span>
+          <span class="text-[11px] text-blue-600 dark:text-blue-400 mt-1.5 block">💡 Password bawaan: <strong
+              class="underline">admin123</strong></span>
         </div>
 
         <p id="loginErrorMsg" class="text-xs text-rose-500 dark:text-rose-400 hidden flex items-center gap-1">
@@ -158,14 +158,16 @@
           <span>Password salah! Silakan coba lagi.</span>
         </p>
 
-        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/20 dark:shadow-blue-900/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+        <button type="submit"
+          class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/20 dark:shadow-blue-900/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
           <i data-lucide="log-in" class="w-4 h-4"></i>
           <span>Buka Panel Admin</span>
         </button>
       </form>
 
       <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 text-center">
-        <a href="../" class="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white inline-flex items-center gap-1.5 transition">
+        <a href="../"
+          class="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white inline-flex items-center gap-1.5 transition">
           <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
           <span>Kembali ke Halaman Depan Website</span>
         </a>
@@ -179,16 +181,20 @@
   <header class="glass-panel border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        
+
         <!-- Left Brand -->
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 text-white flex items-center justify-center font-bold text-sm shadow">
+          <div
+            class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 text-white flex items-center justify-center font-bold text-sm shadow">
             USB
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white tracking-wide">CMS BAKP USB</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">Admin Mode</span>
+              <span class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white tracking-wide">CMS BAKP
+                USB</span>
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">Admin
+                Mode</span>
             </div>
             <p class="text-[11px] text-slate-500 dark:text-slate-400">Pengelola Konten Pengumuman & Unduhan</p>
           </div>
@@ -197,19 +203,21 @@
         <!-- Right Quick Actions: Theme Switcher, Website Link, Logout -->
         <div class="flex items-center gap-2 sm:gap-2.5">
           <!-- Dark / Light Mode Toggle Button -->
-          <button id="adminThemeToggleBtn" type="button" 
-                  class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 border border-slate-300/80 dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm"
-                  title="Ganti Mode Tampilan (Gelap / Terang)">
+          <button id="adminThemeToggleBtn" type="button"
+            class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 border border-slate-300/80 dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm"
+            title="Ganti Mode Tampilan (Gelap / Terang)">
             <i id="themeToggleIcon" data-lucide="sun" class="w-4 h-4 text-amber-500 dark:text-amber-400"></i>
             <span id="themeToggleLabel" class="hidden md:inline font-medium">Mode Terang</span>
           </button>
 
-          <a href="../" target="_blank" class="px-3 py-2 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-300/80 dark:border-white/10 shadow-sm">
+          <a href="../" target="_blank"
+            class="px-3 py-2 sm:px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 text-xs font-semibold transition flex items-center gap-1.5 border border-slate-300/80 dark:border-white/10 shadow-sm">
             <i data-lucide="external-link" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
             <span class="hidden sm:inline">Lihat Website</span>
           </a>
 
-          <button id="logoutBtn" class="px-3 py-2 sm:px-3.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 dark:text-rose-300 text-xs font-semibold transition flex items-center gap-1.5 border border-rose-200 dark:border-rose-500/30 shadow-sm">
+          <button id="logoutBtn"
+            class="px-3 py-2 sm:px-3.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 dark:text-rose-300 text-xs font-semibold transition flex items-center gap-1.5 border border-rose-200 dark:border-rose-500/30 shadow-sm">
             <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
             <span class="hidden sm:inline">Keluar</span>
           </button>
@@ -223,11 +231,12 @@
        3. MAIN ADMIN CONTENT CONTAINER
        ========================================================================= -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-    
+
     <!-- Top Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
+        <div
+          class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
           <i data-lucide="bell" class="w-6 h-6"></i>
         </div>
         <div>
@@ -237,7 +246,8 @@
       </div>
 
       <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
+        <div
+          class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
           <i data-lucide="file-text" class="w-6 h-6"></i>
         </div>
         <div>
@@ -247,17 +257,20 @@
       </div>
 
       <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
+        <div
+          class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
           <i data-lucide="calendar" class="w-6 h-6"></i>
         </div>
         <div>
           <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block">Semester Aktif</span>
-          <span id="statSemester" class="text-sm font-bold text-slate-900 dark:text-white truncate block max-w-[150px]">2025/2026</span>
+          <span id="statSemester"
+            class="text-sm font-bold text-slate-900 dark:text-white truncate block max-w-[150px]">2025/2026</span>
         </div>
       </div>
 
       <div class="glass-card p-5 rounded-2xl flex items-center gap-4 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
+        <div
+          class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center flex-shrink-0">
           <i data-lucide="database" class="w-6 h-6"></i>
         </div>
         <div>
@@ -272,27 +285,37 @@
 
     <!-- Navigation Tabs -->
     <div class="border-b border-slate-200 dark:border-slate-800 flex flex-wrap gap-2 sm:gap-4 transition-colors">
-      <button class="admin-tab-btn active px-4 py-3 text-sm font-bold border-b-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 flex items-center gap-2" data-tab="tab-announcements">
+      <button
+        class="admin-tab-btn active px-4 py-3 text-sm font-bold border-b-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 flex items-center gap-2"
+        data-tab="tab-announcements">
         <i data-lucide="newspaper" class="w-4 h-4"></i>
         <span>Pengumuman & Berita</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-downloads">
+      <button
+        class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2"
+        data-tab="tab-downloads">
         <i data-lucide="folder-down" class="w-4 h-4"></i>
         <span>Pusat Unduhan (File & Form)</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-info-semester">
+      <button
+        class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2"
+        data-tab="tab-info-semester">
         <i data-lucide="info" class="w-4 h-4"></i>
         <span>Info Semester & Highlight</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-sections">
+      <button
+        class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2"
+        data-tab="tab-sections">
         <i data-lucide="layout-grid" class="w-4 h-4"></i>
         <span>Pengaturan Section</span>
       </button>
 
-      <button class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2" data-tab="tab-backup">
+      <button
+        class="admin-tab-btn px-4 py-3 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-b-2 border-transparent transition flex items-center gap-2"
+        data-tab="tab-backup">
         <i data-lucide="hard-drive" class="w-4 h-4"></i>
         <span>Cadangan & Pemulihan (Backup)</span>
       </button>
@@ -302,15 +325,17 @@
          TAB 1: PENGUMUMAN & BERITA
          ========================================================================= -->
     <div id="tab-announcements" class="admin-tab-pane space-y-6">
-      
+
       <!-- Action Bar -->
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         <div class="flex items-center gap-2.5">
-          <button id="openAddAnnouncementBtn" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+          <button id="openAddAnnouncementBtn"
+            class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Tambah Pengumuman / Berita</span>
           </button>
-          <select id="filterAnnouncementType" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+          <select id="filterAnnouncementType"
+            class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
             <option value="all">Semua Tipe</option>
             <option value="pengumuman-resmi">Pengumuman Resmi</option>
             <option value="berita-kegiatan">Berita & Kegiatan</option>
@@ -319,8 +344,8 @@
 
         <div class="relative w-full sm:w-64">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-          <input type="text" id="searchAnnouncementInput" placeholder="Cari judul pengumuman..." 
-                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+          <input type="text" id="searchAnnouncementInput" placeholder="Cari judul pengumuman..."
+            class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
       </div>
 
@@ -328,7 +353,8 @@
       <div class="glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-            <thead class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+            <thead
+              class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
               <tr>
                 <th class="py-3.5 px-4">Tipe & Kategori</th>
                 <th class="py-3.5 px-4">Judul & Ringkasan</th>
@@ -348,15 +374,17 @@
          TAB 2: PUSAT UNDUHAN (DOKUMEN & FORMAT SPJ)
          ========================================================================= -->
     <div id="tab-downloads" class="admin-tab-pane hidden space-y-6">
-      
+
       <!-- Action Bar -->
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         <div class="flex items-center gap-2.5">
-          <button id="openAddDownloadBtn" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+          <button id="openAddDownloadBtn"
+            class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Tambah Dokumen Unduhan</span>
           </button>
-          <select id="filterDownloadCategory" class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+          <select id="filterDownloadCategory"
+            class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
             <option value="all">Semua Kategori</option>
             <option value="spj">Format SPJ & Kuitansi</option>
             <option value="sop">Standar SOP</option>
@@ -366,8 +394,8 @@
 
         <div class="relative w-full sm:w-64">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-          <input type="text" id="searchDownloadInput" placeholder="Cari nama dokumen..." 
-                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+          <input type="text" id="searchDownloadInput" placeholder="Cari nama dokumen..."
+            class="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
       </div>
 
@@ -375,7 +403,8 @@
       <div class="glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-            <thead class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+            <thead
+              class="bg-slate-100/90 dark:bg-white/5 uppercase text-[11px] font-bold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
               <tr>
                 <th class="py-3.5 px-4">Format</th>
                 <th class="py-3.5 px-4">Judul Dokumen</th>
@@ -397,32 +426,37 @@
          ========================================================================= -->
     <div id="tab-info-semester" class="admin-tab-pane hidden space-y-6">
       <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-white/10 max-w-3xl">
-        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Pengaturan Informasi Semester Hero Banner</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Ubah tulisan semester aktif dan kartu sorotan pengumuman pada banner utama.</p>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">Pengaturan Informasi Semester Hero Banner
+        </h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Ubah tulisan semester aktif dan kartu sorotan
+          pengumuman pada banner utama.</p>
 
         <form id="infoSemesterForm" class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Semester / Tahun Akademik:</label>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Semester / Tahun
+                Akademik:</label>
               <input type="text" id="infoSemesterInput" required
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Status Badge:</label>
               <input type="text" id="infoStatusBadgeInput" required
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500" />
             </div>
           </div>
 
           <div class="border-t border-slate-200 dark:border-white/10 pt-4 space-y-4">
-            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">3 Poin Sorotan Informasi:</span>
-            
+            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">3 Poin
+              Sorotan Informasi:</span>
+
             <div id="semesterItemsContainer" class="space-y-4">
               <!-- Dynamically rendered 3 item forms -->
             </div>
           </div>
 
-          <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+          <button type="submit"
+            class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
             <i data-lucide="save" class="w-4 h-4"></i>
             <span>Simpan Perubahan Info Semester</span>
           </button>
@@ -435,19 +469,22 @@
          ========================================================================= -->
     <div id="tab-backup" class="admin-tab-pane hidden space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
+
         <!-- Export Card -->
         <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center">
+            <div
+              class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400 flex items-center justify-center">
               <i data-lucide="download-cloud" class="w-5 h-5"></i>
             </div>
             <div>
               <h4 class="text-sm font-bold text-slate-900 dark:text-white">Ekspor Data Cadangan (Backup JSON)</h4>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Unduh seluruh data pengumuman & link dokumen sebagai file cadangan.</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Unduh seluruh data pengumuman & link dokumen sebagai
+                file cadangan.</p>
             </div>
           </div>
-          <button id="exportDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
+          <button id="exportDataBtn"
+            class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
             <i data-lucide="download" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
             <span>Unduh Cadangan (backup-portal-bakp.json)</span>
           </button>
@@ -456,7 +493,8 @@
         <!-- Import Card -->
         <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 flex items-center justify-center">
               <i data-lucide="upload-cloud" class="w-5 h-5"></i>
             </div>
             <div>
@@ -465,7 +503,8 @@
             </div>
           </div>
           <input type="file" id="importJsonFileInput" accept=".json" class="hidden" />
-          <button id="importDataBtn" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
+          <button id="importDataBtn"
+            class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2 border border-slate-300/80 dark:border-white/15">
             <i data-lucide="upload" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
             <span>Pilih File JSON untuk Dipulihkan</span>
           </button>
@@ -475,15 +514,19 @@
         <div class="glass-card p-6 rounded-2xl border border-rose-200 dark:border-rose-500/30 md:col-span-2 space-y-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/20 dark:text-rose-400 flex items-center justify-center">
+              <div
+                class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/20 dark:text-rose-400 flex items-center justify-center">
                 <i data-lucide="refresh-cw" class="w-5 h-5"></i>
               </div>
               <div>
-                <h4 class="text-sm font-bold text-rose-700 dark:text-rose-300">Kembalikan ke Data Awal (Reset Default)</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Menghapus semua perubahan dan mengembalikan ke data pengumuman & unduhan bawaan pabrik.</p>
+                <h4 class="text-sm font-bold text-rose-700 dark:text-rose-300">Kembalikan ke Data Awal (Reset Default)
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Menghapus semua perubahan dan mengembalikan ke
+                  data pengumuman & unduhan bawaan pabrik.</p>
               </div>
             </div>
-            <button id="resetDefaultBtn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow transition flex items-center gap-1.5">
+            <button id="resetDefaultBtn"
+              class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow transition flex items-center gap-1.5">
               <i data-lucide="alert-triangle" class="w-4 h-4"></i>
               <span>Reset Data</span>
             </button>
@@ -497,35 +540,44 @@
          TAB 5: PENGATURAN SECTION (VISIBILITY & ORDER MANAGER)
          ========================================================================= -->
     <div id="tab-sections" class="admin-tab-pane hidden space-y-6">
-      
+
       <!-- Overview & Action Bar -->
-      <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div
+        class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30 flex items-center gap-1.5">
+            <span
+              class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30 flex items-center gap-1.5">
               <i data-lucide="arrow-up-down" class="w-3.5 h-3.5"></i>
               <span>Layout & Section Reorder</span>
             </span>
-            <span id="sectionActiveCountBadge" class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-400 dark:bg-emerald-500/15 dark:border-emerald-500/30 px-2 py-0.5 rounded-full">
+            <span id="sectionActiveCountBadge"
+              class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-400 dark:bg-emerald-500/15 dark:border-emerald-500/30 px-2 py-0.5 rounded-full">
               8/8 Section Aktif
             </span>
           </div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white">Susun Urutan & Visibilitas Section Website</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Gunakan tombol <strong class="text-blue-600 dark:text-blue-300">Naik (▲) / Turun (▼)</strong> atau <strong class="text-blue-600 dark:text-blue-300">Tarik (Drag)</strong> kartu untuk mengatur urutan posisi section di halaman depan website.
+            Gunakan tombol <strong class="text-blue-600 dark:text-blue-300">Naik (▲) / Turun (▼)</strong> atau <strong
+              class="text-blue-600 dark:text-blue-300">Tarik (Drag)</strong> kartu untuk mengatur urutan posisi section
+            di halaman depan website.
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-          <button id="showAllSectionsBtn" class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border border-blue-200 hover:border-blue-600 dark:bg-blue-600/30 dark:hover:bg-blue-600 dark:text-blue-200 dark:hover:text-white dark:border-blue-500/40 text-xs font-bold transition flex items-center gap-1.5">
+          <button id="showAllSectionsBtn"
+            class="px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border border-blue-200 hover:border-blue-600 dark:bg-blue-600/30 dark:hover:bg-blue-600 dark:text-blue-200 dark:hover:text-white dark:border-blue-500/40 text-xs font-bold transition flex items-center gap-1.5">
             <i data-lucide="eye" class="w-3.5 h-3.5"></i>
             <span>Tampilkan Semua</span>
           </button>
-          <button id="hideAllSectionsBtn" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-300 hover:border-rose-300 dark:bg-slate-800 dark:hover:bg-rose-900/60 dark:text-slate-300 dark:hover:text-rose-200 dark:border-slate-700 dark:hover:border-rose-500/40 text-xs font-bold transition flex items-center gap-1.5">
+          <button id="hideAllSectionsBtn"
+            class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-300 hover:border-rose-300 dark:bg-slate-800 dark:hover:bg-rose-900/60 dark:text-slate-300 dark:hover:text-rose-200 dark:border-slate-700 dark:hover:border-rose-500/40 text-xs font-bold transition flex items-center gap-1.5">
             <i data-lucide="eye-off" class="w-3.5 h-3.5"></i>
             <span>Sembunyikan Semua</span>
           </button>
-          <button id="resetSectionsOrderBtn" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-300 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-300 dark:hover:text-white dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5" title="Kembalikan urutan bawaan">
+          <button id="resetSectionsOrderBtn"
+            class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-300 dark:bg-white/5 dark:hover:bg-white/10 dark:text-slate-300 dark:hover:text-white dark:border-white/10 text-xs font-semibold transition flex items-center gap-1.5"
+            title="Kembalikan urutan bawaan">
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
             <span>Reset Urutan Default</span>
           </button>
@@ -543,14 +595,18 @@
   <!-- =========================================================================
        MODAL: TAMBAH / EDIT PENGUMUMAN
        ========================================================================= -->
-  <div id="announcementModal" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
+  <div id="announcementModal"
+    class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div
+      class="glass-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
       <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
-        <h3 id="announcementModalTitle" class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+        <h3 id="announcementModalTitle"
+          class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
           <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
           <span>Tambah Pengumuman Baru</span>
         </h3>
-        <button id="closeAnnouncementModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
+        <button id="closeAnnouncementModalBtn"
+          class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -561,15 +617,17 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tipe Konten:</label>
-            <select id="announcementTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <select id="announcementTypeInput"
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="pengumuman-resmi">Pengumuman Resmi</option>
               <option value="berita-kegiatan">Berita & Kegiatan</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Label Badge / Kategori Singkat:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Label Badge / Kategori
+              Singkat:</label>
             <input type="text" id="announcementBadgeInput" placeholder="Contoh: PENGUMUMAN PENTING / SPJ" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
@@ -577,51 +635,59 @@
           <div>
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tanggal Terbit:</label>
             <input type="text" id="announcementDateInput" placeholder="Contoh: 25 Maret 2026" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nomor Surat / Referensi:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nomor Surat /
+              Referensi:</label>
             <input type="text" id="announcementDocNumInput" placeholder="Contoh: No. Surat: 142/BAKP-USB/III/2026"
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Lengkap:</label>
           <input type="text" id="announcementTitleInput" placeholder="Masukkan judul pengumuman..." required
-                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+            class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Ringkasan Singkat (Muncul di kartu):</label>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Ringkasan Singkat (Muncul
+            di kartu):</label>
           <textarea id="announcementSummaryInput" rows="2" placeholder="Tuliskan ringkasan 1-2 kalimat..." required
-                    class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
+            class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Isi Lengkap (Muncul saat tombol "Baca Detail" diklik):</label>
-          <textarea id="announcementContentInput" rows="4" placeholder="Tuliskan isi pengumuman lengkap (Bisa format HTML paragraf atau teks biasa)..." required
-                    class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Isi Lengkap (Muncul saat
+            tombol "Baca Detail" diklik):</label>
+          <textarea id="announcementContentInput" rows="4"
+            placeholder="Tuliskan isi pengumuman lengkap (Bisa format HTML paragraf atau teks biasa)..." required
+            class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">URL File Unduhan Lampiran (Opsional):</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">URL File Unduhan Lampiran
+              (Opsional):</label>
             <input type="text" id="announcementActionUrlInput" placeholder="https://link-file-drive.pdf"
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Tombol Lampiran:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teks Tombol
+              Lampiran:</label>
             <input type="text" id="announcementActionTextInput" placeholder="Contoh: Unduh Surat Edaran (PDF)"
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-end gap-3">
-          <button type="button" id="cancelAnnouncementModalBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
+          <button type="button" id="cancelAnnouncementModalBtn"
+            class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
             Batal
           </button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
+          <button type="submit"
+            class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
             <i data-lucide="check" class="w-4 h-4"></i>
             <span>Simpan Pengumuman</span>
           </button>
@@ -633,14 +699,18 @@
   <!-- =========================================================================
        MODAL: TAMBAH / EDIT DOKUMEN UNDUHAN
        ========================================================================= -->
-  <div id="downloadModal" class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
+  <div id="downloadModal"
+    class="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div
+      class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
       <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
-        <h3 id="downloadModalTitle" class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+        <h3 id="downloadModalTitle"
+          class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
           <i data-lucide="plus-circle" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
           <span>Tambah Dokumen Unduhan</span>
         </h3>
-        <button id="closeDownloadModalBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
+        <button id="closeDownloadModalBtn"
+          class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -649,15 +719,18 @@
         <input type="hidden" id="downloadIdInput" />
 
         <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Dokumen / Nama Formulir:</label>
-          <input type="text" id="downloadTitleInput" placeholder="Contoh: Format SPJ Kegiatan dan Kuitansi 2026" required
-                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Dokumen / Nama
+            Formulir:</label>
+          <input type="text" id="downloadTitleInput" placeholder="Contoh: Format SPJ Kegiatan dan Kuitansi 2026"
+            required
+            class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Kategori Dokumen:</label>
-            <select id="downloadCategoryInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <select id="downloadCategoryInput"
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="spj">Format SPJ & Kuitansi</option>
               <option value="sop">Standar SOP</option>
               <option value="sk">SK & Edaran Tarif</option>
@@ -665,7 +738,8 @@
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tipe Format File:</label>
-            <select id="downloadFileTypeInput" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <select id="downloadFileTypeInput"
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
               <option value="PDF">PDF</option>
               <option value="DOCX">DOCX (Word)</option>
               <option value="XLSX">XLSX (Excel)</option>
@@ -678,27 +752,33 @@
           <div>
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Ukuran File:</label>
             <input type="text" id="downloadFileSizeInput" placeholder="Contoh: 184 KB / 1.5 MB" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Bulan/Tahun Update:</label>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Bulan/Tahun
+              Update:</label>
             <input type="text" id="downloadUpdatedDateInput" placeholder="Contoh: Maret 2026" required
-                   class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+              class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Link / URL File (Google Drive / Server Kampus):</label>
-          <input type="text" id="downloadUrlInput" placeholder="https://drive.google.com/file/d/... atau assets/file.pdf" required
-                 class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
-          <span class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">💡 Bisa masukkan link share Google Drive atau URL langsung. Jika diisi tanda pagar (#) tombol tetap bisa diklik.</span>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Link / URL File (Google
+            Drive / Server Kampus):</label>
+          <input type="text" id="downloadUrlInput"
+            placeholder="https://drive.google.com/file/d/... atau assets/file.pdf" required
+            class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500" />
+          <span class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 block">💡 Bisa masukkan link share Google
+            Drive atau URL langsung. Jika diisi tanda pagar (#) tombol tetap bisa diklik.</span>
         </div>
 
         <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-end gap-3">
-          <button type="button" id="cancelDownloadModalBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
+          <button type="button" id="cancelDownloadModalBtn"
+            class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-xs text-slate-700 dark:text-slate-300 font-semibold">
             Batal
           </button>
-          <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
+          <button type="submit"
+            class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
             <i data-lucide="check" class="w-4 h-4"></i>
             <span>Simpan Dokumen</span>
           </button>
@@ -708,7 +788,8 @@
   </div>
 
   <!-- Toast Notification -->
-  <div id="adminToast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 pointer-events-none px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border text-xs font-bold">
+  <div id="adminToast"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 pointer-events-none px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border text-xs font-bold">
     <i id="adminToastIcon" data-lucide="check-circle" class="w-5 h-5"></i>
     <span id="adminToastMsg">Perubahan berhasil disimpan!</span>
   </div>
@@ -873,7 +954,7 @@
 
       const filtered = list.filter(item => {
         const matchesType = typeFilter === 'all' || item.type === typeFilter;
-        const matchesSearch = !searchQuery || 
+        const matchesSearch = !searchQuery ||
           (item.title && item.title.toLowerCase().includes(searchQuery)) ||
           (item.summary && item.summary.toLowerCase().includes(searchQuery)) ||
           (item.badge && item.badge.toLowerCase().includes(searchQuery));
@@ -1026,7 +1107,7 @@
 
       const filtered = list.filter(item => {
         const matchesCategory = categoryFilter === 'all' || item.category === categoryFilter;
-        const matchesSearch = !searchQuery || 
+        const matchesSearch = !searchQuery ||
           (item.title && item.title.toLowerCase().includes(searchQuery)) ||
           (item.fileType && item.fileType.toLowerCase().includes(searchQuery));
         return matchesCategory && matchesSearch;
@@ -1048,11 +1129,10 @@
       tbody.innerHTML = filtered.map(item => `
         <tr class="hover:bg-slate-100/70 dark:hover:bg-white/5 transition">
           <td class="py-3.5 px-4 align-top">
-            <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-bold ${
-              item.fileType === 'PDF' ? 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30' :
-              item.fileType === 'XLSX' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30' :
-              'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30'
-            }">
+            <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-bold ${item.fileType === 'PDF' ? 'bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30' :
+          item.fileType === 'XLSX' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/30' :
+            'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30'
+        }">
               ${item.fileType || 'FILE'}
             </span>
           </td>
@@ -1380,10 +1460,9 @@
         const isLast = index === totalCount - 1;
 
         return `
-          <div class="section-sort-card glass-card p-4 sm:p-5 rounded-2xl border ${
-            isVisible 
-              ? 'border-slate-200 hover:border-blue-500/50 bg-white dark:border-white/10 dark:hover:border-blue-500/40 dark:bg-slate-900/60' 
-              : 'border-rose-300 bg-rose-50/50 opacity-80 dark:border-rose-500/30 dark:bg-slate-950/70 dark:opacity-75'
+          <div class="section-sort-card glass-card p-4 sm:p-5 rounded-2xl border ${isVisible
+            ? 'border-slate-200 hover:border-blue-500/50 bg-white dark:border-white/10 dark:hover:border-blue-500/40 dark:bg-slate-900/60'
+            : 'border-rose-300 bg-rose-50/50 opacity-80 dark:border-rose-500/30 dark:bg-slate-950/70 dark:opacity-75'
           } transition duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
                draggable="true"
                data-key="${sec.key}"
@@ -1568,4 +1647,5 @@
     });
   </script>
 </body>
+
 </html>
