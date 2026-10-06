@@ -171,6 +171,14 @@
       max-width: 480px;
     }
 
+    /* Hero Action Buttons Container */
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
     /* Tombol Contact Us */
     .cta-btn {
       display: inline-flex;
@@ -200,6 +208,45 @@
       width: 18px;
       height: 18px;
       fill: currentColor;
+    }
+
+    /* Tombol SIARTA */
+    .btn-siarta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 1.5px solid rgba(236, 72, 153, 0.55);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-siarta:hover {
+      background: rgba(236, 72, 153, 0.18);
+      border-color: #ff52b7;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(217, 27, 141, 0.35);
+      color: #ffffff;
+    }
+
+    .btn-siarta svg {
+      width: 18px;
+      height: 18px;
+      stroke: #ff75c3;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-siarta:hover svg {
+      transform: scale(1.08);
     }
 
     /* Visual 3D Illustration Area */
@@ -467,6 +514,10 @@
         margin: 0 auto 1.75rem;
       }
 
+      .hero-actions {
+        justify-content: center;
+      }
+
       .illustration-card {
         max-width: 360px;
         margin: 0 auto;
@@ -487,7 +538,14 @@
         font-size: 1.6rem;
       }
 
-      .cta-btn {
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      .cta-btn,
+      .btn-siarta {
         width: 100%;
         max-width: 280px;
       }
@@ -530,14 +588,25 @@
           pemeliharaan dan peningkatan sistem guna menghadirkan layanan administrasi yang lebih optimal, aman, dan
           terintegrasi.
         </p>
-        <button class="cta-btn" id="contactBtn">
-          <span>Contact Us</span>
-          <!-- Inline Fast SVG Arrow -->
-          <svg viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-              stroke-linejoin="round" fill="none" />
-          </svg>
-        </button>
+        <div class="hero-actions">
+          <button class="cta-btn" id="contactBtn">
+            <span>Contact Us</span>
+            <!-- Inline Fast SVG Arrow -->
+            <svg viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            </svg>
+          </button>
+
+          <a href="https://script.google.com/a/macros/setiabudi.ac.id/s/AKfycby-fYsPR4V2A3RJ8Yu2B0a22S2sxmrv53N8WpBoQ4dnl_f2aF8lJTCsOPE2PRBD5ZcHOA/exec" target="_blank" rel="noopener noreferrer" class="btn-siarta" id="siartaBtn" title="Sistem Informasi Anggaran Realisasi dan Tata kelola Anggaran">
+            <!-- Inline Fast SVG Finance/Chart Icon -->
+            <svg viewBox="0 0 24 24">
+              <path d="M3 3v18h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <path d="M18 9l-5 5-4-4-3 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+            <span>SIARTA</span>
+          </a>
+        </div>
       </section>
 
       <!-- Right Column: 3D Illustration -->
@@ -570,6 +639,15 @@
               <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1V9.5z" />
             </svg>
             Beranda
+          </a>
+        </li>
+        <li class="drawer-nav-item">
+          <a href="https://script.google.com/a/macros/setiabudi.ac.id/s/AKfycby-fYsPR4V2A3RJ8Yu2B0a22S2sxmrv53N8WpBoQ4dnl_f2aF8lJTCsOPE2PRBD5ZcHOA/exec" target="_blank" rel="noopener" title="Sistem Informasi Anggaran Realisasi dan Tata kelola Anggaran">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <path d="M18 9l-5 5-4-4-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+            SIARTA
           </a>
         </li>
         <li class="drawer-nav-item">
