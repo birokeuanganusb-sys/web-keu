@@ -48,6 +48,42 @@
         background: linear-gradient(180deg, rgba(3, 74, 120, 0.96) 0%, rgba(2, 132, 199, 0.88) 100%);
       }
     }
+
+    /* Lightweight, GPU-accelerated smooth hover animation for Main Navigation (Zero layout shift) */
+    .nav-item {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.18s ease-out;
+    }
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #38bdf8; /* sky-400 */
+      border-radius: 9999px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.18s ease-out;
+      will-change: transform;
+    }
+    .nav-item:hover {
+      color: #bae6fd; /* sky-200 */
+    }
+    .nav-item:hover::after {
+      transform: scaleX(1);
+    }
+    .nav-item.active {
+      color: #ffffff;
+    }
+    .nav-item.active::after {
+      background-color: #ffffff;
+      transform: scaleX(1);
+    }
   </style>
 </head>
 <body class="font-sans text-slate-700 bg-white antialiased selection:bg-sky-500 selection:text-white">
@@ -113,7 +149,7 @@
           
           <!-- Logo & Campus Identity -->
           <a href="#" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white group-hover:bg-white/20 transition-all">
+            <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white group-hover:bg-white/20 transition-colors duration-200">
               <i data-lucide="landmark" class="w-6 h-6 text-white"></i>
             </div>
             <div class="flex flex-col">
@@ -123,19 +159,19 @@
           </a>
 
           <!-- Desktop Navigation Menu Links -->
-          <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[13px] font-bold tracking-wider text-white/90 uppercase">
-            <a href="#beranda" class="text-white hover:text-sky-200 border-b-2 border-white pb-1 transition-all">BERANDA</a>
-            <a href="#tentang" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">TENTANG KAMI</a>
-            <a href="#layanan" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">LAYANAN</a>
-            <a href="#panduan" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">PANDUAN UKT</a>
-            <a href="#tarif" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">TARIF KULIAH</a>
-            <a href="#berita" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">PENGUMUMAN</a>
-            <a href="#kontak" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">KONTAK</a>
+          <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[13px] font-bold tracking-wider uppercase">
+            <a href="#beranda" class="nav-item active">BERANDA</a>
+            <a href="#tentang" class="nav-item">TENTANG KAMI</a>
+            <a href="#layanan" class="nav-item">LAYANAN</a>
+            <a href="#panduan" class="nav-item">PANDUAN UKT</a>
+            <a href="#tarif" class="nav-item">TARIF KULIAH</a>
+            <a href="#berita" class="nav-item">PENGUMUMAN</a>
+            <a href="#kontak" class="nav-item">KONTAK</a>
           </div>
 
           <!-- Quick Portal Action -->
           <div class="hidden md:flex items-center gap-3">
-            <a href="#cek-tagihan" class="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white text-white hover:text-sky-900 rounded-md border border-white/30 backdrop-blur-sm transition-all duration-200 flex items-center gap-2">
+            <a href="#cek-tagihan" class="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white text-white hover:text-sky-900 rounded-md border border-white/30 backdrop-blur-sm transition-colors duration-150 flex items-center gap-2">
               <i data-lucide="search" class="w-3.5 h-3.5"></i>
               <span>Cek Tagihan</span>
             </a>
@@ -143,7 +179,7 @@
 
           <!-- Mobile Menu Button -->
           <div class="flex lg:hidden">
-            <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-white hover:bg-white/10 focus:outline-none" aria-label="Buka Menu Navigasi">
+            <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-white hover:bg-white/10 focus:outline-none transition-colors duration-150" aria-label="Buka Menu Navigasi">
               <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
           </div>
@@ -152,15 +188,15 @@
       </div>
 
       <!-- Mobile Dropdown Menu -->
-      <div id="mobile-menu" class="hidden lg:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-md">
-        <a href="#beranda" class="block px-3 py-2 text-sm font-bold text-white hover:bg-white/10 rounded-md">BERANDA</a>
-        <a href="#tentang" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">TENTANG KAMI</a>
-        <a href="#layanan" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">LAYANAN</a>
-        <a href="#panduan" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">PANDUAN UKT</a>
-        <a href="#tarif" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">TARIF KULIAH</a>
-        <a href="#berita" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">PENGUMUMAN</a>
-        <a href="#kontak" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">KONTAK</a>
-        <a href="#cek-tagihan" class="block text-center px-4 py-2.5 text-xs font-bold uppercase bg-sky-500 text-white rounded-md">Cek Tagihan Virtual Account</a>
+      <div id="mobile-menu" class="hidden lg:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-2 backdrop-blur-md">
+        <a href="#beranda" class="block px-3 py-2 text-sm font-bold text-white bg-white/10 rounded-md transition-colors duration-150">BERANDA</a>
+        <a href="#tentang" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">TENTANG KAMI</a>
+        <a href="#layanan" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">LAYANAN</a>
+        <a href="#panduan" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">PANDUAN UKT</a>
+        <a href="#tarif" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">TARIF KULIAH</a>
+        <a href="#berita" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">PENGUMUMAN</a>
+        <a href="#kontak" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">KONTAK</a>
+        <a href="#cek-tagihan" class="block text-center px-4 py-2.5 text-xs font-bold uppercase bg-sky-500 hover:bg-sky-600 text-white rounded-md transition-colors duration-150">Cek Tagihan Virtual Account</a>
       </div>
     </nav>
 
@@ -664,7 +700,7 @@
     </div>
   </footer>
 
-  <!-- Script to initialize Lucide icons and Mobile Menu Toggle -->
+  <!-- Script to initialize Lucide icons, Mobile Menu Toggle, and Nav Active States -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
@@ -677,7 +713,23 @@
       menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
       });
+
+      // Close mobile menu when clicking any link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
     }
+
+    // Smooth active state update for desktop nav items
+    const navLinks = document.querySelectorAll('.nav-item');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
   </script>
 
 </body>
