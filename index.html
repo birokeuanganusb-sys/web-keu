@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biro Keuangan - Universitas Setia Budi</title>
+  <meta name="description" content="Portal Informasi dan Layanan Biro Keuangan Universitas Setia Budi (USB). Informasi pembayaran UKT, SPP, Virtual Account, beasiswa, dan administrasi keuangan mahasiswa.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#0284c7',       // Sky 600 / Bright cyan-blue
+              dark: '#0f172a',       // Deep slate top bar
+              navy: '#0b3954',       // Navy blue hero overlay
+              deep: '#034a78',       // Deep rich blue
+              accent: '#0088cc',     // Reference cyan accent
+              light: '#f8fafc',      // Light background
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom CSS to match exact reference nuances */
+    .hero-gradient-overlay {
+      background: linear-gradient(90deg, rgba(3, 74, 120, 0.95) 0%, rgba(2, 132, 199, 0.88) 45%, rgba(2, 132, 199, 0.45) 80%, rgba(2, 132, 199, 0.2) 100%);
+    }
+    @media (max-width: 768px) {
+      .hero-gradient-overlay {
+        background: linear-gradient(180deg, rgba(3, 74, 120, 0.96) 0%, rgba(2, 132, 199, 0.88) 100%);
+      }
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-700 bg-white antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- ================= TOP CONTACT & SOCIAL BAR ================= -->
+  <header class="bg-[#111827] text-slate-300 text-xs py-2.5 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-2">
+      <!-- Left: Contact Details -->
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-y-1 gap-x-4 sm:gap-x-6 text-[11px] sm:text-xs">
+        <a href="tel:+62271852518" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-sky-400"></i>
+          <span>+62 (0271) 852518</span>
+        </a>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <a href="mailto:keuangan@setiabudi.ac.id" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-sky-400"></i>
+          <span>keuangan@setiabudi.ac.id</span>
+        </a>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <div class="flex items-center gap-1.5 text-slate-400">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-sky-400"></i>
+          <span>Sen - Jum: 08:00 - 16:00 WIB</span>
+        </div>
+      </div>
+
+      <!-- Right: Social Links -->
+      <div class="flex items-center gap-3.5 text-slate-400">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Facebook">
+          <i data-lucide="facebook" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Twitter">
+          <i data-lucide="twitter" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Instagram">
+          <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="YouTube">
+          <i data-lucide="youtube" class="w-3.5 h-3.5"></i>
+        </a>
+        <a href="https://setiabudi.ac.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Website Utama USB">
+          <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO & MAIN NAVIGATION SECTION ================= -->
+  <div class="relative bg-slate-900 text-white overflow-hidden min-h-[580px] lg:min-h-[640px] flex flex-col justify-between">
+    <!-- Hero Background Image (Professional Administrative Office) -->
+    <img 
+      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80" 
+      alt="Tim Administrasi Keuangan Universitas Setia Budi" 
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+    
+    <!-- Blue Gradient Overlay (Matching Screenshot Reference) -->
+    <div class="hero-gradient-overlay absolute inset-0"></div>
+
+    <!-- Main Navigation Bar (Overlaid on Hero) -->
+    <nav class="relative z-20 border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo & Campus Identity -->
+          <a href="#" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white group-hover:bg-white/20 transition-all">
+              <i data-lucide="landmark" class="w-6 h-6 text-white"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xl font-extrabold tracking-wider text-white uppercase leading-none">BIRO KEUANGAN</span>
+              <span class="text-[10px] tracking-widest text-sky-200 font-semibold uppercase mt-0.5">UNIVERSITAS SETIA BUDI</span>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation Menu Links -->
+          <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[13px] font-bold tracking-wider text-white/90 uppercase">
+            <a href="#beranda" class="text-white hover:text-sky-200 border-b-2 border-white pb-1 transition-all">BERANDA</a>
+            <a href="#tentang" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">TENTANG KAMI</a>
+            <a href="#layanan" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">LAYANAN</a>
+            <a href="#panduan" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">PANDUAN UKT</a>
+            <a href="#tarif" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">TARIF KULIAH</a>
+            <a href="#berita" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">PENGUMUMAN</a>
+            <a href="#kontak" class="hover:text-sky-200 hover:border-b-2 hover:border-sky-300 pb-1 transition-all">KONTAK</a>
+          </div>
+
+          <!-- Quick Portal Action -->
+          <div class="hidden md:flex items-center gap-3">
+            <a href="#cek-tagihan" class="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white/15 hover:bg-white text-white hover:text-sky-900 rounded-md border border-white/30 backdrop-blur-sm transition-all duration-200 flex items-center gap-2">
+              <i data-lucide="search" class="w-3.5 h-3.5"></i>
+              <span>Cek Tagihan</span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="flex lg:hidden">
+            <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-white hover:bg-white/10 focus:outline-none" aria-label="Buka Menu Navigasi">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-md">
+        <a href="#beranda" class="block px-3 py-2 text-sm font-bold text-white hover:bg-white/10 rounded-md">BERANDA</a>
+        <a href="#tentang" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">TENTANG KAMI</a>
+        <a href="#layanan" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">LAYANAN</a>
+        <a href="#panduan" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">PANDUAN UKT</a>
+        <a href="#tarif" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">TARIF KULIAH</a>
+        <a href="#berita" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">PENGUMUMAN</a>
+        <a href="#kontak" class="block px-3 py-2 text-sm font-bold text-slate-200 hover:bg-white/10 rounded-md">KONTAK</a>
+        <a href="#cek-tagihan" class="block text-center px-4 py-2.5 text-xs font-bold uppercase bg-sky-500 text-white rounded-md">Cek Tagihan Virtual Account</a>
+      </div>
+    </nav>
+
+    <!-- Hero Content Body -->
+    <div id="beranda" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 my-auto w-full">
+      <div class="max-w-2xl text-left">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight drop-shadow-sm">
+          PELAYANAN KEUANGAN<br>TERPADU & TRANSPARAN
+        </h1>
+        <p class="mt-4 sm:mt-5 text-sm sm:text-base text-sky-50/95 leading-relaxed font-normal max-w-xl">
+          Pusat informasi resmi administrasi keuangan mahasiswa Universitas Setia Budi. Akses panduan pembayaran UKT/SPP, verifikasi virtual account, beasiswa, dan layanan administrasi akademik secara praktis dan akurat.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#layanan" class="inline-flex items-center justify-center px-7 py-3 rounded-md border-2 border-white text-white hover:bg-white hover:text-sky-900 font-bold text-sm uppercase tracking-wider transition-all duration-200 shadow-sm">
+            Read More
+          </a>
+          <a href="#panduan" class="inline-flex items-center justify-center px-7 py-3 rounded-md bg-white text-sky-900 hover:bg-sky-50 font-bold text-sm uppercase tracking-wider transition-all duration-200 shadow-sm">
+            Panduan Pembayaran
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subtle bottom decorative element for hero -->
+    <div class="relative z-10 h-3 bg-gradient-to-t from-black/20 to-transparent"></div>
+  </div>
+
+
+  <!-- ================= SECTION 1: WELCOME & 3 FEATURE CARDS ================= -->
+  <section id="tentang" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-slate-900">
+          WELCOME TO BIRO KEUANGAN USB
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-slate-500 leading-relaxed font-normal">
+          Biro Keuangan Universitas Setia Budi berkomitmen menghadirkan tata kelola keuangan perguruan tinggi yang profesional, akuntabel, dan berbasis teknologi untuk mendukung kelancaran studi seluruh mahasiswa.
+        </p>
+        <!-- Blue Accent Line Under Title -->
+        <div class="w-16 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- 3 Feature Cards with Overlapping Badges (01, 02, 03) -->
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        
+        <!-- Card 01 -->
+        <div class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- Card Image -->
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" 
+                alt="Layanan Administrasi SPP dan UKT USB" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <!-- Blue Circular Badge 01 Intersecting Image -->
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 bg-sky-500 text-white font-extrabold text-sm flex items-center justify-center rounded-full border-4 border-white shadow-sm z-10">
+                01
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="pt-8 pb-7 px-6 text-center">
+              <h3 class="font-bold text-slate-900 text-lg hover:text-sky-600 transition-colors">
+                Administrasi SPP & UKT
+              </h3>
+              <p class="mt-2.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                Informasi rincian tagihan semester, kalender jadwal pembayaran akademik, serta tata cara pembayaran melalui Virtual Account perbankan mitra resmi USB.
+              </p>
+            </div>
+          </div>
+          <!-- Bottom Accent Bar -->
+          <div class="h-1 bg-sky-500 w-full"></div>
+        </div>
+
+        <!-- Card 02 -->
+        <div class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- Card Image -->
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
+                alt="Verifikasi & Validasi Pembayaran Mahasiswa" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <!-- Blue Circular Badge 02 Intersecting Image -->
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 bg-sky-500 text-white font-extrabold text-sm flex items-center justify-center rounded-full border-4 border-white shadow-sm z-10">
+                02
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="pt-8 pb-7 px-6 text-center">
+              <h3 class="font-bold text-slate-900 text-lg hover:text-sky-600 transition-colors">
+                Verifikasi & Validasi
+              </h3>
+              <p class="mt-2.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                Pengecekan status transaksi pembayaran KRS, registrasi ulang mahasiswa baru, ujian tengah/akhir semester, dan pendaftaran wisuda secara otomatis.
+              </p>
+            </div>
+          </div>
+          <!-- Bottom Accent Bar -->
+          <div class="h-1 bg-sky-500 w-full"></div>
+        </div>
+
+        <!-- Card 03 -->
+        <div class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- Card Image -->
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" 
+                alt="Layanan Beasiswa dan Konsultasi Finansial USB" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <!-- Blue Circular Badge 03 Intersecting Image -->
+              <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 bg-sky-500 text-white font-extrabold text-sm flex items-center justify-center rounded-full border-4 border-white shadow-sm z-10">
+                03
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="pt-8 pb-7 px-6 text-center">
+              <h3 class="font-bold text-slate-900 text-lg hover:text-sky-600 transition-colors">
+                Beasiswa & Dispensasi
+              </h3>
+              <p class="mt-2.5 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                Pengelolaan alokasi beasiswa KIP-Kuliah, beasiswa prestasi, serta pengajuan permohonan dispensasi cicilan pembayaran bagi mahasiswa yang membutuhkan.
+              </p>
+            </div>
+          </div>
+          <!-- Bottom Accent Bar -->
+          <div class="h-1 bg-sky-500 w-full"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= SECTION 2: WHAT WE DO / 4 SERVICE CARDS ================= -->
+  <section id="layanan" class="py-20 bg-slate-50/70 border-t border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-wider text-slate-900">
+          WHAT WE DO
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-slate-500 leading-relaxed font-normal">
+          Kami menyediakan berbagai kemudahan akses administrasi keuangan digital dan konsultasi tatap muka demi kenyamanan sivitas akademika Universitas Setia Budi.
+        </p>
+        <!-- Blue Accent Line Under Title -->
+        <div class="w-16 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- 4 Column Cards Grid (Exact Style from Pinterest reference) -->
+      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6">
+        
+        <!-- Service Card 1 -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 text-center shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between items-center group">
+          <div class="flex flex-col items-center">
+            <!-- Circular Icon with Double Border Accent -->
+            <div class="w-16 h-16 rounded-full border-2 border-sky-400 bg-sky-50/70 flex items-center justify-center text-sky-600 mb-5 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+              <i data-lucide="wallet-cards" class="w-7 h-7"></i>
+            </div>
+
+            <!-- Service Title -->
+            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2.5">
+              Info Tagihan & VA
+            </h3>
+
+            <!-- Service Description -->
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Pengecekan nomor rekening Virtual Account (BNI, Mandiri, BRI, Jateng) dan rincian komponen tagihan semester mahasiswa aktif.
+            </p>
+          </div>
+
+          <!-- Action Button -->
+          <a href="#panduan" class="w-full py-2.5 px-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-xs rounded-lg transition-colors shadow-sm inline-block">
+            Read More
+          </a>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 text-center shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between items-center group">
+          <div class="flex flex-col items-center">
+            <!-- Circular Icon with Double Border Accent -->
+            <div class="w-16 h-16 rounded-full border-2 border-sky-400 bg-sky-50/70 flex items-center justify-center text-sky-600 mb-5 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+              <i data-lucide="badge-check" class="w-7 h-7"></i>
+            </div>
+
+            <!-- Service Title -->
+            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2.5">
+              Validasi Wisuda & Ujian
+            </h3>
+
+            <!-- Service Description -->
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Layanan validasi pelunasan biaya skripsi, yudisium, wisuda, serta penerbitan kartu ujian secara tersinkronisasi dengan SIAKAD USB.
+            </p>
+          </div>
+
+          <!-- Action Button -->
+          <a href="#panduan" class="w-full py-2.5 px-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-xs rounded-lg transition-colors shadow-sm inline-block">
+            Read More
+          </a>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 text-center shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between items-center group">
+          <div class="flex flex-col items-center">
+            <!-- Circular Icon with Double Border Accent -->
+            <div class="w-16 h-16 rounded-full border-2 border-sky-400 bg-sky-50/70 flex items-center justify-center text-sky-600 mb-5 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+              <i data-lucide="file-spreadsheet" class="w-7 h-7"></i>
+            </div>
+
+            <!-- Service Title -->
+            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2.5">
+              Surat Bebas Finansial
+            </h3>
+
+            <!-- Service Description -->
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Penerbitan surat keterangan bebas tanggungan keuangan untuk keperluan cuti studi, pindah program studi, maupun pengambilan ijazah kelulusan.
+            </p>
+          </div>
+
+          <!-- Action Button -->
+          <a href="#panduan" class="w-full py-2.5 px-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-xs rounded-lg transition-colors shadow-sm inline-block">
+            Read More
+          </a>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="bg-white border border-slate-200/90 rounded-2xl p-7 text-center shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between items-center group">
+          <div class="flex flex-col items-center">
+            <!-- Circular Icon with Double Border Accent -->
+            <div class="w-16 h-16 rounded-full border-2 border-sky-400 bg-sky-50/70 flex items-center justify-center text-sky-600 mb-5 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+              <i data-lucide="life-buoy" class="w-7 h-7"></i>
+            </div>
+
+            <!-- Service Title -->
+            <h3 class="font-bold text-slate-900 text-base leading-snug mb-2.5">
+              Layanan Konsultasi & FAQ
+            </h3>
+
+            <!-- Service Description -->
+            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+              Bantuan kendala transaksi ganda, klarifikasi pemotongan beasiswa, serta konsultasi skema cicilan pembayaran di loket Biro Keuangan USB.
+            </p>
+          </div>
+
+          <!-- Action Button -->
+          <a href="#kontak" class="w-full py-2.5 px-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-xs rounded-lg transition-colors shadow-sm inline-block">
+            Read More
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= SECTION 3: BOTTOM CTA BANNER ================= -->
+  <section class="relative bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 text-white py-16 overflow-hidden">
+    <!-- Subtle Background Elements -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-white drop-shadow-sm">
+        DO YOU HAVE ANY FINANCIAL INQUIRIES?
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-sky-100 max-w-2xl mx-auto font-normal">
+        Ada kendala saat pembayaran tagihan atau butuh informasi administrasi keuangan Universitas Setia Budi? Tim kami siap membantu Anda.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="https://wa.me/628123456789" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white text-sky-900 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider transition-all shadow-sm">
+          <i data-lucide="message-circle" class="w-4 h-4 text-sky-600"></i>
+          <span>Hubungi Helpdesk WhatsApp</span>
+        </a>
+        <a href="#panduan" class="inline-flex items-center gap-2 px-6 py-3 rounded-md border-2 border-white text-white hover:bg-white hover:text-sky-900 font-bold text-xs uppercase tracking-wider transition-all shadow-sm">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>Unduh Panduan Pembayaran</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= SECTION 4: PANDUAN & INFORMASI BANK MITRA ================= -->
+  <section id="panduan" class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left Column: Steps -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-bold rounded-md uppercase tracking-wider">
+            Panduan Mahasiswa
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+            Alur Pembayaran Biaya Kuliah via Virtual Account (VA)
+          </h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Setiap mahasiswa memiliki Nomor Virtual Account tetap yang dapat digunakan melalui ATM, Mobile Banking, Internet Banking, atau Teller seluruh bank.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <!-- Step 1 -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">
+                1
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Login ke Portal SIAKAD USB</h4>
+                <p class="text-xs text-slate-500 mt-1">Akses menu Keuangan / Tagihan untuk melihat rincian tagihan semester berjalan dan kode Virtual Account.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">
+                2
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Pilih Metode Pembayaran & Salin Kode VA</h4>
+                <p class="text-xs text-slate-500 mt-1">Pilih bank mitra (BNI, Mandiri, BRI, Bank Jateng) dan catat kode bayar 16 digit yang tertera.</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">
+                3
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Lakukan Transfer & Verifikasi Otomatis</h4>
+                <p class="text-xs text-slate-500 mt-1">Selesaikan transfer sesuai nominal pas. Sistem SIAKAD akan memvalidasi pembayaran Anda dalam waktu 1-5 menit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Bank Mitra & Quick Info Box -->
+        <div id="cek-tagihan" class="lg:col-span-5">
+          <div class="bg-slate-900 text-white rounded-2xl p-7 shadow-lg border border-slate-800 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-sky-500/10 rounded-full blur-2xl"></div>
+            
+            <h3 class="text-lg font-bold uppercase tracking-wider text-sky-400 mb-1">Cek Status Tagihan</h3>
+            <p class="text-xs text-slate-400 mb-5">Masukkan NIM Mahasiswa untuk melihat rincian tagihan aktif</p>
+
+            <form onsubmit="event.preventDefault(); alert('Pencarian simulasi tagihan berhasil. Silakan cek portal SIAKAD resmi untuk pembayaran langsung.');" class="space-y-4">
+              <div>
+                <label for="nim-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Nomor Induk Mahasiswa (NIM)</label>
+                <div class="relative">
+                  <input id="nim-input" type="text" placeholder="Contoh: 210101001" required class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors">
+                  <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute right-3 top-3"></i>
+                </div>
+              </div>
+
+              <div>
+                <label for="prodi-select" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Program Studi</label>
+                <select id="prodi-select" class="w-full bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-sky-500 transition-colors">
+                  <option>S1 Farmasi</option>
+                  <option>D4 Analis Kesehatan (TLM)</option>
+                  <option>S1 Ilmu Keperawatan</option>
+                  <option>S1 Manajemen</option>
+                  <option>S1 Akuntansi</option>
+                  <option>S1 Teknik Kimia</option>
+                  <option>S1 Psikologi</option>
+                  <option>Profesi Apoteker</option>
+                </select>
+              </div>
+
+              <button type="submit" class="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                <span>Periksa Tagihan</span>
+              </button>
+            </form>
+
+            <div class="mt-6 pt-5 border-t border-slate-800">
+              <span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Bank Mitra Resmi USB:</span>
+              <div class="grid grid-cols-4 gap-2 text-center">
+                <div class="bg-slate-800/80 rounded py-1.5 text-[10px] font-bold text-slate-300 border border-slate-700/60">BNI</div>
+                <div class="bg-slate-800/80 rounded py-1.5 text-[10px] font-bold text-slate-300 border border-slate-700/60">MANDIRI</div>
+                <div class="bg-slate-800/80 rounded py-1.5 text-[10px] font-bold text-slate-300 border border-slate-700/60">BRI</div>
+                <div class="bg-slate-800/80 rounded py-1.5 text-[10px] font-bold text-slate-300 border border-slate-700/60">JATENG</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="kontak" class="bg-[#0b1320] text-slate-400 text-xs pt-16 pb-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        
+        <!-- Col 1: About Biro -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded bg-sky-600 flex items-center justify-center text-white">
+              <i data-lucide="landmark" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <span class="font-extrabold text-white text-sm tracking-wider uppercase block">BIRO KEUANGAN</span>
+              <span class="text-[9px] text-sky-400 font-semibold tracking-widest uppercase block">UNIVERSITAS SETIA BUDI</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Unit pengelola administrasi penerimaan, verifikasi keuangan, dan layanan pembayaran mahasiswa di lingkungan Universitas Setia Budi Surakarta.
+          </p>
+          <div class="text-[11px] text-slate-400 space-y-1">
+            <p class="flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-400 shrink-0"></i>
+              <span>Gedung Rektorat Lt. 1, Jl. Letjen Sutoyo, Mojosongo, Surakarta 57127</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Col 2: Layanan Cepat -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider border-b border-slate-800 pb-2">
+            Layanan Keuangan
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#panduan" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="chevron-right" class="w-3 h-3 text-sky-500"></i> Panduan Pembayaran UKT/SPP</a></li>
+            <li><a href="#panduan" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="chevron-right" class="w-3 h-3 text-sky-500"></i> Verifikasi Registrasi Mahasiswa Baru</a></li>
+            <li><a href="#panduan" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="chevron-right" class="w-3 h-3 text-sky-500"></i> Validasi Biaya Ujian & Wisuda</a></li>
+            <li><a href="#panduan" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="chevron-right" class="w-3 h-3 text-sky-500"></i> Surat Bebas Tanggungan Keuangan</a></li>
+            <li><a href="#panduan" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="chevron-right" class="w-3 h-3 text-sky-500"></i> Permohonan Dispensasi Pembayaran</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Jam Layanan & Loket -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider border-b border-slate-800 pb-2">
+            Jam Layanan Loket
+          </h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li class="flex justify-between pb-1 border-b border-slate-800/60">
+              <span class="text-slate-300">Senin - Kamis</span>
+              <span class="font-semibold text-white">08.00 - 15.30 WIB</span>
+            </li>
+            <li class="flex justify-between pb-1 border-b border-slate-800/60">
+              <span class="text-slate-300">Jumat</span>
+              <span class="font-semibold text-white">08.00 - 14.30 WIB</span>
+            </li>
+            <li class="flex justify-between pb-1 border-b border-slate-800/60">
+              <span class="text-slate-300">Istirahat Siang</span>
+              <span class="font-semibold text-amber-400">11.30 - 13.00 WIB</span>
+            </li>
+            <li class="flex justify-between">
+              <span class="text-slate-300">Sabtu, Minggu & Libur</span>
+              <span class="font-semibold text-rose-400">Tutup (Online Aktif)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Tautan Penting -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white uppercase text-xs tracking-wider border-b border-slate-800 pb-2">
+            Sistem Terintegrasi
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="https://setiabudi.ac.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="external-link" class="w-3 h-3 text-sky-500"></i> Portal Utama Universitas Setia Budi</a></li>
+            <li><a href="https://siakad.setiabudi.ac.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="external-link" class="w-3 h-3 text-sky-500"></i> SIAKAD USB</a></li>
+            <li><a href="https://pmb.setiabudi.ac.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="external-link" class="w-3 h-3 text-sky-500"></i> PMB Universitas Setia Budi</a></li>
+            <li><a href="https://perpustakaan.setiabudi.ac.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="external-link" class="w-3 h-3 text-sky-500"></i> Perpustakaan USB</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright Bottom Bar -->
+      <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+        <p>&copy; 2026 Biro Keuangan Universitas Setia Budi. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-slate-300 transition-colors">Kebijakan Privasi</a>
+          <span>•</span>
+          <a href="#" class="hover:text-slate-300 transition-colors">Syarat & Ketentuan</a>
+          <span>•</span>
+          <a href="admin.html" class="text-sky-400 hover:text-sky-300 transition-colors font-medium flex items-center gap-1">
+            <i data-lucide="lock" class="w-3 h-3"></i>
+            <span>Portal CMS Staf</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script to initialize Lucide icons and Mobile Menu Toggle -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+
+</body>
+</html>
