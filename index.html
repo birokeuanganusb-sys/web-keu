@@ -120,16 +120,16 @@
       transform: translateY(-100%);
     }
 
-    /* State 3: Scrolled Up (Slide Down / Floating Sticky with Backdrop & Shadow) */
+    /* State 3: Scrolled Up (Slide Down / Floating Sticky with Backdrop & Shadow matching Hero Blue) */
     .smart-navbar.nav-scrolled {
       position: fixed;
       top: 0;
       transform: translateY(0);
-      background-color: rgba(15, 23, 42, 0.94);
+      background: linear-gradient(90deg, rgba(3, 74, 120, 0.96) 0%, rgba(2, 132, 199, 0.92) 100%);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 25px -5px rgba(3, 74, 120, 0.35), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
@@ -236,7 +236,7 @@
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-2 backdrop-blur-md shadow-xl">
+        <div id="mobile-menu" class="hidden lg:hidden bg-gradient-to-b from-[#034a78]/95 to-[#0284c7]/95 border-b border-white/10 px-4 pt-2 pb-6 space-y-2 backdrop-blur-md shadow-xl">
           <a href="#beranda" class="block px-3 py-2 text-sm font-bold text-white bg-white/10 rounded-md transition-colors duration-150">BERANDA</a>
           <a href="#tentang" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">TENTANG KAMI</a>
           <a href="#layanan" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">LAYANAN</a>
@@ -244,7 +244,7 @@
           <a href="#tarif" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">TARIF KULIAH</a>
           <a href="#berita" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">PENGUMUMAN</a>
           <a href="#kontak" class="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-150">KONTAK</a>
-          <a href="#cek-tagihan" class="block text-center px-4 py-2.5 text-xs font-bold uppercase bg-sky-500 hover:bg-sky-600 text-white rounded-md transition-colors duration-150">Cek Tagihan Virtual Account</a>
+          <a href="#cek-tagihan" class="block text-center px-4 py-2.5 text-xs font-bold uppercase bg-white/20 hover:bg-white text-white hover:text-sky-900 rounded-md border border-white/30 backdrop-blur-sm transition-colors duration-150">Cek Tagihan Virtual Account</a>
         </div>
       </nav>
     </div>
