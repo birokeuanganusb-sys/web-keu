@@ -328,7 +328,14 @@
       width: 20px;
       height: 20px;
       fill: var(--accent-pink);
+      stroke: var(--accent-pink);
       flex-shrink: 0;
+      transition: fill 0.15s ease, stroke 0.15s ease;
+    }
+
+    .drawer-nav-item a:hover svg {
+      fill: #ff75c3;
+      stroke: #ff75c3;
     }
 
     .drawer-footer {
@@ -644,8 +651,8 @@
         <li class="drawer-nav-item">
           <a href="https://script.google.com/a/macros/setiabudi.ac.id/s/AKfycby-fYsPR4V2A3RJ8Yu2B0a22S2sxmrv53N8WpBoQ4dnl_f2aF8lJTCsOPE2PRBD5ZcHOA/exec" target="_blank" rel="noopener" title="Sistem Informasi Anggaran Realisasi dan Tata kelola Anggaran">
             <svg viewBox="0 0 24 24">
-              <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-              <path d="M18 9l-5 5-4-4-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <path d="M3 3v18h18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <path d="M18 9l-5 5-4-4-3 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
             </svg>
             SIARTA
           </a>
