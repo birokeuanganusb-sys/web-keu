@@ -33,6 +33,7 @@ web-keu/
 ├── assets/                   # Aset statis lokal
 │   ├── docs/                 # Berkas unduhan (panduan PDF, SK tarif, formulir)
 │   └── images/               # Gambar lokal portal (hero, features, background)
+│       ├── favicon.svg       # Favicon logo resmi Biro Keuangan USB
 │       ├── hero-campus.jpg
 │       ├── feature-spp.jpg
 │       ├── feature-verifikasi.jpg

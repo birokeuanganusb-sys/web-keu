@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="usbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="50%" stop-color="#034a78" />
+      <stop offset="100%" stop-color="#082f49" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded card -->
+  <rect width="64" height="64" rx="14" fill="url(#usbGrad)" />
+  <!-- Subtle border -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.5" />
+  <!-- Landmark / University Emblem -->
+  <!-- Roof / Pediment -->
+  <path d="M14 25 L32 14 L50 25 Z" fill="#ffffff" />
+  <!-- Architrave Beam -->
+  <rect x="16" y="26" width="32" height="3" rx="0.75" fill="#ffffff" />
+  <!-- 4 Pillars -->
+  <rect x="19" y="31" width="4.5" height="16" rx="1" fill="#ffffff" />
+  <rect x="26.5" y="31" width="4.5" height="16" rx="1" fill="#ffffff" />
+  <rect x="33" y="31" width="4.5" height="16" rx="1" fill="#ffffff" />
+  <rect x="40.5" y="31" width="4.5" height="16" rx="1" fill="#ffffff" />
+  <!-- Base Foundation Steps -->
+  <rect x="15" y="48" width="34" height="3.5" rx="1" fill="#ffffff" />
+  <rect x="12" y="52.5" width="40" height="3" rx="1" fill="#38bdf8" />
+</svg>
