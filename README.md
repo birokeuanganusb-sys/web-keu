@@ -34,6 +34,7 @@ web-keu/
 │   ├── docs/                 # Berkas unduhan (panduan PDF, SK tarif, formulir)
 │   └── images/               # Gambar lokal portal (hero, features, background)
 │       ├── fav.png           # Favicon logo resmi Biro Keuangan USB
+│       ├── Logo.png          # Logo resmi Universitas Setia Budi (Header)
 │       ├── hero-campus.jpg
 │       ├── feature-spp.jpg
 │       ├── feature-verifikasi.jpg
