@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="id" class="h-full bg-slate-50">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS Portal Biro Keuangan - Universitas Setia Budi</title>
-  <meta name="description" content="Dashboard Content Management System (CMS) Biro Keuangan Universitas Setia Budi untuk mengelola artikel, pengumuman, panduan UKT, dan dokumen akademik.">
+  <meta name="description"
+    content="Dashboard Content Management System (CMS) Biro Keuangan Universitas Setia Budi untuk mengelola artikel, pengumuman, panduan UKT, dan dokumen akademik.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="../assets/images/fav.png">
@@ -12,7 +14,8 @@
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -47,13 +50,16 @@
       width: 6px;
       height: 6px;
     }
+
     ::-webkit-scrollbar-track {
       background: #f1f5f9;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 4px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
@@ -65,25 +71,43 @@
 
     /* Error Shake Animation */
     @keyframes loginShake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20%,
+      60% {
+        transform: translateX(-8px);
+      }
+
+      40%,
+      80% {
+        transform: translateX(8px);
+      }
     }
+
     .animate-shake {
       animation: loginShake 0.4s ease-in-out;
     }
   </style>
 </head>
-<body class="h-full font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white overflow-hidden">
+
+<body
+  class="h-full font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white overflow-hidden">
 
   <!-- ================= AUTHENTICATION / LOGIN SCREEN ================= -->
-  <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-slate-950 via-[#032e4d] to-slate-950 p-4 sm:p-6 overflow-y-auto">
+  <div id="login-screen"
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-slate-950 via-[#032e4d] to-slate-950 p-4 sm:p-6 overflow-y-auto">
     <!-- Ambient glowing backgrounds -->
     <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none">
+    </div>
 
-    <div class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200/80 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
-      
+    <div
+      class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200/80 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+
       <!-- Top Accent Line -->
       <div class="h-1.5 w-full bg-gradient-to-r from-sky-400 via-[#034a78] to-blue-700"></div>
 
@@ -92,7 +116,8 @@
         <div class="text-center mb-6">
           <img src="../assets/images/Logo.png" alt="Logo Universitas Setia Budi"
             class="w-16 h-16 object-contain mx-auto mb-3 drop-shadow-md">
-          <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-brand-50 text-[#034a78] border border-brand-200/60 mb-1.5">
+          <span
+            class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-brand-50 text-[#034a78] border border-brand-200/60 mb-1.5">
             Portal Administrator
           </span>
           <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">CMS Biro Keuangan</h1>
@@ -100,7 +125,8 @@
         </div>
 
         <!-- Alert Error Message (Hidden by default) -->
-        <div id="login-error-alert" class="hidden mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2.5">
+        <div id="login-error-alert"
+          class="hidden mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2.5">
           <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-rose-600"></i>
           <span id="login-error-text">Username atau Kata Sandi salah. Silakan coba lagi.</span>
         </div>
@@ -109,7 +135,9 @@
         <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
           <!-- Username Input -->
           <div>
-            <label for="login-username" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username / NIP Admin</label>
+            <label for="login-username"
+              class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username / NIP
+              Admin</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                 <i data-lucide="user" class="w-4 h-4"></i>
@@ -122,7 +150,8 @@
           <!-- Password Input -->
           <div>
             <div class="flex items-center justify-between mb-1.5">
-              <label for="login-password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Kata Sandi</label>
+              <label for="login-password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Kata
+                Sandi</label>
             </div>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -130,7 +159,8 @@
               </div>
               <input type="password" id="login-password" required placeholder="••••••••"
                 class="block w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#034a78] focus:border-transparent transition-all">
-              <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+              <button type="button" onclick="togglePasswordVisibility()"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
                 <i id="password-toggle-icon" data-lucide="eye" class="w-4 h-4"></i>
               </button>
             </div>
@@ -139,7 +169,8 @@
           <!-- Remember & Helper -->
           <div class="flex items-center justify-between text-xs pt-0.5">
             <label class="flex items-center gap-2 cursor-pointer select-none text-slate-600 hover:text-slate-800">
-              <input type="checkbox" id="login-remember" checked class="rounded border-slate-300 text-[#034a78] focus:ring-[#034a78]">
+              <input type="checkbox" id="login-remember" checked
+                class="rounded border-slate-300 text-[#034a78] focus:ring-[#034a78]">
               <span>Ingat saya di browser ini</span>
             </label>
             <span class="text-slate-400 text-[11px]">Akun resmi BKU</span>
@@ -149,19 +180,21 @@
           <button type="submit" id="login-submit-btn"
             class="w-full py-2.5 px-4 bg-[#034a78] hover:bg-[#02395c] active:bg-[#01273f] text-white text-xs font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-150 flex items-center justify-center gap-2 group cursor-pointer">
             <span id="login-btn-label">Masuk ke Dashboard CMS</span>
-            <i id="login-btn-icon" data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+            <i id="login-btn-icon" data-lucide="arrow-right"
+              class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
           </button>
         </form>
 
         <!-- Back to Public Site -->
         <div class="mt-6 text-center">
-          <a href="../" class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-[#034a78] transition-colors">
+          <a href="../"
+            class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-[#034a78] transition-colors">
             <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
             Kembali ke Portal Publik Web Biro Keuangan
           </a>
         </div>
       </div>
-      
+
       <!-- Card Footer -->
       <div class="bg-slate-50 px-6 py-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
         Sistem Informasi Keuangan Terpadu &copy; 2026 Universitas Setia Budi
@@ -173,11 +206,14 @@
   <div id="dashboard-app" class="h-full flex w-full overflow-hidden hidden">
 
     <!-- ================= MOBILE SIDEBAR BACKDROP ================= -->
-    <div id="mobile-backdrop" class="fixed inset-0 bg-slate-900/50 z-40 lg:hidden hidden backdrop-blur-sm transition-opacity" onclick="toggleMobileSidebar()"></div>
+    <div id="mobile-backdrop"
+      class="fixed inset-0 bg-slate-900/50 z-40 lg:hidden hidden backdrop-blur-sm transition-opacity"
+      onclick="toggleMobileSidebar()"></div>
 
     <!-- ================= SIDEBAR NAVIGATION (LEFT) ================= -->
-    <aside id="sidebar" class="sidebar-transition fixed inset-y-0 left-0 z-50 flex flex-col bg-white border-r border-slate-200 w-64 lg:static lg:translate-x-0 -translate-x-full shrink-0 select-none">
-      
+    <aside id="sidebar"
+      class="sidebar-transition fixed inset-y-0 left-0 z-50 flex flex-col bg-white border-r border-slate-200 w-64 lg:static lg:translate-x-0 -translate-x-full shrink-0 select-none">
+
       <!-- Sidebar Header: System Brand & Portal Logo -->
       <div class="h-16 px-4 flex items-center justify-between border-b border-slate-200 shrink-0">
         <a href="#" class="flex items-center gap-3 overflow-hidden group">
@@ -185,960 +221,1127 @@
             class="w-9 h-9 object-contain shrink-0 group-hover:scale-105 transition-transform duration-200">
           <div id="brand-text" class="flex flex-col truncate transition-opacity duration-200">
             <span class="font-bold text-sm tracking-tight text-slate-900 leading-none">CMS Biro Keuangan</span>
-            <span class="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">Univ. Setia Budi</span>
+            <span class="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">Univ. Setia
+              Budi</span>
           </div>
         </a>
 
         <!-- Desktop Collapse Button -->
-        <button onclick="toggleSidebarCollapse()" class="hidden lg:flex p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer" title="Toggle Sidebar">
+        <button onclick="toggleSidebarCollapse()"
+          class="hidden lg:flex p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+          title="Toggle Sidebar">
           <i id="collapse-icon" data-lucide="panel-left-close" class="w-4 h-4"></i>
         </button>
 
         <!-- Mobile Close Button -->
-        <button onclick="toggleMobileSidebar()" class="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">
+        <button onclick="toggleMobileSidebar()"
+          class="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Quick Switcher to Public Site -->
       <div class="px-3 pt-3 pb-1">
-        <a href="../" target="_blank" class="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors group">
-          <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 transition-colors shrink-0"></i>
+        <a href="../" target="_blank"
+          class="flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-colors group">
+          <i data-lucide="external-link"
+            class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-600 transition-colors shrink-0"></i>
           <span class="sidebar-label truncate">Lihat Portal Publik (Web)</span>
         </a>
       </div>
 
-    <!-- Navigation Menu Items (Scrollable) -->
-    <div class="flex-1 overflow-y-auto px-3 py-3 space-y-6">
-      
-      <!-- Section: Manajemen Konten -->
-      <div>
-        <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-          Konten & Portal
-        </div>
-        <nav class="space-y-1">
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="layout-dashboard" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Dashboard Ringkasan</span>
-          </a>
-          
-          <!-- Active Menu Item -->
-          <a href="#" class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-semibold text-slate-900 bg-slate-100 border border-slate-200/60 shadow-2xs">
-            <div class="flex items-center gap-3 truncate">
-              <i data-lucide="file-text" class="w-4 h-4 text-brand-600 shrink-0"></i>
-              <span class="sidebar-label truncate">Artikel & Pengumuman</span>
-            </div>
-            <span class="sidebar-label px-1.5 py-0.5 text-[10px] font-bold bg-slate-200 text-slate-700 rounded">48</span>
-          </a>
+      <!-- Navigation Menu Items (Scrollable) -->
+      <div class="flex-1 overflow-y-auto px-3 py-3 space-y-6">
 
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="folder-kanban" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Kategori & Tag</span>
-          </a>
-
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="image" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Media Library & File</span>
-          </a>
-
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="layout-template" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Tata Letak Beranda</span>
-          </a>
-        </nav>
-      </div>
-
-      <!-- Section: Layanan Keuangan -->
-      <div>
-        <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-          Administrasi
-        </div>
-        <nav class="space-y-1">
-          <a href="#" class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <div class="flex items-center gap-3 truncate">
-              <i data-lucide="credit-card" class="w-4 h-4 text-slate-400 shrink-0"></i>
-              <span class="sidebar-label truncate">Tarif SPP / UKT</span>
-            </div>
-          </a>
-
-          <a href="#" class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <div class="flex items-center gap-3 truncate">
-              <i data-lucide="badge-percent" class="w-4 h-4 text-slate-400 shrink-0"></i>
-              <span class="sidebar-label truncate">Pengajuan Dispensasi</span>
-            </div>
-            <span class="sidebar-label px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded">3 Baru</span>
-          </a>
-
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="files" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Formulir & Dokumen</span>
-          </a>
-        </nav>
-      </div>
-
-      <!-- Section: Pengaturan Sistem -->
-      <div>
-        <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-          Sistem
-        </div>
-        <nav class="space-y-1">
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="users" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Staf & Hak Akses</span>
-          </a>
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Pengaturan Portal</span>
-          </a>
-          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-            <i data-lucide="history" class="w-4 h-4 text-slate-400 shrink-0"></i>
-            <span class="sidebar-label truncate">Audit Log Sistem</span>
-          </a>
-        </nav>
-      </div>
-
-    </div>
-
-    <!-- Sidebar Footer: Compact User Profile & Logout -->
-    <div class="p-3 border-t border-slate-200 bg-slate-50/70 shrink-0">
-      <div class="flex items-center justify-between gap-2 p-1.5 rounded-lg">
-        <div class="flex items-center gap-2.5 min-w-0">
-          <!-- Initial Avatar -->
-          <div class="w-8 h-8 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0 ring-2 ring-white">
-            BS
-          </div>
-          <div id="user-info" class="flex flex-col min-w-0 truncate">
-            <span class="text-xs font-bold text-slate-900 truncate">Budi Santoso, S.E.</span>
-            <span class="text-[10px] text-slate-500 font-medium truncate">Admin Biro Keuangan</span>
-          </div>
-        </div>
-
-        <button onclick="handleLogout()" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors shrink-0" title="Keluar dari Sistem">
-          <i data-lucide="log-out" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </div>
-
-  </aside>
-
-
-  <!-- ================= MAIN WRAPPER (TOPBAR + CONTENT) ================= -->
-  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-    
-    <!-- ================= TOP NAVIGATION BAR ================= -->
-    <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shrink-0 z-30">
-      
-      <!-- Left: Mobile Menu Toggle & Dynamic Breadcrumb -->
-      <div class="flex items-center gap-3 min-w-0">
-        <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 -ml-2 rounded-md text-slate-600 hover:bg-slate-100" aria-label="Buka Menu">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-
-        <!-- Breadcrumb -->
-        <nav class="flex items-center gap-2 text-xs font-medium text-slate-500 truncate">
-          <a href="#" class="hover:text-slate-900 transition-colors">CMS Portal</a>
-          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
-          <span class="text-slate-900 font-semibold truncate">Kelola Konten & Dokumen</span>
-        </nav>
-      </div>
-
-      <!-- Right: Global Search & Quick Actions -->
-      <div class="flex items-center gap-3">
-        
-        <!-- Quick Global Search Bar -->
-        <div class="relative hidden sm:block w-64 md:w-80">
-          <input 
-            type="text" 
-            id="global-search"
-            placeholder="Cari konten, surat, tarif... (Ctrl + K)" 
-            class="w-full bg-slate-50 border border-slate-200 rounded-md pl-9 pr-8 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all"
-          >
-          <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5"></i>
-          <kbd class="hidden md:inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold text-slate-400 bg-white border border-slate-200 rounded absolute right-2 top-2">⌘K</kbd>
-        </div>
-
-        <!-- Notification Bell with Counter -->
-        <div class="relative">
-          <button class="relative p-2 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors" title="Notifikasi Baru">
-            <i data-lucide="bell" class="w-4 h-4"></i>
-            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
-          </button>
-        </div>
-
-        <!-- System Status Indicator (Clean) -->
-        <div class="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200/80 text-[11px] font-semibold text-emerald-800">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>SIAKAD Sync Active</span>
-        </div>
-
-        <!-- Primary CTA: Tambah Konten Baru -->
-        <button onclick="openContentModal()" class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold text-xs rounded-md shadow-xs transition-colors shrink-0">
-          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-          <span>Tambah Konten</span>
-        </button>
-
-      </div>
-    </header>
-
-
-    <!-- ================= MAIN CONTENT WORK AREA (SCROLLABLE) ================= -->
-    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
-      
-      <!-- Page Header & Action Bar -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <!-- Section: Manajemen Konten -->
         <div>
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-            Manajemen Konten & Publikasi
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">
-            Kelola artikel panduan UKT, jadwal pembayaran semester, pengumuman loket, dan dokumen resmi Biro Keuangan USB.
-          </p>
+          <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Konten & Portal
+          </div>
+          <nav class="space-y-1">
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="layout-dashboard" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Dashboard Ringkasan</span>
+            </a>
+
+            <!-- Active Menu Item -->
+            <a href="#"
+              class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-semibold text-slate-900 bg-slate-100 border border-slate-200/60 shadow-2xs">
+              <div class="flex items-center gap-3 truncate">
+                <i data-lucide="file-text" class="w-4 h-4 text-brand-600 shrink-0"></i>
+                <span class="sidebar-label truncate">Artikel & Pengumuman</span>
+              </div>
+              <span
+                class="sidebar-label px-1.5 py-0.5 text-[10px] font-bold bg-slate-200 text-slate-700 rounded">48</span>
+            </a>
+
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="folder-kanban" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Kategori & Tag</span>
+            </a>
+
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="image" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Media Library & File</span>
+            </a>
+
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="layout-template" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Tata Letak Beranda</span>
+            </a>
+          </nav>
         </div>
 
-        <!-- Secondary Actions -->
-        <div class="flex items-center gap-2">
-          <button onclick="showToast('Mengekspor data ke format spreadsheet (.csv)...')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-md text-xs font-medium shadow-2xs transition-colors">
-            <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
-            <span>Export CSV</span>
-          </button>
-          <button onclick="refreshTableData()" class="p-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-md text-xs font-medium shadow-2xs transition-colors" title="Muat Ulang Data">
-            <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-slate-500"></i>
+        <!-- Section: Layanan Keuangan -->
+        <div>
+          <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Administrasi
+          </div>
+          <nav class="space-y-1">
+            <a href="#"
+              class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <div class="flex items-center gap-3 truncate">
+                <i data-lucide="credit-card" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                <span class="sidebar-label truncate">Tarif SPP / UKT</span>
+              </div>
+            </a>
+
+            <a href="#"
+              class="flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <div class="flex items-center gap-3 truncate">
+                <i data-lucide="badge-percent" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                <span class="sidebar-label truncate">Pengajuan Dispensasi</span>
+              </div>
+              <span class="sidebar-label px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded">3
+                Baru</span>
+            </a>
+
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="files" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Formulir & Dokumen</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Section: Pengaturan Sistem -->
+        <div>
+          <div class="sidebar-label px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Sistem
+          </div>
+          <nav class="space-y-1">
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="users" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Staf & Hak Akses</span>
+            </a>
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Pengaturan Portal</span>
+            </a>
+            <a href="#"
+              class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+              <i data-lucide="history" class="w-4 h-4 text-slate-400 shrink-0"></i>
+              <span class="sidebar-label truncate">Audit Log Sistem</span>
+            </a>
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- Sidebar Footer: Compact User Profile & Logout -->
+      <div class="p-3 border-t border-slate-200 bg-slate-50/70 shrink-0">
+        <div class="flex items-center justify-between gap-2 p-1.5 rounded-lg">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <!-- Initial Avatar -->
+            <div
+              class="w-8 h-8 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center shrink-0 ring-2 ring-white">
+              BS
+            </div>
+            <div id="user-info" class="flex flex-col min-w-0 truncate">
+              <span class="text-xs font-bold text-slate-900 truncate">Budi Santoso, S.E.</span>
+              <span class="text-[10px] text-slate-500 font-medium truncate">Admin Biro Keuangan</span>
+            </div>
+          </div>
+
+          <button onclick="handleLogout()"
+            class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors shrink-0"
+            title="Keluar dari Sistem">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
-      <!-- ================= 1. STAT CARDS METRICS ================= -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        <!-- Card 1: Total Konten -->
-        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-500">Total Publikasi Aktif</span>
-            <span class="p-2 rounded-md bg-slate-100 text-slate-600"><i data-lucide="file-check-2" class="w-4 h-4"></i></span>
-          </div>
-          <div class="mt-4 flex items-baseline justify-between">
-            <span class="text-2xl font-bold tracking-tight text-slate-900">48</span>
-            <span class="text-[11px] font-semibold text-emerald-700 flex items-center gap-0.5">
-              <i data-lucide="trending-up" class="w-3 h-3"></i> +12.5%
-            </span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-1">4 item baru bulan ini</span>
+    </aside>
+
+
+    <!-- ================= MAIN WRAPPER (TOPBAR + CONTENT) ================= -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+      <!-- ================= TOP NAVIGATION BAR ================= -->
+      <header
+        class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 shrink-0 z-30">
+
+        <!-- Left: Mobile Menu Toggle & Dynamic Breadcrumb -->
+        <div class="flex items-center gap-3 min-w-0">
+          <button onclick="toggleMobileSidebar()"
+            class="lg:hidden p-2 -ml-2 rounded-md text-slate-600 hover:bg-slate-100" aria-label="Buka Menu">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Breadcrumb -->
+          <nav class="flex items-center gap-2 text-xs font-medium text-slate-500 truncate">
+            <a href="#" class="hover:text-slate-900 transition-colors">CMS Portal</a>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+            <span class="text-slate-900 font-semibold truncate">Kelola Konten & Dokumen</span>
+          </nav>
         </div>
 
-        <!-- Card 2: Draft Disimpan -->
-        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-500">Draft Tersimpan</span>
-            <span class="p-2 rounded-md bg-amber-50 text-amber-700"><i data-lucide="file-edit" class="w-4 h-4"></i></span>
-          </div>
-          <div class="mt-4 flex items-baseline justify-between">
-            <span class="text-2xl font-bold tracking-tight text-slate-900">6</span>
-            <span class="text-[11px] font-medium text-slate-500">Belum dipublikasikan</span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-1">Terakhir diedit kemarin</span>
-        </div>
+        <!-- Right: Global Search & Quick Actions -->
+        <div class="flex items-center gap-3">
 
-        <!-- Card 3: Menunggu Review -->
-        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-500">Menunggu Review</span>
-            <span class="p-2 rounded-md bg-sky-50 text-brand-700"><i data-lucide="clock-4" class="w-4 h-4"></i></span>
-          </div>
-          <div class="mt-4 flex items-baseline justify-between">
-            <span class="text-2xl font-bold tracking-tight text-slate-900">3</span>
-            <span class="text-[11px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200/80">Perlu Verifikasi</span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-1">Dari Bagian Akuntansi</span>
-        </div>
-
-        <!-- Card 4: Total Kunjungan / Pembaca -->
-        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-500">Total Pembaca (Bulan Ini)</span>
-            <span class="p-2 rounded-md bg-slate-100 text-slate-600"><i data-lucide="eye" class="w-4 h-4"></i></span>
-          </div>
-          <div class="mt-4 flex items-baseline justify-between">
-            <span class="text-2xl font-bold tracking-tight text-slate-900">24.580</span>
-            <span class="text-[11px] font-semibold text-emerald-700 flex items-center gap-0.5">
-              <i data-lucide="trending-up" class="w-3 h-3"></i> +18.2%
-            </span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-1">Lonjakan saat periode bayar UKT</span>
-        </div>
-
-      </div>
-
-
-      <!-- ================= 2. FILTER & ACTION CONTROLS ================= -->
-      <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-xs space-y-3">
-        
-        <!-- Category Segmented Tabs -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-100 text-xs">
-          <button onclick="filterByCategory('all', this)" class="tab-btn px-3 py-1.5 rounded-md font-semibold text-brand-700 bg-brand-50 border border-brand-200/60 shrink-0">
-            Semua Konten (48)
-          </button>
-          <button onclick="filterByCategory('Panduan UKT', this)" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
-            Panduan Pembayaran (16)
-          </button>
-          <button onclick="filterByCategory('Pengumuman', this)" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
-            Pengumuman & Surat (14)
-          </button>
-          <button onclick="filterByCategory('Beasiswa', this)" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
-            Beasiswa & Keringanan (10)
-          </button>
-          <button onclick="filterByCategory('Tarif', this)" class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
-            Tarif & Formulir (8)
-          </button>
-        </div>
-
-        <!-- Search and Dropdown Filters Row -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
-          
-          <!-- Search in Table -->
-          <div class="relative flex-1">
-            <input 
-              type="text" 
-              id="table-search" 
-              onkeyup="handleTableSearch()" 
-              placeholder="Cari berdasarkan judul, penulis, nomor dokumen, atau tag..." 
-              class="w-full bg-white border border-slate-200 rounded-md pl-9 pr-4 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-colors"
-            >
+          <!-- Quick Global Search Bar -->
+          <div class="relative hidden sm:block w-64 md:w-80">
+            <input type="text" id="global-search" placeholder="Cari konten, surat, tarif... (Ctrl + K)"
+              class="w-full bg-slate-50 border border-slate-200 rounded-md pl-9 pr-8 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 focus:bg-white transition-all">
             <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5"></i>
+            <kbd
+              class="hidden md:inline-flex items-center px-1.5 py-0.5 text-[9px] font-semibold text-slate-400 bg-white border border-slate-200 rounded absolute right-2 top-2">⌘K</kbd>
           </div>
 
-          <!-- Dropdowns & Reset -->
-          <div class="flex flex-wrap items-center gap-2 text-xs">
-            
-            <!-- Status Filter -->
-            <select id="status-filter" onchange="applyFilters()" class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
-              <option value="all">Semua Status</option>
-              <option value="published">Published (Terbit)</option>
-              <option value="draft">Draft</option>
-              <option value="review">Menunggu Review</option>
-              <option value="archived">Diarsipkan</option>
-            </select>
-
-            <!-- Kategori Dropdown -->
-            <select id="category-filter" onchange="applyFilters()" class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
-              <option value="all">Semua Kategori</option>
-              <option value="Panduan UKT">Panduan UKT & SPP</option>
-              <option value="Pengumuman">Pengumuman & Surat</option>
-              <option value="Beasiswa">Beasiswa & Keringanan</option>
-              <option value="Tarif">Tarif & Biaya</option>
-            </select>
-
-            <!-- Penulis Dropdown -->
-            <select id="author-filter" onchange="applyFilters()" class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
-              <option value="all">Semua Penulis</option>
-              <option value="Budi Santoso">Budi Santoso, S.E.</option>
-              <option value="Rina Wulandari">Rina Wulandari, A.Md.</option>
-              <option value="Ahmad Fauzi">Ahmad Fauzi, S.Kom.</option>
-              <option value="Dewi Lestari">Dewi Lestari, M.Ak.</option>
-            </select>
-
-            <button onclick="resetFilters()" class="px-2.5 py-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-md font-medium transition-colors" title="Reset Semua Filter">
-              Reset
+          <!-- Notification Bell with Counter -->
+          <div class="relative">
+            <button
+              class="relative p-2 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              title="Notifikasi Baru">
+              <i data-lucide="bell" class="w-4 h-4"></i>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
             </button>
           </div>
 
-        </div>
-
-        <!-- Bulk Action Floating Bar (Hidden by default, shown when items are checked) -->
-        <div id="bulk-action-bar" class="hidden p-2.5 bg-slate-900 text-white rounded-md text-xs flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i data-lucide="check-square" class="w-4 h-4 text-brand-400"></i>
-            <span id="bulk-selected-count" class="font-semibold">0 item dipilih</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="bulkChangeStatus('published')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[11px] font-semibold transition-colors">
-              Publikasikan
-            </button>
-            <button onclick="bulkChangeStatus('archived')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-[11px] font-semibold transition-colors">
-              Arsipkan
-            </button>
-            <button onclick="bulkDelete()" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded text-[11px] font-semibold transition-colors">
-              Hapus
-            </button>
-            <button onclick="deselectAll()" class="px-2 text-slate-400 hover:text-white text-[11px]">
-              Batal
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- ================= 3. DATA TABLE COMPONENT ================= -->
-      <div class="bg-white rounded-lg border border-slate-200 shadow-xs overflow-hidden">
-        
-        <div class="overflow-x-auto max-h-[600px] overflow-y-auto relative">
-          <table class="w-full text-left border-collapse text-xs">
-            
-            <!-- Sticky Table Header -->
-            <thead class="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200 sticky top-0 z-10 select-none">
-              <tr>
-                <th class="py-3 px-4 w-10 text-center">
-                  <input type="checkbox" id="check-all" onchange="toggleCheckAll(this)" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
-                </th>
-                <th class="py-3 px-4 min-w-[280px]">Judul Konten & No. Dokumen</th>
-                <th class="py-3 px-4 min-w-[130px]">Kategori</th>
-                <th class="py-3 px-4 min-w-[150px]">Penulis / Staf</th>
-                <th class="py-3 px-4 min-w-[120px]">Status</th>
-                <th class="py-3 px-4 min-w-[130px]">Diperbarui</th>
-                <th class="py-3 px-4 min-w-[90px] text-right">Pembaca</th>
-                <th class="py-3 px-4 min-w-[110px] text-center sticky right-0 bg-slate-50 border-l border-slate-200">Aksi</th>
-              </tr>
-            </thead>
-
-            <!-- Table Body with Mockup Data -->
-            <tbody id="table-body" class="divide-y divide-slate-100 text-slate-700">
-              
-              <!-- Row 1: Published -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Panduan UKT" data-status="published" data-author="Budi Santoso">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="file-text" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(1)" class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
-                        Panduan Pembayaran UKT Semester Genap 2026/2027 via Virtual Account (VA)
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-500 font-medium">DOC-BKU/2026/02-014</span>
-                        <span>•</span>
-                        <span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><i data-lucide="pin" class="w-3 h-3"></i> Pinned di Beranda</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/60">
-                    Panduan UKT
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">BS</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-900 block truncate">Budi Santoso, S.E.</span>
-                      <span class="text-[10px] text-slate-400 block">Bagian Pelayanan</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>02 Okt 2026</span>
-                  <span class="text-slate-400 block text-[10px]">10:45 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
-                  8.420
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(1)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100" title="Lihat Pratinjau"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(1)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50" title="Edit Konten"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50" title="Hapus"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 2: Published -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Pengumuman" data-status="published" data-author="Rina Wulandari">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-slate-100 text-slate-600 shrink-0 mt-0.5"><i data-lucide="megaphone" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(2)" class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
-                        Surat Edaran Batas Akhir Registrasi Pembayaran Wisuda Periode April 2026
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-500 font-medium">EDR-USB/KEU/2026/09</span>
-                        <span>•</span>
-                        <span>PDF Lampiran (1.2 MB)</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-50 text-purple-800 border border-purple-200/60">
-                    Pengumuman
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">RW</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-900 block truncate">Rina Wulandari, A.Md.</span>
-                      <span class="text-[10px] text-slate-400 block">Staf Validasi Wisuda</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>29 Sep 2026</span>
-                  <span class="text-slate-400 block text-[10px]">14:20 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
-                  4.110
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(2)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(2)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 3: Menunggu Review -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Beasiswa" data-status="review" data-author="Ahmad Fauzi">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="award" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(3)" class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
-                        Ketentuan & Syarat Pengajuan Keringanan Biaya Kuliah Mahasiswa Kurang Mampu
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-500 font-medium">DOC-BKU/2026/03-088</span>
-                        <span>•</span>
-                        <span class="text-amber-700 font-medium">Menunggu persetujuan Kabiro</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/60">
-                    Beasiswa
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">AF</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-900 block truncate">Ahmad Fauzi, S.Kom.</span>
-                      <span class="text-[10px] text-slate-400 block">Staf IT & Data</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/80">
-                    <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> In Review
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>Kemarin</span>
-                  <span class="text-slate-400 block text-[10px]">16:10 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-400">
-                  -
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(3)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(3)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 4: Draft -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Tarif" data-status="draft" data-author="Dewi Lestari">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-amber-50 text-amber-700 shrink-0 mt-0.5"><i data-lucide="file-edit" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(4)" class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
-                        Rincian Tabel Tarif Biaya Praktikum & Laboratorium Farmasi & TLM 2026/2027
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-500 font-medium">TRF-FARM/2026/04</span>
-                        <span>•</span>
-                        <span class="text-amber-700 font-semibold">Draft Belum Terbit</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/60">
-                    Tarif
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">DL</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-900 block truncate">Dewi Lestari, M.Ak.</span>
-                      <span class="text-[10px] text-slate-400 block">Bagian Akuntansi</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Draft
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>3 hari lalu</span>
-                  <span class="text-slate-400 block text-[10px]">09:15 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-400">
-                  0
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(4)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(4)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 5: Published -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Panduan UKT" data-status="published" data-author="Budi Santoso">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="file-check" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(5)" class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
-                        Formulir Permohonan Surat Bebas Tanggungan Finansial untuk Pengambilan Ijazah
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-500 font-medium">FRM-BKU/2026/01</span>
-                        <span>•</span>
-                        <span>DOCX & PDF</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/60">
-                    Panduan UKT
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">BS</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-900 block truncate">Budi Santoso, S.E.</span>
-                      <span class="text-[10px] text-slate-400 block">Bagian Pelayanan</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>24 Sep 2026</span>
-                  <span class="text-slate-400 block text-[10px]">11:00 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
-                  3.290
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(5)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(5)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 6: Archived -->
-              <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Pengumuman" data-status="archived" data-author="Rina Wulandari">
-                <td class="py-3.5 px-4 text-center">
-                  <input type="checkbox" class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer" onchange="updateBulkBar()">
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-start gap-2.5">
-                    <div class="p-1.5 rounded bg-slate-100 text-slate-500 shrink-0 mt-0.5"><i data-lucide="archive" class="w-4 h-4"></i></div>
-                    <div>
-                      <a href="#" onclick="viewContentDetail(6)" class="font-bold text-slate-600 hover:text-brand-600 transition-colors line-clamp-1">
-                        Jadwal Rekonsiliasi Keuangan Semester Ganjil 2025/2026 (Expired)
-                      </a>
-                      <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
-                        <span class="font-mono text-slate-400">DOC-BKU/2025/11-002</span>
-                        <span>•</span>
-                        <span>Diarsipkan</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    Pengumuman
-                  </span>
-                </td>
-                <td class="py-3.5 px-4">
-                  <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">RW</div>
-                    <div class="truncate">
-                      <span class="font-medium text-slate-700 block truncate">Rina Wulandari, A.Md.</span>
-                      <span class="text-[10px] text-slate-400 block">Staf Validasi Wisuda</span>
-                    </div>
-                  </div>
-                </td>
-                <td class="py-3.5 px-4">
-                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Archived
-                  </span>
-                </td>
-                <td class="py-3.5 px-4 text-slate-500 text-[11px]">
-                  <span>10 Agt 2026</span>
-                  <span class="text-slate-400 block text-[10px]">13:00 WIB</span>
-                </td>
-                <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-500">
-                  1.840
-                </td>
-                <td class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
-                  <div class="flex items-center justify-center gap-1">
-                    <button onclick="viewContentDetail(6)" class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="editContentRow(6)" class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
-                    <button onclick="deleteContentRow(this)" class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                  </div>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Table Footer: Pagination Controls & Data Count Info -->
-        <div class="px-4 py-3 bg-slate-50/80 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 select-none">
-          
-          <div class="flex items-center gap-3">
-            <span>Menampilkan <strong class="text-slate-800 font-semibold" id="pagination-info">1 - 6</strong> dari <strong class="text-slate-800 font-semibold">48</strong> data</span>
-            <div class="hidden sm:flex items-center gap-1.5">
-              <span>| Baris per halaman:</span>
-              <select class="bg-white border border-slate-200 rounded px-2 py-0.5 text-xs text-slate-700">
-                <option>10</option>
-                <option>25</option>
-                <option>50</option>
-              </select>
-            </div>
+          <!-- System Status Indicator (Clean) -->
+          <div
+            class="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200/80 text-[11px] font-semibold text-emerald-800">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>SIAKAD Sync Active</span>
           </div>
 
-          <!-- Pagination Button Controls -->
-          <div class="flex items-center gap-1">
-            <button class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 disabled:opacity-50 transition-colors" disabled>
-              Sebelumnya
-            </button>
-            <button class="w-7 h-7 rounded bg-brand-600 text-white font-bold flex items-center justify-center shadow-xs">
-              1
-            </button>
-            <button class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
-              2
-            </button>
-            <button class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
-              3
-            </button>
-            <span class="px-1 text-slate-400">...</span>
-            <button class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
-              6
-            </button>
-            <button class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors">
-              Selanjutnya
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </main>
-  </div>
-
-
-  <!-- ================= 4. MODAL DIALOG: TAMBAH / EDIT KONTEN ================= -->
-  <div id="content-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-    <!-- Modal Backdrop -->
-    <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeContentModal()"></div>
-
-    <div class="flex min-h-full items-center justify-center p-4">
-      <div class="relative w-full max-w-2xl bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden transform transition-all">
-        
-        <!-- Modal Header -->
-        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/70">
-          <div>
-            <h3 id="modal-title" class="text-base font-bold text-slate-900">Tambah Konten / Pengumuman Baru</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Isi formulir untuk mempublikasikan informasi baru ke portal Biro Keuangan</p>
-          </div>
-          <button onclick="closeContentModal()" class="p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors">
-            <i data-lucide="x" class="w-4 h-4"></i>
+          <!-- Primary CTA: Tambah Konten Baru -->
+          <button onclick="openContentModal()"
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold text-xs rounded-md shadow-xs transition-colors shrink-0">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Tambah Konten</span>
           </button>
+
         </div>
+      </header>
 
-        <!-- Modal Form Body -->
-        <form id="content-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4 text-xs">
-          
-          <!-- Judul Konten -->
+
+      <!-- ================= MAIN CONTENT WORK AREA (SCROLLABLE) ================= -->
+      <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+        <!-- Page Header & Action Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <label for="form-title" class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
-              Judul Konten / Pengumuman <span class="text-rose-500">*</span>
-            </label>
-            <input 
-              type="text" 
-              id="form-title" 
-              required 
-              placeholder="Contoh: Jadwal Pembayaran UKT Semester Genap 2026/2027" 
-              class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500"
-            >
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+              Manajemen Konten & Publikasi
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">
+              Kelola artikel panduan UKT, jadwal pembayaran semester, pengumuman loket, dan dokumen resmi Biro Keuangan
+              USB.
+            </p>
           </div>
 
-          <!-- Kategori & Status Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="form-category" class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
-                Kategori Konten <span class="text-rose-500">*</span>
-              </label>
-              <select id="form-category" required class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
-                <option value="Panduan UKT">Panduan UKT & SPP</option>
-                <option value="Pengumuman">Pengumuman & Surat Edaran</option>
-                <option value="Beasiswa">Beasiswa & Keringanan</option>
-                <option value="Tarif">Tarif & Biaya Kuliah</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="form-status" class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
-                Status Publikasi <span class="text-rose-500">*</span>
-              </label>
-              <select id="form-status" required class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
-                <option value="published">Langsung Terbitkan (Published)</option>
-                <option value="draft">Simpan sebagai Draft</option>
-                <option value="review">Kirim untuk Review Atasan</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Target Audiens -->
-          <div>
-            <label class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
-              Target Audiens
-            </label>
-            <div class="grid grid-cols-3 gap-2">
-              <label class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
-                <input type="radio" name="target_audience" value="all" checked class="text-brand-600 focus:ring-brand-500">
-                <span class="font-medium text-slate-800">Semua Mahasiswa</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
-                <input type="radio" name="target_audience" value="prodi" class="text-brand-600 focus:ring-brand-500">
-                <span class="font-medium text-slate-800">Fakultas / Prodi Tertentu</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
-                <input type="radio" name="target_audience" value="internal" class="text-brand-600 focus:ring-brand-500">
-                <span class="font-medium text-slate-800">Internal Staf Kampus</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Ringkasan Singkat / Konten -->
-          <div>
-            <label for="form-summary" class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
-              Ringkasan Informasi & Isi Berita <span class="text-rose-500">*</span>
-            </label>
-            <textarea 
-              id="form-summary" 
-              rows="4" 
-              required 
-              placeholder="Tuliskan isi rincian pengumuman atau panduan administrasi secara lengkap..." 
-              class="w-full bg-white border border-slate-200 rounded-md p-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500"
-            ></textarea>
-          </div>
-
-          <!-- File Upload Lampiran -->
-          <div>
-            <label class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
-              Dokumen Lampiran (Opsional - PDF / DOCX)
-            </label>
-            <div class="border-2 border-dashed border-slate-200 rounded-md p-4 text-center hover:border-brand-400 transition-colors bg-slate-50/50">
-              <i data-lucide="upload-cloud" class="w-6 h-6 text-slate-400 mx-auto mb-1"></i>
-              <p class="text-[11px] text-slate-600 font-medium">Klik untuk upload berkas atau seret file ke sini</p>
-              <p class="text-[10px] text-slate-400 mt-0.5">Maksimal ukuran file: 10 MB (Format: .pdf, .docx, .xlsx)</p>
-            </div>
-          </div>
-
-          <!-- Pin to Homepage Checkbox -->
-          <div class="pt-2 flex items-center justify-between border-t border-slate-100">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="form-pinned" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
-              <span class="font-medium text-slate-800">Sematkan sebagai Berita Utama di Halaman Depan Portal</span>
-            </label>
-          </div>
-
-          <!-- Modal Action Buttons -->
-          <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-2">
-            <button type="button" onclick="closeContentModal()" class="px-4 py-2 rounded-md border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold transition-colors">
-              Batal
-            </button>
-            <button type="submit" class="px-4 py-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-xs transition-colors">
-              Simpan & Publikasikan
-            </button>
-          </div>
-
-        </form>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ================= 5. QUICK VIEW DETAIL DRAWER / MODAL ================= -->
-  <div id="view-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-    <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeViewModal()"></div>
-    <div class="flex min-h-full items-center justify-center p-4">
-      <div class="relative w-full max-w-lg bg-white rounded-lg shadow-xl border border-slate-200 p-6 space-y-4">
-        <div class="flex items-start justify-between">
+          <!-- Secondary Actions -->
           <div class="flex items-center gap-2">
-            <span class="p-2 rounded bg-sky-50 text-brand-600"><i data-lucide="file-text" class="w-5 h-5"></i></span>
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400" id="view-category">Kategori</span>
-              <h4 class="text-sm font-bold text-slate-900 leading-snug" id="view-title">Judul</h4>
+            <button onclick="showToast('Mengekspor data ke format spreadsheet (.csv)...')"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-md text-xs font-medium shadow-2xs transition-colors">
+              <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>Export CSV</span>
+            </button>
+            <button onclick="refreshTableData()"
+              class="p-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-md text-xs font-medium shadow-2xs transition-colors"
+              title="Muat Ulang Data">
+              <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-slate-500"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= 1. STAT CARDS METRICS ================= -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <!-- Card 1: Total Konten -->
+          <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-slate-500">Total Publikasi Aktif</span>
+              <span class="p-2 rounded-md bg-slate-100 text-slate-600"><i data-lucide="file-check-2"
+                  class="w-4 h-4"></i></span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+              <span class="text-2xl font-bold tracking-tight text-slate-900">48</span>
+              <span class="text-[11px] font-semibold text-emerald-700 flex items-center gap-0.5">
+                <i data-lucide="trending-up" class="w-3 h-3"></i> +12.5%
+              </span>
+            </div>
+            <span class="text-[11px] text-slate-400 mt-1">4 item baru bulan ini</span>
+          </div>
+
+          <!-- Card 2: Draft Disimpan -->
+          <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-slate-500">Draft Tersimpan</span>
+              <span class="p-2 rounded-md bg-amber-50 text-amber-700"><i data-lucide="file-edit"
+                  class="w-4 h-4"></i></span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+              <span class="text-2xl font-bold tracking-tight text-slate-900">6</span>
+              <span class="text-[11px] font-medium text-slate-500">Belum dipublikasikan</span>
+            </div>
+            <span class="text-[11px] text-slate-400 mt-1">Terakhir diedit kemarin</span>
+          </div>
+
+          <!-- Card 3: Menunggu Review -->
+          <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-slate-500">Menunggu Review</span>
+              <span class="p-2 rounded-md bg-sky-50 text-brand-700"><i data-lucide="clock-4" class="w-4 h-4"></i></span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+              <span class="text-2xl font-bold tracking-tight text-slate-900">3</span>
+              <span
+                class="text-[11px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200/80">Perlu
+                Verifikasi</span>
+            </div>
+            <span class="text-[11px] text-slate-400 mt-1">Dari Bagian Akuntansi</span>
+          </div>
+
+          <!-- Card 4: Total Kunjungan / Pembaca -->
+          <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-slate-500">Total Pembaca (Bulan Ini)</span>
+              <span class="p-2 rounded-md bg-slate-100 text-slate-600"><i data-lucide="eye" class="w-4 h-4"></i></span>
+            </div>
+            <div class="mt-4 flex items-baseline justify-between">
+              <span class="text-2xl font-bold tracking-tight text-slate-900">24.580</span>
+              <span class="text-[11px] font-semibold text-emerald-700 flex items-center gap-0.5">
+                <i data-lucide="trending-up" class="w-3 h-3"></i> +18.2%
+              </span>
+            </div>
+            <span class="text-[11px] text-slate-400 mt-1">Lonjakan saat periode bayar UKT</span>
+          </div>
+
+        </div>
+
+
+        <!-- ================= 2. FILTER & ACTION CONTROLS ================= -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-xs space-y-3">
+
+          <!-- Category Segmented Tabs -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-100 text-xs">
+            <button onclick="filterByCategory('all', this)"
+              class="tab-btn px-3 py-1.5 rounded-md font-semibold text-brand-700 bg-brand-50 border border-brand-200/60 shrink-0">
+              Semua Konten (48)
+            </button>
+            <button onclick="filterByCategory('Panduan UKT', this)"
+              class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
+              Panduan Pembayaran (16)
+            </button>
+            <button onclick="filterByCategory('Pengumuman', this)"
+              class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
+              Pengumuman & Surat (14)
+            </button>
+            <button onclick="filterByCategory('Beasiswa', this)"
+              class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
+              Beasiswa & Keringanan (10)
+            </button>
+            <button onclick="filterByCategory('Tarif', this)"
+              class="tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors">
+              Tarif & Formulir (8)
+            </button>
+          </div>
+
+          <!-- Search and Dropdown Filters Row -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
+
+            <!-- Search in Table -->
+            <div class="relative flex-1">
+              <input type="text" id="table-search" onkeyup="handleTableSearch()"
+                placeholder="Cari berdasarkan judul, penulis, nomor dokumen, atau tag..."
+                class="w-full bg-white border border-slate-200 rounded-md pl-9 pr-4 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500 transition-colors">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5"></i>
+            </div>
+
+            <!-- Dropdowns & Reset -->
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+
+              <!-- Status Filter -->
+              <select id="status-filter" onchange="applyFilters()"
+                class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+                <option value="all">Semua Status</option>
+                <option value="published">Published (Terbit)</option>
+                <option value="draft">Draft</option>
+                <option value="review">Menunggu Review</option>
+                <option value="archived">Diarsipkan</option>
+              </select>
+
+              <!-- Kategori Dropdown -->
+              <select id="category-filter" onchange="applyFilters()"
+                class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+                <option value="all">Semua Kategori</option>
+                <option value="Panduan UKT">Panduan UKT & SPP</option>
+                <option value="Pengumuman">Pengumuman & Surat</option>
+                <option value="Beasiswa">Beasiswa & Keringanan</option>
+                <option value="Tarif">Tarif & Biaya</option>
+              </select>
+
+              <!-- Penulis Dropdown -->
+              <select id="author-filter" onchange="applyFilters()"
+                class="bg-white border border-slate-200 rounded-md px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+                <option value="all">Semua Penulis</option>
+                <option value="Budi Santoso">Budi Santoso, S.E.</option>
+                <option value="Rina Wulandari">Rina Wulandari, A.Md.</option>
+                <option value="Ahmad Fauzi">Ahmad Fauzi, S.Kom.</option>
+                <option value="Dewi Lestari">Dewi Lestari, M.Ak.</option>
+              </select>
+
+              <button onclick="resetFilters()"
+                class="px-2.5 py-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-md font-medium transition-colors"
+                title="Reset Semua Filter">
+                Reset
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Bulk Action Floating Bar (Hidden by default, shown when items are checked) -->
+          <div id="bulk-action-bar"
+            class="hidden p-2.5 bg-slate-900 text-white rounded-md text-xs flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i data-lucide="check-square" class="w-4 h-4 text-brand-400"></i>
+              <span id="bulk-selected-count" class="font-semibold">0 item dipilih</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="bulkChangeStatus('published')"
+                class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[11px] font-semibold transition-colors">
+                Publikasikan
+              </button>
+              <button onclick="bulkChangeStatus('archived')"
+                class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-[11px] font-semibold transition-colors">
+                Arsipkan
+              </button>
+              <button onclick="bulkDelete()"
+                class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded text-[11px] font-semibold transition-colors">
+                Hapus
+              </button>
+              <button onclick="deselectAll()" class="px-2 text-slate-400 hover:text-white text-[11px]">
+                Batal
+              </button>
             </div>
           </div>
-          <button onclick="closeViewModal()" class="p-1 rounded text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-4 h-4"></i></button>
+
         </div>
-        <div class="p-3 bg-slate-50 rounded border border-slate-200 text-xs text-slate-600 space-y-2">
-          <p id="view-body">Isi ringkasan konten...</p>
+
+
+        <!-- ================= 3. DATA TABLE COMPONENT ================= -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-xs overflow-hidden">
+
+          <div class="overflow-x-auto max-h-[600px] overflow-y-auto relative">
+            <table class="w-full text-left border-collapse text-xs">
+
+              <!-- Sticky Table Header -->
+              <thead
+                class="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200 sticky top-0 z-10 select-none">
+                <tr>
+                  <th class="py-3 px-4 w-10 text-center">
+                    <input type="checkbox" id="check-all" onchange="toggleCheckAll(this)"
+                      class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer">
+                  </th>
+                  <th class="py-3 px-4 min-w-[280px]">Judul Konten & No. Dokumen</th>
+                  <th class="py-3 px-4 min-w-[130px]">Kategori</th>
+                  <th class="py-3 px-4 min-w-[150px]">Penulis / Staf</th>
+                  <th class="py-3 px-4 min-w-[120px]">Status</th>
+                  <th class="py-3 px-4 min-w-[130px]">Diperbarui</th>
+                  <th class="py-3 px-4 min-w-[90px] text-right">Pembaca</th>
+                  <th class="py-3 px-4 min-w-[110px] text-center sticky right-0 bg-slate-50 border-l border-slate-200">
+                    Aksi</th>
+                </tr>
+              </thead>
+
+              <!-- Table Body with Mockup Data -->
+              <tbody id="table-body" class="divide-y divide-slate-100 text-slate-700">
+
+                <!-- Row 1: Published -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Panduan UKT"
+                  data-status="published" data-author="Budi Santoso">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="file-text"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(1)"
+                          class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
+                          Panduan Pembayaran UKT Semester Genap 2026/2027 via Virtual Account (VA)
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-500 font-medium">DOC-BKU/2026/02-014</span>
+                          <span>•</span>
+                          <span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><i
+                              data-lucide="pin" class="w-3 h-3"></i> Pinned di Beranda</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/60">
+                      Panduan UKT
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        BS</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-900 block truncate">Budi Santoso, S.E.</span>
+                        <span class="text-[10px] text-slate-400 block">Bagian Pelayanan</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>02 Okt 2026</span>
+                    <span class="text-slate-400 block text-[10px]">10:45 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
+                    8.420
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(1)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"
+                        title="Lihat Pratinjau"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(1)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50" title="Edit Konten"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50" title="Hapus"><i
+                          data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 2: Published -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Pengumuman"
+                  data-status="published" data-author="Rina Wulandari">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-slate-100 text-slate-600 shrink-0 mt-0.5"><i data-lucide="megaphone"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(2)"
+                          class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
+                          Surat Edaran Batas Akhir Registrasi Pembayaran Wisuda Periode April 2026
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-500 font-medium">EDR-USB/KEU/2026/09</span>
+                          <span>•</span>
+                          <span>PDF Lampiran (1.2 MB)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-50 text-purple-800 border border-purple-200/60">
+                      Pengumuman
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        RW</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-900 block truncate">Rina Wulandari, A.Md.</span>
+                        <span class="text-[10px] text-slate-400 block">Staf Validasi Wisuda</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>29 Sep 2026</span>
+                    <span class="text-slate-400 block text-[10px]">14:20 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
+                    4.110
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(2)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye"
+                          class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(2)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2"
+                          class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 3: Menunggu Review -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Beasiswa"
+                  data-status="review" data-author="Ahmad Fauzi">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="award"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(3)"
+                          class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
+                          Ketentuan & Syarat Pengajuan Keringanan Biaya Kuliah Mahasiswa Kurang Mampu
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-500 font-medium">DOC-BKU/2026/03-088</span>
+                          <span>•</span>
+                          <span class="text-amber-700 font-medium">Menunggu persetujuan Kabiro</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/60">
+                      Beasiswa
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        AF</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-900 block truncate">Ahmad Fauzi, S.Kom.</span>
+                        <span class="text-[10px] text-slate-400 block">Staf IT & Data</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/80">
+                      <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> In Review
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>Kemarin</span>
+                    <span class="text-slate-400 block text-[10px]">16:10 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-400">
+                    -
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(3)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye"
+                          class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(3)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2"
+                          class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 4: Draft -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Tarif"
+                  data-status="draft" data-author="Dewi Lestari">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-amber-50 text-amber-700 shrink-0 mt-0.5"><i data-lucide="file-edit"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(4)"
+                          class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
+                          Rincian Tabel Tarif Biaya Praktikum & Laboratorium Farmasi & TLM 2026/2027
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-500 font-medium">TRF-FARM/2026/04</span>
+                          <span>•</span>
+                          <span class="text-amber-700 font-semibold">Draft Belum Terbit</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/60">
+                      Tarif
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        DL</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-900 block truncate">Dewi Lestari, M.Ak.</span>
+                        <span class="text-[10px] text-slate-400 block">Bagian Akuntansi</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Draft
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>3 hari lalu</span>
+                    <span class="text-slate-400 block text-[10px]">09:15 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-400">
+                    0
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(4)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye"
+                          class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(4)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2"
+                          class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 5: Published -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Panduan UKT"
+                  data-status="published" data-author="Budi Santoso">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-sky-50 text-brand-600 shrink-0 mt-0.5"><i data-lucide="file-check"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(5)"
+                          class="font-bold text-slate-900 hover:text-brand-600 transition-colors line-clamp-1">
+                          Formulir Permohonan Surat Bebas Tanggungan Finansial untuk Pengambilan Ijazah
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-500 font-medium">FRM-BKU/2026/01</span>
+                          <span>•</span>
+                          <span>DOCX & PDF</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-50 text-sky-800 border border-sky-200/60">
+                      Panduan UKT
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        BS</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-900 block truncate">Budi Santoso, S.E.</span>
+                        <span class="text-[10px] text-slate-400 block">Bagian Pelayanan</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Published
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>24 Sep 2026</span>
+                    <span class="text-slate-400 block text-[10px]">11:00 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-700">
+                    3.290
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(5)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye"
+                          class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(5)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2"
+                          class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 6: Archived -->
+                <tr class="table-row hover:bg-slate-50/80 transition-colors group" data-category="Pengumuman"
+                  data-status="archived" data-author="Rina Wulandari">
+                  <td class="py-3.5 px-4 text-center">
+                    <input type="checkbox"
+                      class="row-checkbox rounded border-slate-300 text-brand-600 focus:ring-brand-500 cursor-pointer"
+                      onchange="updateBulkBar()">
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-start gap-2.5">
+                      <div class="p-1.5 rounded bg-slate-100 text-slate-500 shrink-0 mt-0.5"><i data-lucide="archive"
+                          class="w-4 h-4"></i></div>
+                      <div>
+                        <a href="#" onclick="viewContentDetail(6)"
+                          class="font-bold text-slate-600 hover:text-brand-600 transition-colors line-clamp-1">
+                          Jadwal Rekonsiliasi Keuangan Semester Ganjil 2025/2026 (Expired)
+                        </a>
+                        <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400">
+                          <span class="font-mono text-slate-400">DOC-BKU/2025/11-002</span>
+                          <span>•</span>
+                          <span>Diarsipkan</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                      Pengumuman
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold text-[10px] flex items-center justify-center shrink-0">
+                        RW</div>
+                      <div class="truncate">
+                        <span class="font-medium text-slate-700 block truncate">Rina Wulandari, A.Md.</span>
+                        <span class="text-[10px] text-slate-400 block">Staf Validasi Wisuda</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="py-3.5 px-4">
+                    <span
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Archived
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-500 text-[11px]">
+                    <span>10 Agt 2026</span>
+                    <span class="text-slate-400 block text-[10px]">13:00 WIB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-right font-mono font-medium text-slate-500">
+                    1.840
+                  </td>
+                  <td
+                    class="py-3.5 px-4 text-center sticky right-0 bg-white group-hover:bg-slate-50/80 border-l border-slate-100">
+                    <div class="flex items-center justify-center gap-1">
+                      <button onclick="viewContentDetail(6)"
+                        class="p-1 rounded text-slate-400 hover:text-slate-800 hover:bg-slate-100"><i data-lucide="eye"
+                          class="w-3.5 h-3.5"></i></button>
+                      <button onclick="editContentRow(6)"
+                        class="p-1 rounded text-slate-400 hover:text-brand-600 hover:bg-brand-50"><i
+                          data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteContentRow(this)"
+                        class="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50"><i data-lucide="trash-2"
+                          class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table Footer: Pagination Controls & Data Count Info -->
+          <div
+            class="px-4 py-3 bg-slate-50/80 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 select-none">
+
+            <div class="flex items-center gap-3">
+              <span>Menampilkan <strong class="text-slate-800 font-semibold" id="pagination-info">1 - 6</strong> dari
+                <strong class="text-slate-800 font-semibold">48</strong> data</span>
+              <div class="hidden sm:flex items-center gap-1.5">
+                <span>| Baris per halaman:</span>
+                <select class="bg-white border border-slate-200 rounded px-2 py-0.5 text-xs text-slate-700">
+                  <option>10</option>
+                  <option>25</option>
+                  <option>50</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Pagination Button Controls -->
+            <div class="flex items-center gap-1">
+              <button
+                class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50 disabled:opacity-50 transition-colors"
+                disabled>
+                Sebelumnya
+              </button>
+              <button
+                class="w-7 h-7 rounded bg-brand-600 text-white font-bold flex items-center justify-center shadow-xs">
+                1
+              </button>
+              <button
+                class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
+                2
+              </button>
+              <button
+                class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
+                3
+              </button>
+              <span class="px-1 text-slate-400">...</span>
+              <button
+                class="w-7 h-7 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center transition-colors">
+                6
+              </button>
+              <button
+                class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors">
+                Selanjutnya
+              </button>
+            </div>
+
+          </div>
+
         </div>
-        <div class="flex justify-between items-center text-[11px] text-slate-400 pt-2 border-t border-slate-100">
-          <span id="view-author">Penulis: Budi Santoso</span>
-          <span id="view-date">2 Okt 2026</span>
-        </div>
-        <div class="flex justify-end">
-          <button onclick="closeViewModal()" class="px-3 py-1.5 bg-slate-800 text-white rounded text-xs font-semibold">Tutup</button>
+
+      </main>
+    </div>
+
+
+    <!-- ================= 4. MODAL DIALOG: TAMBAH / EDIT KONTEN ================= -->
+    <div id="content-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+      <!-- Modal Backdrop -->
+      <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeContentModal()">
+      </div>
+
+      <div class="flex min-h-full items-center justify-center p-4">
+        <div
+          class="relative w-full max-w-2xl bg-white rounded-lg shadow-xl border border-slate-200 overflow-hidden transform transition-all">
+
+          <!-- Modal Header -->
+          <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/70">
+            <div>
+              <h3 id="modal-title" class="text-base font-bold text-slate-900">Tambah Konten / Pengumuman Baru</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Isi formulir untuk mempublikasikan informasi baru ke portal Biro
+                Keuangan</p>
+            </div>
+            <button onclick="closeContentModal()"
+              class="p-1.5 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Modal Form Body -->
+          <form id="content-form" onsubmit="handleFormSubmit(event)" class="p-6 space-y-4 text-xs">
+
+            <!-- Judul Konten -->
+            <div>
+              <label for="form-title"
+                class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
+                Judul Konten / Pengumuman <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="form-title" required
+                placeholder="Contoh: Jadwal Pembayaran UKT Semester Genap 2026/2027"
+                class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+            </div>
+
+            <!-- Kategori & Status Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="form-category"
+                  class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
+                  Kategori Konten <span class="text-rose-500">*</span>
+                </label>
+                <select id="form-category" required
+                  class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+                  <option value="Panduan UKT">Panduan UKT & SPP</option>
+                  <option value="Pengumuman">Pengumuman & Surat Edaran</option>
+                  <option value="Beasiswa">Beasiswa & Keringanan</option>
+                  <option value="Tarif">Tarif & Biaya Kuliah</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="form-status"
+                  class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
+                  Status Publikasi <span class="text-rose-500">*</span>
+                </label>
+                <select id="form-status" required
+                  class="w-full bg-white border border-slate-200 rounded-md px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500">
+                  <option value="published">Langsung Terbitkan (Published)</option>
+                  <option value="draft">Simpan sebagai Draft</option>
+                  <option value="review">Kirim untuk Review Atasan</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Target Audiens -->
+            <div>
+              <label class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1.5">
+                Target Audiens
+              </label>
+              <div class="grid grid-cols-3 gap-2">
+                <label
+                  class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
+                  <input type="radio" name="target_audience" value="all" checked
+                    class="text-brand-600 focus:ring-brand-500">
+                  <span class="font-medium text-slate-800">Semua Mahasiswa</span>
+                </label>
+                <label
+                  class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
+                  <input type="radio" name="target_audience" value="prodi" class="text-brand-600 focus:ring-brand-500">
+                  <span class="font-medium text-slate-800">Fakultas / Prodi Tertentu</span>
+                </label>
+                <label
+                  class="flex items-center gap-2 p-2.5 rounded-md border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
+                  <input type="radio" name="target_audience" value="internal"
+                    class="text-brand-600 focus:ring-brand-500">
+                  <span class="font-medium text-slate-800">Internal Staf Kampus</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Ringkasan Singkat / Konten -->
+            <div>
+              <label for="form-summary"
+                class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
+                Ringkasan Informasi & Isi Berita <span class="text-rose-500">*</span>
+              </label>
+              <textarea id="form-summary" rows="4" required
+                placeholder="Tuliskan isi rincian pengumuman atau panduan administrasi secara lengkap..."
+                class="w-full bg-white border border-slate-200 rounded-md p-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-brand-500"></textarea>
+            </div>
+
+            <!-- File Upload Lampiran -->
+            <div>
+              <label class="block font-semibold text-slate-700 uppercase tracking-wider text-[11px] mb-1">
+                Dokumen Lampiran (Opsional - PDF / DOCX)
+              </label>
+              <div
+                class="border-2 border-dashed border-slate-200 rounded-md p-4 text-center hover:border-brand-400 transition-colors bg-slate-50/50">
+                <i data-lucide="upload-cloud" class="w-6 h-6 text-slate-400 mx-auto mb-1"></i>
+                <p class="text-[11px] text-slate-600 font-medium">Klik untuk upload berkas atau seret file ke sini</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Maksimal ukuran file: 10 MB (Format: .pdf, .docx, .xlsx)
+                </p>
+              </div>
+            </div>
+
+            <!-- Pin to Homepage Checkbox -->
+            <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="form-pinned"
+                  class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+                <span class="font-medium text-slate-800">Sematkan sebagai Berita Utama di Halaman Depan Portal</span>
+              </label>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-2">
+              <button type="button" onclick="closeContentModal()"
+                class="px-4 py-2 rounded-md border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold transition-colors">
+                Batal
+              </button>
+              <button type="submit"
+                class="px-4 py-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-xs transition-colors">
+                Simpan & Publikasikan
+              </button>
+            </div>
+
+          </form>
+
         </div>
       </div>
     </div>
-  </div>
 
 
-  <!-- ================= 6. TOAST NOTIFICATION CONTAINER ================= -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <!-- ================= 5. QUICK VIEW DETAIL DRAWER / MODAL ================= -->
+    <div id="view-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+      <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onclick="closeViewModal()"></div>
+      <div class="flex min-h-full items-center justify-center p-4">
+        <div class="relative w-full max-w-lg bg-white rounded-lg shadow-xl border border-slate-200 p-6 space-y-4">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded bg-sky-50 text-brand-600"><i data-lucide="file-text" class="w-5 h-5"></i></span>
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                  id="view-category">Kategori</span>
+                <h4 class="text-sm font-bold text-slate-900 leading-snug" id="view-title">Judul</h4>
+              </div>
+            </div>
+            <button onclick="closeViewModal()" class="p-1 rounded text-slate-400 hover:text-slate-700"><i
+                data-lucide="x" class="w-4 h-4"></i></button>
+          </div>
+          <div class="p-3 bg-slate-50 rounded border border-slate-200 text-xs text-slate-600 space-y-2">
+            <p id="view-body">Isi ringkasan konten...</p>
+          </div>
+          <div class="flex justify-between items-center text-[11px] text-slate-400 pt-2 border-t border-slate-100">
+            <span id="view-author">Penulis: Budi Santoso</span>
+            <span id="view-date">2 Okt 2026</span>
+          </div>
+          <div class="flex justify-end">
+            <button onclick="closeViewModal()"
+              class="px-3 py-1.5 bg-slate-800 text-white rounded text-xs font-semibold">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ================= 6. TOAST NOTIFICATION CONTAINER ================= -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   </div><!-- End #dashboard-app -->
 
@@ -1176,7 +1379,7 @@
           const userData = JSON.parse(session);
           loginScreen.classList.add('hidden');
           dashboardApp.classList.remove('hidden');
-          
+
           // Update user display if available
           const userNameEl = document.querySelector('#user-info span.font-bold');
           if (userNameEl && userData.name) {
@@ -1235,7 +1438,7 @@
 
           document.getElementById('login-screen').classList.add('hidden');
           document.getElementById('dashboard-app').classList.remove('hidden');
-          
+
           btnLabel.textContent = "Masuk ke Dashboard CMS";
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-80', 'cursor-wait');
@@ -1250,7 +1453,7 @@
       } else {
         errorAlert.classList.remove('hidden');
         document.getElementById('login-error-text').textContent = 'Username atau Kata Sandi salah. Silakan periksa kembali.';
-        
+
         // Shake animation feedback on error
         const card = document.querySelector('#login-screen .max-w-md');
         if (card) {
@@ -1378,7 +1581,7 @@
 
       closeContentModal();
       showToast(`Sukses! "${title.substring(0, 30)}..." telah disimpan sebagai ${status}.`);
-      
+
       // Prepend mock row
       const tbody = document.getElementById('table-body');
       const tr = document.createElement('tr');
@@ -1465,7 +1668,7 @@
         b.className = "tab-btn px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 shrink-0 transition-colors";
       });
       btn.className = "tab-btn px-3 py-1.5 rounded-md font-semibold text-brand-700 bg-brand-50 border border-brand-200/60 shrink-0";
-      
+
       const rows = document.querySelectorAll('#table-body tr');
       rows.forEach(row => {
         const rCat = row.getAttribute('data-category');
@@ -1494,7 +1697,7 @@
       const selected = document.querySelectorAll('.row-checkbox:checked').length;
       const bar = document.getElementById('bulk-action-bar');
       const countSpan = document.getElementById('bulk-selected-count');
-      
+
       if (selected > 0) {
         bar.classList.remove('hidden');
         countSpan.textContent = `${selected} item dipilih`;
@@ -1576,4 +1779,5 @@
   </script>
 
 </body>
+
 </html>
